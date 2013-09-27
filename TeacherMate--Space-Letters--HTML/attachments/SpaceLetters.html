@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)http://teachermate.treehouse.su/games/games/game/SpaceLetters/1/LetterIdentification/0 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SpaceLetters</title>
+<script type="text/javascript" src="./SpaceLetters_files/Activity.js"></script>
+<script type="text/javascript" src="./SpaceLetters_files/Util.js"></script>
+<script type="text/javascript" src="./SpaceLetters_files/MathFacts.js"></script>
+<script type="text/javascript" src="./SpaceLetters_files/XMLStudent.js"></script>
+<script type="text/javascript" src="./SpaceLetters_files/score.js"></script>
+<script type="text/javascript" src="./SpaceLetters_files/postdata.js"></script>
+<script type="text/javascript" src="./SpaceLetters_files/letterGenParser.js"></script>  
+<script type="text/javascript" src="./SpaceLetters_files/jquery.min.js"></script>
+<script type="text/javascript" src="./SpaceLetters_files/purl.js"></script>
+<script type="text/javascript">
+var ad = decodeURIComponent(document.URL);
+var url = purl(ad,true); 
+var redirect = url.fparam('redirect');
+var currentURL = url.attr('file');
+if(!redirect || redirect=="")
+{
+	redirect = currentURL;
+}
+//alert(redirect);
+//Code to Check Browsers.
+var check_compatible = (navigator.userAgent.match(/(Firefox)/i))?true:false;
+var audio_compatible = (check_compatible)?".ogg":".mp4"; 
+var setMozOrWebkit = (check_compatible)?"Moz":"Webkit"; 
+var transend = (check_compatible)?"transitionend":"webkitTransitionEnd";
+var setkey = (check_compatible)?'@-moz-keyframes':'@-webkit-keyframes'; 
+var base_img = 'http://teachermate.treehouse.su/games/images/spacemath/images';
+var TotalScore = '29'; 
+var s_id = '6';
+//var s_id=783;
+//var st_path = 'http://teachermate.treehouse.su/games/xml/'+s_id;
+var st_path = './SpaceLetters_files/student.xml';
+var base_url = 'http://teachermate.treehouse.su/games/';
+var category = '1';
+var currentSubCategory = 'LetterIdentification';
+var timeOffset='0';
+var TotalScore = '29';
+var InitialScore = '29';
+var game_id = '27';
+//var soundsDirPath = 'http://teachermate.treehouse.su/games/files/resource/activity/spacemath/';
+var soundsDirPath = './SpaceLetters_files/';
+
+var singleActivity = false; 
+var playIntro = true;
+var reload = false;
+var gameFolder = 'SpaceLetters';
+var initTimer = 0; 
+var iteration = '0';
+var demoaudiopath = base_url+'files/resource/demo/'
+//Resizing the window
+//Resizing the window
+var rock1id="";
+var rock2id="";
+var rock3id="";
+var rock4id="";
+var bulletid="";
+var gunid="";
+function resize(){
+	//alert("Hiii");
+	var swidth1= window.innerWidth;
+	var swidth2= document.body.clientWidth; 
+	var sheight1= window.innerHeight;
+	var sheight2= document.body.clientHeight;
+	var fon_size = (swidth1/100+sheight1/100);   
+	//if (window.innerWidth || window.innerHeight){  
+		document.body.style.width    = swidth1 + "px";
+		document.body.style.height   = sheight1 + "px";
+		//document.body.style.fontSize = swidth1/40+"px"; 
+		document.body.style.fontSize = fon_size+"px"; 
+		
+	//}
+}
+window.onload = resize;
+window.onresize = resize;
+var lefttrans = 0.37;
+var righttrans = 0.37 ;
+var toptrans = 0.6 ;
+var bottomtrans = 0.6 ;
+function onGameData(obj){
+	gameData1 = obj;
+	 //alert("gameData1:"+gameData1);
+	loadXMLDoc();
+}
+var ansdum1,ansdum2,ansdum3;
+var RandomAnswers = new Array();
+var symbolArray ="";
+var rand;
+var questionOutput="";
+var QuestOut="";
+var correct="";
+var rockBlast = "";
+var randCase = ""; 
+var onlyOnce = true;
+var answers =["a","b","c","d","e","f","g","h","i","j","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+function loadXMLDoc()
+{
+document.getElementById("rock1").style.visibility="visible";
+document.getElementById("rock2").style.visibility="visible";
+document.getElementById("rock3").style.visibility="visible";
+document.getElementById("rock0").style.visibility="visible";
+ onetimeintro = false;
+isIntrosnd = "false";
+	sendLevel(gameData1);
+	 randCase = randomize(0,1);
+	 //alert(randCase);
+	var mathFacts=getProblem(3); 
+	 
+
+  if(onlyOnce){
+  if(lefttrans <= 0.1){  
+  lefttrans = 0.09;
+righttrans = 0.09 ;
+toptrans = 0.21 ;
+ bottomtrans = 0.21 ;
+ }
+ else{
+	//alert("hjk");
+ lefttrans-= 0.03;
+	righttrans-= 0.03 ;
+	toptrans -= 0.05;
+	bottomtrans -= 0.05 ;
+ }
+  onlyOnce=false;
+	rndChoose = randomize(0,(answers.length-1));
+	random_ans=randomize(0,(w.length-1)); 
+	//alert(w);
+	val_chnge = (w[random_ans[w.length-1]] ==answers[rndChoose[0]]|| w[random_ans[w.length-1]] ==answers[rndChoose[3]]||w[random_ans[w.length-1]] ==answers[rndChoose[6]])?1:0;
+	
+	ansdum1 = answers[rndChoose[val_chnge+0]]
+	mathFacts.answer=w[random_ans[w.length-1]];// answers[rndChoose[1]]
+	ansdum2= answers[rndChoose[val_chnge+3]]
+	ansdum3= answers[rndChoose[val_chnge+6]]
+	RandomAnswers=[ansdum1,mathFacts.answer,ansdum2,ansdum3];
+	
+	correct = mathFacts.answer; 
+	answerAudio.src = AudioDirPath+correct+audio_compatible;
+	//alert(answerAudio.src);
+	answerAudio.preload="auto";
+	// alert(correct);
+	symbolArray=mathFacts.symbol;
+	rand=randomize(0,3);
+	
+	questionOutput=mathFacts.p1+" "+mathFacts.symbol+" "+mathFacts.p2; 
+	QuestOut =  correct; 
+	document.getElementById('question').style.visibility = "hidden";
+	document.getElementById('question').innerHTML = questionOutput;
+	rockBlast = document.getElementById('rockBlast');
+	rockBlast.style.opacity = "0";
+	rock1id = document.getElementById('rock_and_text_container_0');
+	rock2id = document.getElementById('rock_and_text_container_1');
+	rock3id = document.getElementById('rock_and_text_container_2');
+	rock4id = document.getElementById('rock_and_text_container_3');
+	rock1id.style.left = "13%";
+rock2id.style.top = "10%";
+rock3id.style.left = "77%";
+rock4id.style.top = "73%";
+	rock1id.style.visibility = "hidden";
+	rock2id.style.visibility = "hidden";
+	rock3id.style.visibility = "hidden";
+	rock4id.style.visibility = "hidden";
+	document.getElementById('rock_text_0').style.visibility = "hidden";
+	document.getElementById('rock_text_1').style.visibility = "hidden";
+	document.getElementById('rock_text_2').style.visibility = "hidden";
+	document.getElementById('rock_text_3').style.visibility = "hidden";
+	document.getElementById('rock_text_0').innerHTML =RandomAnswers[rand[0]]; 
+	document.getElementById('rock_text_1').innerHTML =RandomAnswers[rand[1]];
+	document.getElementById('rock_text_2').innerHTML =RandomAnswers[rand[2]];
+	document.getElementById('rock_text_3').innerHTML =RandomAnswers[rand[3]];
+	
+	setTimeout("play_letter()",1000);
+	}
+	//randArr=rand[1]; 
+	
+	}
+	var answerAudio = new Audio();
+	function play_letter(){
+	document.getElementById('rock_text_0').style.visibility = "visible";
+	document.getElementById('rock_text_1').style.visibility = "visible";
+	document.getElementById('rock_text_2').style.visibility = "visible";
+	document.getElementById('rock_text_3').style.visibility = "visible";
+	
+	//alert(AudioDirPath);
+	
+	answerAudio.play();
+	setTimeout("initialize()",1000);
+	}
+	//var AudioDirPath = 'http://teachermate.treehouse.su/games/files/resource/letter/';
+	var AudioDirPath = './SpaceLetters_files/';
+	function load(){
+	
+		loadGameData();
+	}
+function initialize(){
+	bulletfire = true;
+	keyflag = true;
+	hitArea = false;
+	bulletid = document.getElementById('bullet');
+	gunid = document.getElementById('guncontainer');
+	currentKeyFlag = "left";
+			gunid.style[setMozOrWebkit+"Transform"]="rotate(0deg)";
+	bulletfire = true;
+	bulletid.style[setMozOrWebkit+"Transition"] = "";
+	bulletid.style.top ="42.7%";
+	bulletid.style.left ="47.5%";
+	 bulletid.style.visibility = "visible";
+	gunid.style.visibility = "visible";
+	rock1id.style.visibility = "visible";
+	rock2id.style.visibility = "visible";
+	rock3id.style.visibility = "visible";
+	rock4id.style.visibility = "visible";
+	//rock1id.style.display = "block";
+	//rock2id.style.display = "block";
+	//rock3id.style.display = "block";
+	//rock4id.style.display = "block";
+	document.getElementById('rock_text_0').style.visibility = "visible";
+	document.getElementById('rock_text_1').style.visibility = "visible";
+	document.getElementById('rock_text_2').style.visibility = "visible";
+	document.getElementById('rock_text_3').style.visibility = "visible";
+	rock1id.style.left = "11%"; 
+	currentLeft = parseInt(rock1id.style.left);
+	rock1id.style[setMozOrWebkit+"Transition"] = "left "+lefttrans+"s linear";
+	rock1id.addEventListener(transend,Moz_left);
+	
+	rock2id.style.top = "11%"; 
+	currentTop = parseInt(rock2id.style.top);
+	rock2id.style[setMozOrWebkit+"Transition"] = "top "+toptrans+"s linear";
+	rock2id.addEventListener(transend,Moz_top);
+	
+	rock3id.style.left = "78%"; 
+	currentRight = parseInt(rock3id.style.left);
+	rock3id.style[setMozOrWebkit+"Transition"] = "left "+righttrans+"s linear";
+	rock3id.addEventListener(transend,Moz_right);
+	
+	rock4id.style.top = "74%"; 
+	currentBottom = parseInt(rock4id.style.top);
+	rock4id.style[setMozOrWebkit+"Transition"] = "top "+bottomtrans+"s linear";
+	rock4id.addEventListener(transend,Moz_bottom);
+	 // bulletid.style.left = "0%";
+	
+	enableKeyboard(); 
+}
+//Moz transition for rocks.
+var currentLeft = 0;
+var currentTop = 0;
+var currentRight = 0; 
+var keyflag=true;
+var shipaudio = new Audio();
+shipaudio.src =soundsDirPath +'shot'+audio_compatible;
+shipaudio.preload = "auto";
+function Moz_left(){   
+ 
+	if(currentLeft<35){
+		currentLeft+=1;
+		rock1id.style.left = currentLeft +"%"; 
+	} 
+	else{
+		lifecnt+=1;
+		//alert(lifecnt);
+		keyflag = false;
+		hitArea = true;
+		bulletfire = false;
+		if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					playGameAudiosFinalCustom(0, 0, 'shot', 'playGameAudiosFinalCallBackDummy');
+				}
+				else{
+					shipaudio.play();
+				}
+		setTimeout("shipBlast();",100);
+		disableKeyboard();
+	}
+}
+var hitArea = false;
+function shipBlast(){
+onlyOnce = true;
+	gunid.style.visibility = "hidden";
+	bulletid.style.visibility = "hidden"; 
+	document.getElementById("gunBlast").style.opacity="1";
+	document.getElementById("gunBlast").style[setMozOrWebkit+"Transition"] = "opacity 1s linear";
+	document.getElementById("gunBlast").addEventListener(transend,function(){setTimeout(function(){document.getElementById("gunBlast").style[setMozOrWebkit+"Transition"] = "";
+			document.getElementById("gunBlast").style.opacity="0";
+			rock1id.style.visibility = "hidden";
+			rock1id.style[setMozOrWebkit+"Transition"] = "";
+			rock1id.style.left = "13%";
+			rock2id.style.visibility = "hidden";
+			rock2id.style[setMozOrWebkit+"Transition"] = "";
+			rock2id.style.top = "10%";
+			rock3id.style.visibility = "hidden";
+			rock3id.style[setMozOrWebkit+"Transition"] = "";
+			rock3id.style.left = "77%";
+			rock4id.style.visibility = "hidden";
+			rock4id.style[setMozOrWebkit+"Transition"] = "";
+			rock4id.style.top = "73%";
+			rock1id.style.visibility = "hidden";
+	rock2id.style.visibility = "hidden";
+	rock3id.style.visibility = "hidden";
+	rock4id.style.visibility = "hidden";
+	document.getElementById('rock_text_0').style.visibility = "hidden";
+	document.getElementById('rock_text_1').style.visibility = "hidden";
+	document.getElementById('rock_text_2').style.visibility = "hidden";
+	document.getElementById('rock_text_3').style.visibility = "hidden";
+	 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=0;
+				 // alert(scoreValue);
+				setTimeout(function(){showScore(scoreValue);},25);
+				
+			timout = setTimeout("nextLife();",2000);},1000);
+			},false);
+}
+var lifecnt = 0;
+var timout=0;
+function nextLife(){
+	clearTimeout(timout);
+	//alert(lifecnt);
+	if(lifecnt == 1){
+	onlyOnce=true;
+	lefttrans = 0.38;
+	righttrans = 0.38 ;
+	toptrans = 0.6 ;
+  bottomtrans = 0.6 ;
+  // alert("set");
+	document.getElementById('life2').style.visibility = "visible";
+	document.getElementById('life2').style.top = "40.5%";
+	document.getElementById('life2').style.left = "45%";
+	document.getElementById('life2').style[setMozOrWebkit+"Transition"] = "all 1s ease-in-out"
+	document.getElementById('life2').addEventListener(transend,function(){document.getElementById('life2').style[setMozOrWebkit+"Transition"] = "";	
+	gunid.style[setMozOrWebkit+"Transform"]="rotate(0deg)";
+	gunid.style.visibility = "visible";
+	//bullet.style.visibility = "visible"; 
+	document.getElementById('life2').style.visibility = "hidden";
+	rock1id.style.visibility = "hidden";
+	rock2id.style.visibility = "hidden";
+	rock3id.style.visibility = "hidden";
+	rock4id.style.visibility = "hidden";
+	document.getElementById('rock_text_0').style.visibility = "hidden";
+	document.getElementById('rock_text_1').style.visibility = "hidden";
+	document.getElementById('rock_text_2').style.visibility = "hidden";
+	document.getElementById('rock_text_3').style.visibility = "hidden";
+	 
+	setTimeout("loadXMLDoc();",1000);},false);
+}
+else if(lifecnt == 2){
+	onlyOnce=true;
+	lefttrans = 0.38;
+	righttrans = 0.38 ;
+	toptrans = 0.6 ;
+  bottomtrans = 0.6 ;
+	document.getElementById('life1').style.visibility = "visible";
+	document.getElementById('life1').style.top = "40.5%";
+	document.getElementById('life1').style.left = "45%";
+	document.getElementById('life1').style[setMozOrWebkit+"Transition"] = "all 1s ease-in-out"
+	document.getElementById('life1').addEventListener(transend,function(){document.getElementById('life1').style[setMozOrWebkit+"Transition"] = "";
+	gunid.style[setMozOrWebkit+"Transform"]="rotate(0deg)";
+	gunid.style.visibility = "visible";
+	//bullet.style.visibility = "visible"; 
+	document.getElementById('life1').style.visibility = "hidden";
+	rock1id.style.visibility = "hidden";
+	rock2id.style.visibility = "hidden";
+	rock3id.style.visibility = "hidden";
+	rock4id.style.visibility = "hidden";
+	document.getElementById('rock_text_0').style.visibility = "hidden";
+	document.getElementById('rock_text_1').style.visibility = "hidden";
+	document.getElementById('rock_text_2').style.visibility = "hidden";
+	document.getElementById('rock_text_3').style.visibility = "hidden";
+	 
+	setTimeout("loadXMLDoc();",1000);},false);
+}
+else if(lifecnt == 3){
+	postGameOverMessageToApp();
+}
+	
+	
+}
+function ajax_call(){
+		//alert("Hi");
+		window.location = redirect;
+	 //post_score_details(xmlstr2);
+}
+function postGameOverMessageToApp() {
+	ajax_call();
+	//document.location = 'iflgameover/';
+}
+function Moz_right(){
+	if(currentLeft< 34){
+		currentRight-=1;
+		rock3id.style.left = currentRight +"%"; 
+	}
+}
+
+function Moz_top(){
+	if(currentLeft< 35){
+		currentTop+=1;
+		rock2id.style.top = currentTop +"%"; 
+	}
+}
+
+function Moz_bottom(){
+	if(currentLeft< 35){
+		currentBottom-=1;
+		rock4id.style.top = currentBottom +"%"; 
+	}
+}
+function enableKeyboard(){
+	window.addEventListener('keydown',function(event){getKeyCode(event.keyCode);},false);
+}
+function disableKeyboard(){
+	window.removeEventListener('keydown',function(event){getKeyCode(event.keyCode);},false);
+}
+var dir="";
+function fire(currentKeyFlag){
+	 //disableKeyboard();
+	switch(currentKeyFlag){
+		case "left": 
+			bulletid.style[setMozOrWebkit+"Transform"]="rotate(5deg)";
+			bulletid.style.left = (currentLeft+5)+"%";
+			bulletid.style[setMozOrWebkit+"Transition"] = "left 1s linear";
+			bulletid.addEventListener(transend,function(){if(!hitArea){Evalution(currentKeyFlag);currentKeyFlag="";}},false);
+		break;
+		case "top": 
+			bulletid.style[setMozOrWebkit+"Transform"]="rotate(95deg)";
+			bulletid.style.top = currentTop+"%";
+			bulletid.style[setMozOrWebkit+"Transition"] = "top 1s linear";
+			bulletid.addEventListener(transend,function(){if(!hitArea){Evalution(currentKeyFlag);currentKeyFlag="";}},false);
+		break;
+		case "right": 
+			bulletid.style[setMozOrWebkit+"Transform"]="rotate(185deg)";
+			bulletid.style.left = currentRight+"%";
+			bulletid.style[setMozOrWebkit+"Transition"] = "left 1s linear"; 
+			bulletid.addEventListener(transend,function(){ if(!hitArea){Evalution(currentKeyFlag);currentKeyFlag="";}},false);
+		break;
+		case "bottom":
+			bulletid.style[setMozOrWebkit+"Transform"]="rotate(275deg)";
+			bulletid.style.top = currentBottom+"%";
+			bulletid.style[setMozOrWebkit+"Transition"] = "top 1s linear";
+			bulletid.addEventListener(transend,function(){if(!hitArea){Evalution(currentKeyFlag);currentKeyFlag="";}},false);
+		break;
+	}
+	
+}
+	var fire_audio1 = new Audio();
+				fire_audio1.src = soundsDirPath +'winning'+audio_compatible;
+				fire_audio1.preload="auto";
+function Evalution(currentKeyFlag){ 
+
+	switch(currentKeyFlag){
+		case "left": 
+			if(document.getElementById('rock_text_0').innerHTML == correct){
+				scoreValue++;
+				rockBlast.style.opacity = "1";
+				rockBlast.style.left = parseInt(rock1id.style.left)-10+"%";
+				rockBlast.style.top = parseInt(rock1id.style.top)-10+"%";
+				rockBlast.style[setMozOrWebkit+"Transition"] = "opacity 1s linear";
+				rock1id.style.visibility = "hidden";
+				rock1id.style[setMozOrWebkit+"Transition"] = "none";
+				rock2id.style[setMozOrWebkit+"Transition"] = "none";
+				rock3id.style[setMozOrWebkit+"Transition"] = "none";
+				rock4id.style[setMozOrWebkit+"Transition"] = "none";
+				rockBlast.addEventListener(transend,function(){
+				rockBlast.style[setMozOrWebkit+"Transition"] ="";
+				rock1id.style.left = "12%";
+				rock2id.style.top = "12%";
+				rock3id.style.left = "79%";
+				rock4id.style.top = "75%";
+				 rock1id.style.visibility = "hidden";
+				 rock2id.style.visibility = "hidden";
+				 rock3id.style.visibility = "hidden";
+				 rock4id.style.visibility = "hidden";
+				 bulletid.style.visibility = "hidden";
+				 document.getElementById('rock_text_0').style.visibility = "hidden";
+				document.getElementById('rock_text_1').style.visibility = "hidden";
+				document.getElementById('rock_text_2').style.visibility = "hidden";
+				document.getElementById('rock_text_3').style.visibility = "hidden";
+				disableKeyboard();
+				onlyOnce=true;
+				setTimeout("loadXMLDoc();",1000);
+				
+			
+				fire_audio1.play();
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+				iflgamescoreupdate(scoreValue);
+				}
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					setTimeout(function(){playGameAudiosFinalCustom(0, 0, 'winning', 'playGameAudiosFinalCallBackDummy');},100);
+				}},false);
+				 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=1;
+				 // alert(scoreValue);
+				setTimeout(function(){showScore(scoreValue);},25);
+			}
+			else{
+			bulletfire = true;bulletid.style[setMozOrWebkit+"Transition"] = "";bulletid.style.left ="47.5%";
+				document.getElementById('rock_text_0').style.visibility = "hidden";
+				 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=0;
+				showScore(scoreValue);
+			}
+		break;
+		case "top": 
+			if(document.getElementById('rock_text_1').innerHTML == correct){
+			scoreValue++;
+					rockBlast.style.opacity = "1";
+				rockBlast.style.left = parseInt(rock2id.style.left)-10+"%";
+				rockBlast.style.top = parseInt(rock2id.style.top)-10+"%";
+				rockBlast.style[setMozOrWebkit+"Transition"] = "opacity 1s linear";
+				rock2id.style.visibility = "hidden";
+				rock1id.style[setMozOrWebkit+"Transition"] = "none";
+				rock2id.style[setMozOrWebkit+"Transition"] = "none";
+				rock3id.style[setMozOrWebkit+"Transition"] = "none";
+				rock4id.style[setMozOrWebkit+"Transition"] = "none";
+				rockBlast.addEventListener(transend,function(){
+				rockBlast.style[setMozOrWebkit+"Transition"] ="";
+				rock1id.style.left = "12%";
+				rock2id.style.top = "12%";
+				rock3id.style.left = "79%";
+				rock4id.style.top = "75%";
+				rock1id.style.visibility = "hidden";
+				 rock2id.style.visibility = "hidden";
+				 rock3id.style.visibility = "hidden";
+				 rock4id.style.visibility = "hidden";
+				  bulletid.style.visibility = "hidden";
+				//rock1id.style.display = "none";
+				//rock2id.style.display = "none";
+				//rock3id.style.display = "none";
+				//rock4id.style.display = "none";
+				document.getElementById('rock_text_0').style.visibility = "hidden";
+				document.getElementById('rock_text_1').style.visibility = "hidden";
+				document.getElementById('rock_text_2').style.visibility = "hidden";
+				document.getElementById('rock_text_3').style.visibility = "hidden";
+				disableKeyboard();
+				onlyOnce=true;
+				setTimeout("loadXMLDoc();",1000);
+				fire_audio1.play();
+				
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+				iflgamescoreupdate(scoreValue);
+				}
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					setTimeout(function(){playGameAudiosFinalCustom(0, 0, 'winning', 'playGameAudiosFinalCallBackDummy');},100);
+				}},false);
+				 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=1;
+				 // alert(scoreValue);
+				setTimeout(function(){showScore(scoreValue);},25);
+			}
+			else{
+			bulletfire = true;bulletid.style[setMozOrWebkit+"Transition"] = "";bulletid.style.top ="42.7%";
+				document.getElementById('rock_text_1').style.visibility = "hidden";
+				  UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=0;
+				showScore(scoreValue);
+			}
+			
+		break;
+		case "right":
+			if(document.getElementById('rock_text_2').innerHTML == correct){
+				scoreValue++;
+				rockBlast.style.opacity = "1";
+				rockBlast.style.left = parseInt(rock3id.style.left)-10+"%";
+				rockBlast.style.top = parseInt(rock3id.style.top)-10+"%";
+				rockBlast.style[setMozOrWebkit+"Transition"] = "opacity 1s linear";
+				rock3id.style.visibility = "hidden";
+				rock1id.style[setMozOrWebkit+"Transition"] = "none";
+				rock2id.style[setMozOrWebkit+"Transition"] = "none";
+				rock3id.style[setMozOrWebkit+"Transition"] = "none";
+				rock4id.style[setMozOrWebkit+"Transition"] = "none";
+				rockBlast.addEventListener(transend,function(){
+				rockBlast.style[setMozOrWebkit+"Transition"] ="";
+				rock1id.style.visibility = "hidden";
+				 rock2id.style.visibility = "hidden";
+				 rock3id.style.visibility = "hidden";
+				 rock4id.style.visibility = "hidden";
+				rock1id.style.left = "12%";
+				rock2id.style.top = "12%";
+				rock3id.style.left = "79%";
+				rock4id.style.top = "75%";
+				//rock1id.style.display = "none";
+				//rock2id.style.display = "none";
+				//rock3id.style.display = "none";
+				//rock4id.style.display = "none";
+				 bulletid.style.visibility = "hidden";
+				document.getElementById('rock_text_0').style.visibility = "hidden";
+				document.getElementById('rock_text_1').style.visibility = "hidden";
+				document.getElementById('rock_text_2').style.visibility = "hidden";
+				document.getElementById('rock_text_3').style.visibility = "hidden";
+				disableKeyboard();
+				onlyOnce=true;
+				setTimeout("loadXMLDoc();",1000);
+				
+				fire_audio1.play();
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+				iflgamescoreupdate(scoreValue);
+				}
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					setTimeout(function(){playGameAudiosFinalCustom(0, 0, 'winning', 'playGameAudiosFinalCallBackDummy');},100);
+				}},false);
+				 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=1;
+				// alert(scoreValue);
+				setTimeout(function(){showScore(scoreValue);},25);
+			}
+			else{
+			bulletfire = true;bulletid.style[setMozOrWebkit+"Transition"] = "";bulletid.style.left ="47.5%";
+				document.getElementById('rock_text_2').style.visibility = "hidden";
+				 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				//showScore(scoreValue);
+				//gameAttempt=0;
+				 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=0;
+				showScore(scoreValue);
+				
+			}
+		break;
+		case "bottom":
+			if(document.getElementById('rock_text_3').innerHTML == correct){
+				scoreValue++;
+				rockBlast.style.opacity = "1";
+				rockBlast.style.left = parseInt(rock4id.style.left)-10+"%";
+				rockBlast.style.top = parseInt(rock4id.style.top)-10+"%";
+				rockBlast.style[setMozOrWebkit+"Transition"] = "opacity 1s linear";
+				rock4id.style.visibility = "hidden";
+				rock1id.style[setMozOrWebkit+"Transition"] = "none";
+				rock2id.style[setMozOrWebkit+"Transition"] = "none";
+				rock3id.style[setMozOrWebkit+"Transition"] = "none";
+				rock4id.style[setMozOrWebkit+"Transition"] = "none";
+				rockBlast.addEventListener(transend,function(){
+				rockBlast.style[setMozOrWebkit+"Transition"] ="";
+				rock1id.style.visibility = "hidden";
+				 rock2id.style.visibility = "hidden";
+				 rock3id.style.visibility = "hidden";
+				 rock4id.style.visibility = "hidden";
+				rock1id.style.left = "12%";
+				rock2id.style.top = "12%";
+				rock3id.style.left = "79%";
+				rock4id.style.top = "75%";
+				 bulletid.style.visibility = "hidden";
+				//rock1id.style.display = "none";
+				//rock2id.style.display = "none";
+				//rock3id.style.display = "none";
+				//rock4id.style.display = "none";
+				document.getElementById('rock_text_0').style.visibility = "hidden";
+				document.getElementById('rock_text_1').style.visibility = "hidden";
+				document.getElementById('rock_text_2').style.visibility = "hidden";
+				document.getElementById('rock_text_3').style.visibility = "hidden";
+				disableKeyboard();
+				onlyOnce=true;
+				setTimeout("loadXMLDoc();",1000);
+				fire_audio1.play();
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+				iflgamescoreupdate(scoreValue);
+				}
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					setTimeout(function(){playGameAudiosFinalCustom(0, 0, 'winning', 'playGameAudiosFinalCallBackDummy');},100);
+				}},false);
+				 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=1;
+				 // alert(scoreValue);
+				setTimeout(function(){showScore(scoreValue);},25);
+			}
+			else{
+			bulletfire = true;bulletid.style[setMozOrWebkit+"Transition"] = "";bulletid.style.top ="42.7%";
+				document.getElementById('rock_text_3').style.visibility = "hidden";
+				 UnixTimeStamp = Math.round(new Date().getTime() / 1000);
+				 gameAttempt=0;
+				showScore(scoreValue);
+			}
+		break;
+	}
+}
+var keycodeValue="";
+var currentKeyFlag = "left";
+var bulletfire = true;
+// lock scroll
+preventDefaultScroll = function(evt) {
+evt.preventDefault();
+window.scroll(0,0);
+return false;
+};
+window.document.addEventListener('touchmove', preventDefaultScroll, false);
+function fireButtonPressed()
+{
+	var event = 13;
+	getKeyCode(event);
+}
+function leftButtonPressed ()
+{
+	var event = 37;
+	getKeyCode(event);
+}
+function rightButtonPressed ()
+{
+	var event = 39;
+	getKeyCode(event);
+}
+function upButtonPressed ()
+{
+	var event = 38;
+	getKeyCode(event);
+}
+function downButtonPressed ()
+{
+	var event = 40;
+	getKeyCode(event);
+}
+function getKeyCode(event){
+ 
+ keycodeValue = event;
+ if(keyflag){
+ switch(keycodeValue)
+	{
+		//Left Arrow.
+		case 37: 
+			//gunid.src = "images/left.png";
+			currentKeyFlag = "left";
+			gunid.style[setMozOrWebkit+"Transform"]="rotate(0deg)";
+			if(bulletfire){
+				
+			}
+		break;
+		//Up Arrow.
+		case 38: 
+			currentKeyFlag = "top";
+			//gunid.src = "images/top.png";
+			gunid.style[setMozOrWebkit+"Transform"]="rotate(90deg)";
+			if(bulletfire){
+				
+			}
+		break;
+		//Right Arrow.
+		case 39: 
+			currentKeyFlag = "right";
+			//gunid.src = "images/right.png";
+			gunid.style[setMozOrWebkit+"Transform"]="rotate(180deg)";
+			if(bulletfire){
+				
+			}
+		break;
+		//Down Arrow.
+		case 40:  
+			currentKeyFlag = "bottom";
+			//gunid.src = "images/bottom.png";
+			
+				gunid.style[setMozOrWebkit+"Transform"]="rotate(270deg)";
+			
+			
+			if(bulletfire){
+			}
+		break;
+		//Fire.
+		case 13:
+			if(bulletfire){
+				bulletfire =false;
+				
+				fire_audio.play();
+				 if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					playGameAudiosFinalCustom(0, 0, 'mov', 'playGameAudiosFinalCallBackDummy');
+				}
+				setTimeout(function(){fire(currentKeyFlag);},100);
+			}
+		break;
+		
+	}
+	}
+}
+var fire_audio = new Audio();
+				fire_audio.src = soundsDirPath +'mov'+audio_compatible;
+				fire_audio.preload="auto";
+function loading_img(){
+document.getElementById("load").style.visibility="visible";
+setTimeout('initial1();',1000);
+
+}
+
+function initial1(){
+    document.getElementById("load").style.visibility="hidden";
+    document.getElementById("backimage").style.visibility="visible";
+	document.getElementById("home").style.visibility="visible";
+	document.getElementById("homeaudio").style.visibility="visible";
+	document.getElementById("scoreboard").style.visibility="visible";
+	document.getElementById("life1").style.visibility="visible";
+	document.getElementById("life2").style.visibility="visible";
+	document.getElementById("gunBlast").style.visibility="visible";
+	document.getElementById("guncontainer").style.visibility="visible";
+	document.getElementById("bullet").style.visibility="visible";	
+	timeInterval=setInterval("timeData()",1000);
+	
+}
+ 
+function initial(){
+	agent = navigator.userAgent;
+	document.getElementById("scoreboard").style.visibility="hidden";	
+	setTimeout("loadgamedata()",1000);
+	setTimeout("Audio_Instruct();",2000);
+	loading_img();
+	
+}
+ function skipAudio(){
+
+ 				init_Audios.pause();
+				init_Audios.src="";
+				init();
+	   }
+	   
+ var init_Audios  = new Audio(); 
+ //init_Audios.src = demoaudiopath+'spacelettersdemo'+audio_compatible;
+ init_Audios.src = './SpaceLetters_files/spacelettersdemo'+audio_compatible;
+				init_Audios.preload="auto";
+	   var agent="";
+function Audio_Instruct(){
+document.getElementById("mainBg").style.visibility="visible";
+		  if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					playGameAudiosFinalCustom(0, 1, 'spacemathdemo', 'bforeload');
+		   }
+		   else {
+		     if (isIntrosnd == "false"){
+			    isIntrosnd = "true";
+				resetme = false;
+				document.getElementById('life1').style.visibility = "visible";
+				document.getElementById('life2').style.visibility = "visible";
+				if(playIntro){
+				init_Audios.play(); 
+				}
+				if (second == "false"){
+				if(playIntro){
+				init_Audios.addEventListener("ended",function(){
+				document.getElementById("mainBg").style.visibility="hidden";
+				loadXMLDoc();},false);
+				}
+				else{
+				document.getElementById("mainBg").style.visibility="hidden";
+				loadXMLDoc();
+				}
+				}else{
+				if(playIntro){
+				init_Audios.addEventListener('ended',bforeload,false); 
+				}
+				else{
+					bforeload();
+				}
+				}
+				//bforeload();
+				}
+		  }
+}
+var timeInterval;
+var scoreUpdateInterval;
+var UnixTimeStamp="";
+var gamedata={};
+var gameAttempt=0;
+var xmlstr="";
+var xmlstr2="";
+var scoreValue=0;
+function scoreUpdate()
+{ 
+clearInterval(scoreUpdateInterval);
+scoreValue = TotalScore;//getScore();
+//alert("Hi"+scoreValue);
+showScore(scoreValue);
+  if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					iflgamescoreupdate(scoreValue);
+		   }
+//
+//alert(scoreVal);
+}
+function iflgamescoreupdate(score){
+  //alert("hg  =  "+score);
+  //document.location="iflgamescoreupdate~"+score;
+}
+function showScore(scoreValue){ 
+TotalScore = scoreValue;
+		document.getElementById('score').innerHTML=parseInt(scoreValue); 
+		gamedata.scorAlign=scoreValue;
+		gamedata.symbol=symbolArray;
+		gamedata.timeOffset=timeOffset;
+			gamedata.time  = UnixTimeStamp; 
+		gamedata.attempts=gameAttempt;
+		gamedata.questionOutput=questionOutput;
+		writeXML(gamedata);
+
+		
+}
+var tmrStorage="";
+function writeXML(obj){
+		//alert(obj.time); 
+			if(obj.time!="")
+				{	 
+			 
+			tmrStorage+='<Elem><Name>'+QuestOut+'</Name><Timestamp>'+obj.time+'</Timestamp><Data>'+obj.attempts+'</Data></Elem>';
+			//xmlstr='<student><Usage><Elem><Name>ElevatorLetters</Name><Data>'+obj.timeOffset+'</Data></Elem></Usage><Letter_Identification>'+tagAppend+'</Letter_Identification></student>';
+			//xmlstr2='<variable><dispatch><Elem><Name>index</Name><Data>0</Data></Elem><Elem><Name>usageTime</Name><Data>'+obj.timeOffset+'</Data></Elem></dispatch><score><Elem><Name>score</Name><Data>'+obj.Score+'</Data></Elem></score></variable>';
+			
+		 	xmlstr='<PostGameResultForStudent>'
+                               +'<gameid>'+game_id+'</gameid>'+
+                               '<studentid>'+s_id+'</studentid>' +
+                               '<GameResult><student><Usage><Elem><Name>SpaceLetters</Name><Data>'+obj.timeOffset+'</Data></Elem></Usage><Letter_Identification>'+tmrStorage+'</Letter_Identification></student></GameResult>'+
+								'</PostGameResultForStudent>';
+			} 
+			xmlstr2='<GetStudentContentsByIds>' 
+   +'<studentids>'+s_id+'</studentids><initialscore>'+InitialScore+'</initialscore><finalscore>'+obj.scorAlign+'</finalscore>'
++'</GetStudentContentsByIds>';
+//alert(xmlstr2);
+}
+ 
+function timeData(){
+	
+				if(singleActivity){
+				console.log("timedata>>"+initTimer);
+					if(initTimer > 180) {
+                        clearInterval(timeInterval);
+                        //resetValues();
+                        //alert('ITERATION : ' + '');
+                        alert(base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration);
+						//document.location = base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration;		
+						document.location = redirect;			
+					}
+				}
+				initTimer++;
+				timeOffset++;
+			}
+function bforeload(){
+	//loadXml("../../Config.xml");
+	isIntrosnd = "false";
+    document.getElementById("homeaudio").style.visibility="hidden";
+	document.getElementById("Repeat").style.visibility="visible";
+	document.getElementById("mainBg").style.visibility="hidden";
+	scoreUpdateInterval=setInterval('scoreUpdate()',2000);
+	setTimeout("load()",1000);
+}
+var isIntrosnd="false";
+var mainPathIndex = 0;
+var subPathIndex = 0;
+var audioIndex1=0;
+var gameAudioIndex=0;
+var gameAudiosMainPathArr =["resource", "games"];
+
+// sub path - under main path the audio file is located
+var gameAudiosSubPathArr =["activity/spacemath/","word/"];
+
+function playGameAudiosFinalCustom1(newaudioName, callbackMethod)
+{
+//alert(newaudioName+":4"+callbackMethod);
+	playGameAudiosFinalCustom(0,0, newaudioName, callbackMethod);
+}
+
+function playGameAudiosFinalCustom(mainPathIndex, subPathIndex, newaudioName, callbackMethod){
+	audioIndex1 = -1;
+    if (subPathIndex == 0)
+    {
+    	alert("0");
+        document.location = "iflgameAudioPlayCallBackFinal~"+callbackMethod+"~"
+		+gameAudiosMainPathArr[mainPathIndex]+"~" 
+        +gameAudiosSubPathArr[subPathIndex]+"~" 
+        +newaudioName+".mp3";
+    }
+	 if (subPathIndex == 1)
+    {
+    	alert("1");
+        document.location = "iflgameAudioPlayCallBackFinal~"+callbackMethod+"~"
+		+gameAudiosMainPathArr[mainPathIndex]+"~" 
+        +gameAudiosSubPathArr[subPathIndex]+"~" 
+        +newaudioName+".mp3";
+    }
+	
+}
+function playGameAudiosFinalCallBackDummy()
+{
+ 
+}
+// Navigation - arrow key Actions
+
+function ActionLeft(event)
+{
+	getKeyCode(37);
+}	
+
+function ActionUp(event)
+{
+	getKeyCode(38);
+}	
+
+function ActionRight(event)
+{
+	getKeyCode(39);
+}	
+
+function ActionDown(event)
+{
+	getKeyCode(40);
+}	
+
+// Game Specific actions - enter key action
+
+function ActionEnter(event)
+{
+	if(bulletfire){
+	getKeyCode(13);
+	}
+}
+var resetme = false;
+function resetValues(){
+playIntro = true;
+if(!onetimeintro){
+onetimeintro = true;
+resetme = true;
+rock1id.style[setMozOrWebkit+"Transition"] = "none";
+rock2id.style[setMozOrWebkit+"Transition"] = "none";
+rock3id.style[setMozOrWebkit+"Transition"] = "none";
+rock4id.style[setMozOrWebkit+"Transition"] = "none";
+ answerAudio.pause();
+ init_Audios  = new Audio(); 
+ //init_Audios.src = demoaudiopath+'spacelettersdemo'+audio_compatible;
+ init_Audios.src = './SpaceLetters_files/spacelettersdemo'+audio_compatible;
+init_Audios.preload="auto";
+rock1id.style.visibility ="hidden";
+rock2id.style.visibility ="hidden";
+rock3id.style.visibility ="hidden";
+rock4id.style.visibility ="hidden";
+/*rock1id.style.left = "13%";
+rock2id.style.top = "10%";
+rock3id.style.left = "77%";
+rock4id.style.top = "73%";*/
+rock1id = "";
+rock2id= "";
+rock3id= "";
+rock4id= "";
+bulletid="";
+gunid="";
+//lefttrans = 0.17;
+//righttrans = 0.17 ;
+//toptrans = 0.3 ;
+//bottomtrans = 0.3 ;
+ansdum1,ansdum2,ansdum3;
+RandomAnswers = new Array();
+symbolArray ="";
+rand;
+questionOutput="";
+QuestOut="";
+correct="";
+rockBlast = "";
+randCase = ""; 
+currentLeft = 0;
+currentTop = 0;
+currentRight = 0; 
+keyflag=true;
+hitArea = false;
+lifecnt = 0;
+timout=0;
+dir="";
+keycodeValue="";
+currentKeyFlag = "left";
+bulletfire = true;
+//init_Audios  = new Audio(); 
+agent="";
+timeInterval;
+scoreUpdateInterval;
+UnixTimeStamp="";
+gamedata={};
+gameAttempt=0;
+xmlstr="";
+xmlstr2="";
+
+ scoreValue=InitialScore;
+ TotalScore=InitialScore;
+ document.getElementById('score').innerHTML=scoreValue;
+tmrStorage="";
+mainPathIndex = 0;
+subPathIndex = 0;
+audioIndex1=0;
+gameAudioIndex=0;
+//loadXMLDoc();
+alert("reset");
+document.getElementById('life1').style.top = "4%";
+		document.getElementById('life1').style.left = "12%";
+		document.getElementById('life2').style.top = "4%";
+		document.getElementById('life2').style.left = "24%";
+disableKeyboard();
+document.getElementById("rock_text_0").style.visibility="hidden";
+document.getElementById("rock_text_1").style.visibility="hidden";
+document.getElementById("rock_text_2").style.visibility="hidden";
+document.getElementById("rock_text_3").style.visibility="hidden";
+document.getElementById("rock_text_0").style.visibility="hidden";
+document.getElementById("rock_text_1").style.visibility="hidden";
+document.getElementById("rock_text_2").style.visibility="hidden";
+document.getElementById("rock_text_3").style.visibility="hidden";
+document.getElementById("rock_text_0").innerHTML = "";
+document.getElementById("rock_text_1").innerHTML = "";
+document.getElementById("rock_text_2").innerHTML = "";
+document.getElementById("rock_text_3").innerHTML = "";
+document.getElementById("rock1").style.visibility="hidden";
+document.getElementById("rock2").style.visibility="hidden";
+document.getElementById("rock3").style.visibility="hidden";
+document.getElementById("rock0").style.visibility="hidden";
+clearInterval(scoreUpdateInterval);
+second="false";
+onlyOnce = true;
+
+answers =["a","b","c","d","e","f","g","h","i","j","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+audioname=setTimeout("Audio_Instruct()",50);
+}
+}
+var onetimeintro = false;
+var audioname = 0;
+var second="true";
+var isIntrosnd="false";
+</script>
+</head> 
+<body onload="initial();resize();" style="position: fixed; overflow: hidden; background-image: url(./SpaceLetters_files/back.jpg); background-attachment: fixed; width: 1643px; height: 851px; font-size: 24.939999999999998px; ">
+ <a onclick="fireButtonPressed();">
+ <button type="button" id="fireButton" style="z-index: 22000; position: absolute; top: 85%; left: 80%; width: 100px; height: 30px;" >Fire</button>
+
+ </a>
+ 
+ <a onclick="leftButtonPressed();">
+ <button type="button" id="leftButton" style="z-index: 22000; position: absolute; top: 70%; left: 5%; width: 70px; height: 30px; ">Left</button>
+ </a>
+ <a onclick="rightButtonPressed();">
+ <button type="button" id="rightButton" style="z-index: 22000; position: absolute; top: 70%; left: 20%; width: 70px; height: 30px; ">Right</button>
+ </a>
+ <a onclick="upButtonPressed();">
+ <button type="button" id="leftButton" style="z-index: 22000; position: absolute; top: 60%; left: 12.5%; width: 70px; height: 30px; ">Up</button>
+ </a>
+ <a onclick="downButtonPressed();">
+ <button type="button" id="downButton" style="z-index: 22000; position: absolute; top: 80%; left: 12.5%; width: 70px; height: 30px; ">Down</button>
+ </a>
+ 
+<img src="./SpaceLetters_files/space_brows.png" style="position: absolute; top: 3%; left: 11%; width: 78%; height: 92%; visibility: hidden; " id="mainBg">
+ 
+<a onclick="exit();">
+	<img src="./SpaceLetters_files/home_alpha01_ipad1.png" id="home" style="position: absolute; z-index: 1100; top: 89%; left: 12%; visibility: visible; ">
+</a>
+<a onclick="splaudio(init_Audios,bforeload);">
+	<img src="./SpaceLetters_files/skipbtn.png" value="audio" id="homeaudio" style="position: absolute; z-index: 1100; top: 4%; left: 12%; visibility: hidden; ">
+</a>
+<!-- help function -->
+		<a onclick="resetValues();">
+		<img src="./SpaceLetters_files/Repeat.png" value="audio" id="Repeat" style="visibility: visible; position: absolute; z-index: 1100; top: 4%; left: 12%; ">
+		</a>
+<img style="position: absolute; visibility: hidden; top: 30%; left: 42%; width: 10%; height: 10%; " src="./SpaceLetters_files/preloader_white.gif" id="load">
+	<img src="./SpaceLetters_files/bg.png" id="backimage" style="position: absolute; top: 3%; left: 11%; width: 78%; height: 92%; visibility: visible; ">
+	<img src="./SpaceLetters_files/rockBlast.png" id="rockBlast" style="z-index: 22; position: absolute; top: 25%; left: 25%; width: 25%; height: 25%; opacity: 0; ">
+	
+	<img src="./SpaceLetters_files/gunBlast.png" id="gunBlast" style="z-index: 22; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; opacity: 0; visibility: visible; ">
+	<div id="guncontainer" style="position: absolute; left: 45%; z-index: 11; top: 40.5%; width: 10%; height: 15%; visibility: visible; -webkit-transform: rotate(0deg); ">
+		<img src="./SpaceLetters_files/left.png" width="100%" height="100%" id="gun"> 
+	</div>
+	<img src="./SpaceLetters_files/bullet.png" id="bullet" width="5%" height="10%" style="z-index: 10; left: 47.5%; top: 42.7%; position: absolute; visibility: visible; ">
+	<div id="rock_and_text_container_0" style="visibility: visible; z-index: 20; position: absolute; left: 20%; top: 42.5%; width: 10%; height: 10%; -webkit-transition: left 0.35s linear; ">	
+	<div id="rock_text_0" style="width: 100%; position: absolute; font-weight: bold; color: yellow; font-size: 250%; text-align: center; visibility: visible; ">m</div>
+	<img src="./SpaceLetters_files/rock1.png" id="rock0" width="100%" height="100%" style="visibility: visible; "> 
+	</div>
+	<div id="rock_and_text_container_1" style="visibility: visible; z-index: 20; position: absolute; left: 45%; top: 16%; width: 10%; height: 10%; -webkit-transition: top 0.5499999999999999s linear; "> 
+		<div id="rock_text_1" style="width: 100%; left: 2%; position: absolute; font-weight: bold; color: yellow; font-size: 250%; text-align: center; visibility: visible; ">e</div>
+		<img src="./SpaceLetters_files/rock1.png" id="rock1" width="100%" height="100%" style="visibility: visible; ">
+	</div>
+	<div id="rock_and_text_container_2" style="visibility: visible; z-index: 20; position: absolute; left: 69%; top: 42.5%; width: 10%; height: 10%; -webkit-transition: left 0.35s linear; ">
+		<div id="rock_text_2" style="width: 100%; left: 2%; position: absolute; font-weight: bold; color: yellow; font-size: 250%; text-align: center; visibility: visible; ">n</div>
+		<img src="./SpaceLetters_files/rock1.png" id="rock2" width="100%" height="100%" style="visibility: visible; "> 
+	</div>
+	
+	<div id="rock_and_text_container_3" style="visibility: visible; z-index: 20; position: absolute; left: 45%; top: 69%; width: 10%; height: 10%; -webkit-transition: top 0.5499999999999999s linear; ">
+		<div id="rock_text_3" style="width: 100%; left: 2%; position: absolute; font-weight: bold; color: yellow; font-size: 250%; text-align: center; visibility: visible; ">y</div>
+		<img src="./SpaceLetters_files/rock1.png" id="rock3" width="100%" height="100%" style="visibility: visible; ">
+	</div>
+	<div id="question" style="z-index: 27; position: absolute; left: 70%; top: 4%; font-size: 300%; color: white; font-weight: bold; visibility: hidden; ">5 - 1</div>
+	<img src="./SpaceLetters_files/gun.png" id="life1" width="5%" height="10%" style="z-index: 10; left: 12%; top: 4%; width: 10%; height: 15%; position: absolute; visibility: hidden; ">
+	<img src="./SpaceLetters_files/gun.png" id="life2" width="5%" height="10%" style="z-index: 10; left: 24%; top: 4%; width: 10%; height: 15%; position: absolute; visibility: hidden; ">
+	<img src="./SpaceLetters_files/scoreboard.png" id="scoreboard" style="position: absolute; visibility: visible; top: 72%; left: 70%; width: 10%; height: 10%; "> 
+	
+	<div id="score" style="visibility:visible;position:absolute;top:74%;left:70%;font-size:200%;font-weight:bold;width:10%;height:10%;text-align:center;">29</div>
+	<script type="text/javascript" src="./SpaceLetters_files/ideal_redirect.js"></script>
+	 
+
+</body></html>

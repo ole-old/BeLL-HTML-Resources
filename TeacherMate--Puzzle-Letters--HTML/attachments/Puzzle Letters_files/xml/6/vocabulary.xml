@@ -1,0 +1,148 @@
+<teacher>
+<teacher_id>
+
+6</teacher_id>
+<grade_id>1</grade_id>
+
+<use_easy_start>1</use_easy_start>
+<assigned_students>
+<student>
+	<student_id>
+	16	</student_id>
+	<student_name>
+	Student Photon	</student_name>
+	<group_id>
+		</group_id>
+	<language_id>
+		</language_id>
+	<language_2_id>
+	0	</language_2_id>
+	<language_3_id>
+		</language_3_id>
+	<level_id>
+	B, 10	</level_id>
+	<addition_level_id>
+	2	</addition_level_id>
+	<subtraction_level_id>
+	1	</subtraction_level_id>
+	<multiplication_level_id>
+	0	</multiplication_level_id>
+	<division_level_id>
+	0	</division_level_id>
+	<vocabulary_level_id>
+	0	</vocabulary_level_id>
+	<device_id>
+	0	</device_id>
+	<basal_id>
+		</basal_id>
+	<basal_book_id>
+		</basal_book_id>
+	<basal_story_id>
+	0	</basal_story_id>
+		
+	<sc_timestamp>
+	1343053894	</sc_timestamp>
+</student>
+<student>
+	<student_id>
+	18	</student_id>
+	<student_name>
+	tes student	</student_name>
+	<group_id>
+		</group_id>
+	<language_id>
+		</language_id>
+	<language_2_id>
+	0	</language_2_id>
+	<language_3_id>
+		</language_3_id>
+	<level_id>
+	A, 1	</level_id>
+	<addition_level_id>
+	2	</addition_level_id>
+	<subtraction_level_id>
+	1	</subtraction_level_id>
+	<multiplication_level_id>
+	0	</multiplication_level_id>
+	<division_level_id>
+	0	</division_level_id>
+	<vocabulary_level_id>
+	0	</vocabulary_level_id>
+	<device_id>
+	0	</device_id>
+	<basal_id>
+		</basal_id>
+	<basal_book_id>
+		</basal_book_id>
+	<basal_story_id>
+	0	</basal_story_id>
+		
+	<sc_timestamp>
+	1343053847	</sc_timestamp>
+</student>
+<student>
+	<student_id>
+	17	</student_id>
+	<student_name>
+	testing photon	</student_name>
+	<group_id>
+		</group_id>
+	<language_id>
+		</language_id>
+	<language_2_id>
+	0	</language_2_id>
+	<language_3_id>
+		</language_3_id>
+	<level_id>
+	B, 10	</level_id>
+	<addition_level_id>
+	2	</addition_level_id>
+	<subtraction_level_id>
+	1	</subtraction_level_id>
+	<multiplication_level_id>
+	0	</multiplication_level_id>
+	<division_level_id>
+	0	</division_level_id>
+	<vocabulary_level_id>
+	0	</vocabulary_level_id>
+	<device_id>
+	0	</device_id>
+	<basal_id>
+		</basal_id>
+	<basal_book_id>
+		</basal_book_id>
+	<basal_story_id>
+	0	</basal_story_id>
+		
+	<sc_timestamp>
+	0	</sc_timestamp>
+</student>
+</assigned_students>
+<usedstorylist>                              
+	<story><story_name>mimitheduckling</story_name><story_id>6007</story_id> 	<story_updated_timestamp>1343030163</story_updated_timestamp><story_zippath>files/story_groups/mimitheduckling.zip</story_zippath></story><story><story_name>megsdog</story_name><story_id>6008</story_id> 	<story_updated_timestamp>1343030216</story_updated_timestamp><story_zippath>files/story_groups/megsdog.zip</story_zippath></story><story><story_name>mydrawings</story_name><story_id>6009</story_id> 	<story_updated_timestamp>1343030272</story_updated_timestamp><story_zippath>files/story_groups/mydrawings.zip</story_zippath></story><story><story_name>blocks</story_name><story_id>6010</story_id> 	<story_updated_timestamp>1343030319</story_updated_timestamp><story_zippath>files/story_groups/blocks.zip</story_zippath></story><story><story_name>icanridemybike</story_name><story_id>6011</story_id> 	<story_updated_timestamp>1343030374</story_updated_timestamp><story_zippath>files/story_groups/icanridemybike.zip</story_zippath></story><story><story_name>ilove</story_name><story_id>6012</story_id> 	<story_updated_timestamp>1343030419</story_updated_timestamp><story_zippath>files/story_groups/ilove.zip</story_zippath></story><story><story_name>theparty</story_name><story_id>6013</story_id> 	<story_updated_timestamp>1343030470</story_updated_timestamp><story_zippath>files/story_groups/theparty.zip</story_zippath></story><story><story_name>therace</story_name><story_id>6014</story_id> 	<story_updated_timestamp>1343030533</story_updated_timestamp><story_zippath>files/story_groups/therace.zip</story_zippath></story><story><story_name>thesky</story_name><story_id>6015</story_id> 	<story_updated_timestamp>1343030597</story_updated_timestamp><story_zippath>files/story_groups/thesky.zip</story_zippath></story><story><story_name>thetrainride</story_name><story_id>6016</story_id> 	<story_updated_timestamp>1343030697</story_updated_timestamp><story_zippath>files/story_groups/thetrainride.zip</story_zippath></story></usedstorylist>
+<usedvocabularywordlist>
+   </usedvocabularywordlist>
+<usedstorylevels>
+B</usedstorylevels>
+
+<RunningRecordstoryList>                             
+<RunningRecordstory>
+	<RRStoryId>10</RRStoryId>
+	<RRStoryName>Mexican Food</RRStoryName>
+	<RRStoryLevel>B</RRStoryLevel>
+	<zippath>http://apps.innovationsforlearning.org/omsphase4/files/RRStories/B/Coded Level 2 Story 4.xml</zippath>
+</RunningRecordstory>
+<RunningRecordstory>
+	<RRStoryId>18</RRStoryId>
+	<RRStoryName>Big Dog and Little Puppy</RRStoryName>
+	<RRStoryLevel>C</RRStoryLevel>
+	<zippath>http://apps.innovationsforlearning.org/omsphase4/files/RRStories/C/Coded Level 3 Story 6.xml</zippath>
+</RunningRecordstory>
+<RunningRecordstory>
+	<RRStoryId>1</RRStoryId>
+	<RRStoryName>We Had a Hat</RRStoryName>
+	<RRStoryLevel>A</RRStoryLevel>
+	<zippath>http://apps.innovationsforlearning.org/omsphase4/files/RRStories/A/Coded Level 1 Story 1.xml</zippath>
+</RunningRecordstory>
+</RunningRecordstoryList>
+<vocabulary_word stud_id='16'><voc_word>command</voc_word><voc_word>carol</voc_word><voc_word>backward</voc_word><voc_word>dump</voc_word><voc_word>aboard</voc_word><voc_word>chart</voc_word><voc_word>dairy</voc_word><voc_word>ache</voc_word><voc_word>alley</voc_word></vocabulary_word><vocabulary_word stud_id='18'><voc_word>dump</voc_word><voc_word>aboard</voc_word><voc_word>adopt</voc_word><voc_word>ache</voc_word><voc_word>command</voc_word><voc_word>basketball</voc_word><voc_word>backward</voc_word><voc_word>alley</voc_word><voc_word>carol</voc_word></vocabulary_word><vocabulary_word stud_id='17'><voc_word>aboard</voc_word><voc_word>chart</voc_word><voc_word>backward</voc_word><voc_word>dump</voc_word><voc_word>ache</voc_word><voc_word>alley</voc_word><voc_word>adopt</voc_word><voc_word>carol</voc_word><voc_word>dairy</voc_word></vocabulary_word></teacher>

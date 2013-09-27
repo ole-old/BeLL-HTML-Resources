@@ -1,0 +1,1 @@
+function randomize(e,t){var n=e;var r=t;var i=r-n;var s=new Array;for(var o=0;o<=i;o++){s[o]=n++}for(var o=0;o<=i;o++){var u=Math.random(i)*r;u=Math.round(u);var a=Math.random(i)*r;a=Math.round(a);tmp_rnd=s[u];s[u]=s[a];s[a]=tmp_rnd}if(s.length==i+1){}else{for(var o=0;o<s.length;o++){if(s[o]==""||s[o]==undefined){s.splice(o,1)}}}return s}

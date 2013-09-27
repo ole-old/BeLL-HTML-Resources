@@ -1,0 +1,3 @@
+lastEventOccurredTimeDifference = 0;
+setTimeout(function(){startTimer();},60000);
+function startTimer(){console.log("------------ TIME ------------   :  "+lastEventOccurredTimeDifference);lastEventOccurredTimeDifference++;if(lastEventOccurredTimeDifference<=60){setTimeout(startTimer,1e3)}else{OneMinTimeExit()}}function unsetTimer(){lastEventOccurredTimeDifference=0}lastEventOccurredTimeDifference=0;setTimeout(function(){startTimer()},6e4);if(window.addEventListener){document.body.addEventListener("click",unsetTimer,true);document.addEventListener("keypress",unsetTimer,true)}else{if(window.attachEvent){document.body.attachEvent("load",startTimer);document.body.attachEvent("click",unsetTimer);document.body.attachEvent("keypress",unsetTimer)}}

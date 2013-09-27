@@ -1,0 +1,273 @@
+
+<!-- saved from url=(0073)http://teachermate.treehouse.su/games/games/game/Circus/1/InitialLetter/0 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+<title>Circus</title>
+	<script type="text/javascript" src="./Circus_files/resize.js"></script>
+	<script type="text/javascript" src="./Circus_files/stage_1.js"></script>
+	<script type="text/javascript" src="./Circus_files/letteranim.js"></script>
+	<script type="text/javascript" src="./Circus_files/letter_place.js"></script>
+	<script type="text/javascript" src="./Circus_files/randomize.js"></script> 
+	<script type="text/javascript" src="./Circus_files/iphonecall.js"></script>
+	<script type="text/javascript" src="./Circus_files/score.js"></script>
+	<script type="text/javascript" src="./Circus_files/endRedirect.js"></script>
+	<script type="text/javascript" src="./Circus_files/letterGenParser.js"></script>
+	<script type="text/javascript" src="./Circus_files/postdata.js"></script>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript">
+			var check_compatible = (navigator.userAgent.match(/(Firefox)/i))?true:false;
+			var audio_compatible = (check_compatible)?".ogg":".mp3"; 
+			var setMozOrWebkit = (check_compatible)?"Moz":"Webkit"; 
+			var transend = (check_compatible)?"transitionend":"webkitTransitionEnd";
+			var animend = (check_compatible)?"animationend":"webkitAnimationEnd";
+			var setkey = (check_compatible)?'@-moz-keyframes':'@-webkit-keyframes';
+			
+			
+		//	var base_url = 'http://teachermate.treehouse.su/games/';
+			var base_url = './Circus_files/';
+			var demoaudiopath = base_url+'files/resource/demo/';
+			var category = '1';
+			var currentSubCategory = 'InitialLetter';
+			var timeOffset='0';
+			var TotalScore = '0';
+			var s_id = '8';
+			var game_id = '23';
+			var InitialScore = '0';
+			var soundsDirPath = base_url+'files/resource/activity/circus/';
+			var st_path = './Circus_files/xml/'+s_id;
+			
+var singleActivity = false; 
+var playIntro = true;
+var reload = false;
+var gameFolder = 'Circus';
+var initTimer = 0; 
+var iteration = '0';
+var redirectArg='redirect';
+			var startinterval=0;
+			var Letters_image_Array = [["Alligator","a",10,10,15,0,60,"Alligator"],["Bee","b",4,5,15,4,70,"Bee"],["Birds","n",6,7,15,2,60,"Birds"],["Camel","c",9,10,20,2,60,"Camel"],["Duck","d",11,3,15,4,60,"Duck"],
+	["Elephant","e",8,10,20,2,60,"Elephant"],["Fox","f",8,10,20,0,60,"Fox"],["Goose","g",8,5,20,4,60,"Goose"],["Hippo","h",9,10,20,2,60,"Hippo"],["Inchworm","i",10,5,10,4,60,"Inchworm"],["Jaguar","j",8,8,15,2,60,"Jaguar"],["Lion","l",11,6,17,2,60,"Lion"],
+	["Monkey","m",14,8,15,2,60,"Monkey"],["Ostrich","o",15,5,25,4,60,"Ostrich"],["Pig","p",5,10,25,2,60,"Pig"],["Rabbit","r",14,5,25,4,60,"Rabbit"],["Snake","s",15,5,25,4,60,"Snake"],["Tiger","t",10,5,25,4,60,"Tiger"],["Umbrellabird","u",14,5,25,4,60,"Umbrellabird"],
+	["Vulture","v",7,5,25,4,60,"Vulture"],["Wolf","w",9,10,25,0,60,"Wolf"],["Zebra","z",8,10,25,0,60,"Zebra"]];
+	//Image Pre-Loading.
+	 var pre_load_gif_array = new Array();
+function resetValues(){
+playIntro = true;
+//InitialScore = TotalScore;
+startinterval=0;
+pre_load_gif_array = new Array();
+scores = 0;
+parsedFiles=0;
+letter_anim_interval;
+pos_interval;
+next_start_time;
+img = new Array();
+load_cnt = 0;
+call_ypos_cnt = 0;
+testcnt = 0;
+capture_anim_top = 0;
+final_top_pos = 0;
+powder_cnt = 1;
+upinterval ;
+animate_cnt = 1; 
+rightmov = 0;
+screenexitcnt = 0;
+ score = InitialScore;
+ TotalScore=InitialScore;
+ document.getElementById("scorecard").innerHTML=score;
+leftAdjust = 0;
+splicecnt=0;
+placeddownpos = 0;
+clickflag = false;
+nextscreenval = -35;
+nextscreeninterval;
+xscreen=0;
+
+//For score updates
+gamedata={};
+gameAttempt=[];
+xmlstr="";
+xmlstr2="";
+
+timeInterval=0;
+scoreinterval=0;
+
+// For Thermometer Game - Support audio placy back 
+mainPathIndex = 0;
+subPathIndex = 0;
+audioIndex=0;
+tmpxmlstr="";
+gameQuestion="";
+gameResult="";
+timestamp="";
+
+// HR
+UnixTimeStamp;
+gametimestamp=[];
+eval_int;
+cnt=0;
+flag = false;
+nextStageCnt = 0;
+agent="";
+stage2interval=0;
+document.getElementById("powder").style.visibility = "hidden";
+document.getElementById("letter_anim").style.visibility = "hidden";
+letterplace;
+Evaluation;
+//letter_anim = 0;
+stage_1;
+stage_2;
+clearInterval(eval_int);
+clearInterval(scoreinterval);
+clearInterval(pos_interval);
+clearInterval(next_start_time);
+clearInterval(startinterval);
+clearInterval(eval_int);
+clearInterval(upinterval);
+clearInterval(stage2interval);
+demoaudio();
+//initialize();
+	 }
+			function ajax_call(){ 
+				document.location=	redirectToArg(document.URL,redirectArg);
+				post_score_details(xmlstr2);
+
+				
+			}
+	        for(var pre = 0;pre<Letters_image_Array.length;pre++){
+			    pre_load_gif_array[pre] = new Image();
+				pre_load_gif_array[pre].src = base_url+"images/circus/"+Letters_image_Array[pre][0]+".gif"; 
+				Letters_image_Array[pre][0] = pre_load_gif_array[pre].src;
+	        }
+			var pre_load_powder_images = new Array();
+			  for(var pre = 1;pre<17;pre++){
+			    pre_load_powder_images[pre] = new Image();
+				pre_load_powder_images[pre].src = base_url+"images/circus/Powder/powder_000"+pre+".png" 
+				pre_load_powder_images[pre] = pre_load_powder_images[pre].src;
+	        }
+			//alert(pre_load_powder_images);
+			function initialize(){ 
+				//loadXml('student/get_student_id');
+				isIntrosnd = "false";	
+				document.getElementById("homeaudio").style.visibility = "hidden";document.getElementById('Repeat').style.visibility="visible";				
+				scoreinterval=setInterval("scrintrvl()",1000);
+				startinterval=setInterval("stage1();",1500); 
+			}
+		function timeData(){
+	
+				if(singleActivity){
+				console.log("timedata>>"+initTimer);
+					if(initTimer > 180) {
+                        clearInterval(timeInterval);
+                        //resetValues();
+                        //alert('ITERATION : ' + '');
+                        //alert(base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration);
+						document.location = base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration;					
+					}
+				}
+				initTimer++;
+				timeOffset++;
+			}
+			//Resizing the window
+			function resize(){
+				var swidth1= window.innerWidth;
+				var swidth2= document.body.clientWidth; 
+				var sheight1= window.innerHeight;
+				var sheight2= document.body.clientHeight;
+				var fon_size = (swidth1/50+sheight1/50);   
+				if (window.innerWidth){  
+					document.body.style.width    = swidth1 + "px";
+					document.body.style.height   = sheight1 + "px";
+					document.body.style.fontSize = sheight1/40+"px"; 
+				}
+			}
+			//window.onload = resize;
+			//window.onresize = resize;
+			window.onload = function(){				
+			   // initial();
+			
+			   loadgamedata("call")
+
+				resize();
+				time_run();
+			}
+			function initial(){
+				document.getElementById("scorecard").style.visibility="hidden"; 
+				document.getElementById("load").style.visibility="visible";
+				setTimeout('demoaudio();',1000);
+			}
+			/* This code prevents the webview from moving on a swipe...*/
+			preventDefaultScroll = function(evt) {
+				evt.preventDefault();
+				window.scroll(0,0);
+				return false;
+			};
+			window.document.addEventListener('touchmove', preventDefaultScroll, false);
+			function time_run(){
+				timeInterval=setInterval("timeData()",1000);
+			}			
+	</script>
+</head>
+
+<body style="background-image: url('./Circus_files/images/back.jpg'); position: fixed; width: 550px; height: 375px; top: -1%; left: -2%; background-attachment: fixed; font-size: 25.2px;">
+
+	<div style="position:relative; width:900px;height:490px;overflow:hidden;margin:auto;">
+	<a onclick="exit();">
+		<img src="./Circus_files/home_alpha01_ipad1.png" id="home" style="position: absolute; z-index: 1100; top: 93%; left: 1%; visibility: visible;">
+	</a>
+	<a onclick="splaudio(ding,initialize);">
+		<img src="./Circus_files/skipbtn.png" value="audio" id="homeaudio" style="position: absolute; z-index: 1100; top: 0%; left: 1%; visibility: visible;">
+	</a>
+    <a onclick="resetValues();">
+		<img src="./Circus_files/Repeat.png" value="audio" id="Repeat" style="visibility:hidden;position:absolute;z-index:1100;top:0%;left:1%;visibility:hidden;">
+		</a>	
+	<img style="position: absolute; visibility: hidden; top: 30%; left: 42%; width: 10%; height: 10%;" src="./Circus_files/preloader_white.gif" id="load">
+	
+	<div id="container" style="position:absolute;width:350%;height:120%;top:-1%;left:-4%;z-index:100;">
+	
+	<img src="./Circus_files/circus.png" style="position:absolute;width:30%;height:105%;z-index:1003;visibility:hidden;" id="demo">
+	
+	<div id="scorecard" align="center" style="position: absolute; left: 25.2%; top: 76.2%; z-index: 1001; font-size: 25px; width: 3.5%; height: 5%; font-weight: bold; visibility: visible;">
+	</div>
+	<img src="./Circus_files/circus_score box.png" style="position: absolute; width: 4%; height: 8%; left: 25%; top: 75%; z-index: 1000; visibility: visible;" id="scorebox">
+	<img src="./Circus_files/backgroundalone.png" style="position: absolute; margin-left: -0.5%; z-index: 0; width: 100%; height: 110%; visibility: visible;" id="bg"> 
+	<img id="lighting1" style="position: absolute; top: -5%; left: 12%; width: 5%; height: 50%; -webkit-transform: rotate(-30deg); visibility: visible;" src="./Circus_files/lighting.png">
+	<img id="lighting2" style="position: absolute; top: -5%; left: 12%; width: 5%; height: 50%; -webkit-transform: rotate(30deg); visibility: visible;" src="./Circus_files/lighting.png">
+	
+	<div id="stage_1">
+	<img id="boy_anim_1" style="position: absolute; top: 0%; left: 2%; width: 7%; height: 20%; visibility: visible;" src="./Circus_files/animationgboy.png">
+	<img id="boy_anim_2" style="position: absolute; top: 52%; left: 19%; width: 7%; height: 20%; visibility: visible;" src="./Circus_files/ballboy1.gif">
+	</div>
+	
+	<div id="common_assets_right">
+	
+	<div id="right_answer_field_1" style="position:absolute;width:5%;height:15%;left:43%;top:70%;" ontouchstart="Evaluation(this.id);" onclick="Evaluation(this.id);">
+	<img id="right_answer_img_1" src="./Circus_files/table01.png" style="position:absolute;width:100%;height:100%;">
+	
+	<div id="right_answer_text_1" style="position:absolute;left:24%;top:4%;font-weight:bold;font-size:45px;text-align:center;width:50%;height:50%;"></div>
+	
+	</div>
+	<div id="right_answer_field_2" style="position:absolute;width:5%;height:15%;left:63%;top:70%;" ontouchstart="Evaluation(this.id);" onclick="Evaluation(this.id);">
+	
+	<img id="right_answer_img_2" src="./Circus_files/table02.png" style="position:absolute;width:100%;height:100%;">
+	
+	<div id="right_answer_text_2" style="position:absolute;left:24%;top:4%;font-weight:bold;font-size:45px;text-align:center;width:50%;height:50%;"></div>
+	</div>
+	<div id="right_answer_field_3" style="position:absolute;width:5%;height:15%;left:83%;top:70%;" ontouchstart="Evaluation(this.id);" onclick="Evaluation(this.id);">
+	
+	<img id="right_answer_img_3" src="./Circus_files/table03.png" style="position:absolute;width:100%;height:100%;">
+	
+	<div id="right_answer_text_3" style="position:absolute;left:24%;top:4%;font-weight:bold;font-size:45px;text-align:center;width:50%;height:50%;">
+	</div>
+	</div>
+	</div>
+	
+ 	<img id="letter_anim" style="position:absolute;left:2%;top:0%;visibility:hidden;" src="./Circus_files/saved_resource"> 
+	
+	<img id="powder" style="position:absolute;left:2%;top:69%;width:15%;height:20%;visibility:hidden;" src="./Circus_files/0">
+	
+	</div>
+	</div>
+	
+	<script type="text/javascript" src="./Circus_files/ideal_redirect.js"></script>
+
+</body></html>
