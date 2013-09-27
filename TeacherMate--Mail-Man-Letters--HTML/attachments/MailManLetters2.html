@@ -1,0 +1,2053 @@
+	<!DOCTYPE html>
+	<html lang="en"><head> 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+		<title>MailMan Letters</title>  
+			
+			<script type="text/javascript" src="MailManLetters_files/ice.js"></script>
+			<script type="text/javascript" src="MailManLetters_files/score.js"></script>
+			<script type="text/javascript" src="MailManLetters_files/postdata.js"></script>
+			 <script type="text/javascript" src="MailManLetters_files/letterGenParser.js"></script>
+			<script type="text/javascript">
+			var check_compatible = (navigator.userAgent.match(/(Firefox)/i))?true:false;
+			var audio_compatible = (check_compatible)?".ogg":".mp4"; 
+			var setMozOrWebkit = (check_compatible)?"Moz":"Webkit"; 
+			var transend = (check_compatible)?"transitionend":"webkitTransitionEnd";
+			var animend = (check_compatible)?"animationend":"webkitAnimationEnd";
+			var setkey = (check_compatible)?'@-moz-keyframes':'@-webkit-keyframes'; 
+			var css;
+			var suffixtext = "";
+			var mailtext = "";
+			var randomSuffixWord = "";
+			var randomSuffix0 = "";
+			var randomSuffix1 = "";
+			var randomSuffix2 = "";
+			var base_img = './images/mailmanletters/'; // Change1
+		
+			var house3go1 = ['ipadimg/walkinghouse3.png','ipadimg/walkinghouse3a.png','ipadimg/walkinghouse3b.png','ipadimg/walkinghouse3c.png','ipadimg/sprite_a.png','ipadimg/sprite_b.png','ipadimg/sprite_c.png','ipadimg/sprite_d.png','ipadimg/sprite_e.png','ipadimg/sprite_f.png','ipadimg/sprite_g.png','ipadimg/sprite_h.png','ipadimg/sprite_i.png','ipadimg/sprite_1.png','ipadimg/sprite_2.png','ipadimg/sprite_3.png','ipadimg/sprite_4.png','ipadimg/sprite_5.png','ipadimg/sprite_6.png','ipadimg/sprite_7.png','ipadimg/sprite_8.png','ipadimg/sprite_9.png','ipadimg/sprite_10.png','ipadimg/sprite_11.png'];
+			
+			var house21go;
+			var house31go;
+			var house11go;
+			var house1go = new Array();
+			var house2go = new Array();
+			var house3go= new Array();
+			
+			var house2go1out = ['newimg/walkouthom2a.png','newimg/walkouthom2b.png'];
+			var house3go1out = ['newimg/walkouthom3_1.png','newimg/walkouthom3_2a.png','newimg/walkouthom3_2b.png'];
+			var house21goout;
+			var house31goout;
+			var house2goout = new Array();
+			var house3goout= new Array();
+			var house1go;
+			var house1goout;
+			var house1goend;
+			var house1gooutend;
+			var post;
+			var postEnd;
+			var sample;
+			var sampleEnd;
+			var demoSoundsPath='./sounds/';//demo // change 1
+			var soundsDirPath = './sounds/'; //dog barkaudio // change 2
+			//var suffixsoundsDirPath = 'http://teachermates.treehouse.su/games/files/resource/rime/'; 
+			var lettersoundsDirPath = './sounds/'; //change3
+			var ImgsoundsDirPath = './sounds/words/'; //change 4
+			var base_url = 'http://teachermates.treehouse.su/games/';
+			var category = '1';
+			var currentSubCategory = 'InitialLetter';
+			var timeOffset='0';
+			var TotalScore = '11';
+			var s_id = '10';
+			var game_id = '25';
+	var house1go1 = ['ipadimg/posthom1.png','ipadimg/posthom1a.png','ipadimg/posthom1b.png','ipadimg/comeouthom1a.png','ipadimg/comeouthom1b.png'];
+			var InitialScore = '11';
+			var st_path = './xml/'+s_id;
+	
+	var singleActivity = false; 
+	var playIntro = true;
+	var reload = false;
+	var gameFolder = 'MailManLetters';
+	var initTimer = 0; 
+	var iteration = '0';
+	
+	function ajax_call(){
+		
+		document.location=redirectToArg(document.URL,"redirect");
+		post_score_details(xmlstr2);
+	}
+	
+			
+			var Letters_image_Array = [["Alligator","A",10,10,15,0,60],["Bee","B",4,5,15,4,70],["Nest","N",6,7,15,2,60],["Camel","C",9,10,20,2,60],["Duck","D",11,3,15,4,60],
+		["Elephant","E",8,10,20,2,60],["Fox","F",8,10,20,0,60],["Goose","G",8,5,20,4,60],["Hippo","H",9,10,20,2,60],["Inchworm","I",10,5,10,4,60],["Jaguar","J",8,8,15,2,60],["Lion","L",11,6,17,2,60],
+		["Monkey","M",14,8,15,2,60],["Ostrich","O",15,5,25,4,60],["Pig","P",5,10,25,2,60],["Rabbit","R",14,5,25,4,60],["Snake","S",15,5,25,4,60],["Tiger","T",10,5,25,4,60],["Umbrellabird","U",14,5,25,4,60],
+		["Vulture","V",7,5,25,4,60],["Wolf","W",9,10,25,0,60],["Zebra","Z",8,10,25,0,60]];
+	
+	var Alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	
+	
+		
+				
+	//For score updates
+	var gamedata={};
+	var gameAttempt=[];
+	var xmlstr="";
+	var xmlstr2="";
+	
+	var timeInterval;	
+	var gameQuestion="";
+	var gameResult="";
+	var tmpxmlstr="";
+	var UnixTimeStamp;
+	var gametimestamp=[];
+	var gameAtt=[];
+	var InitSet =0;
+	
+	
+			
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// For  MailMan Game  - Support audio placy back
+	
+	var mainPathIndex = 0;
+	var subPathIndex = 0;
+	var audioIndex=0;
+	
+	// main path - Either resource OR Current game folder
+	var gameAudiosMainPathArr =["resource", "game"];
+	
+	// sub path - under main path the audio file is located
+	var gameAudiosSubPathArr =["activity/mailman/sounds/","rime/","common/","letter/","word/"];
+	
+	
+	function playGameAudiosFinalCustom1(mainPathIndex,subPathIndex,newaudioName, callbackMethod)
+	{
+		playGameAudiosFinalCustom(mainPathIndex,subPathIndex, newaudioName, callbackMethod);
+	}
+	
+	function playGameAudiosFinalCustom(mainPathIndex, subPathIndex, newaudioName, callbackMethod){
+	//alert('kl'+newaudioName);
+		audioIndex = -1;
+	    if (subPathIndex == 0)
+	    {
+		document.location = "iflgameAudioPlayCallBackFinal~"
+			+callbackMethod+"~"
+		+gameAudiosMainPathArr[mainPathIndex]+"~" 
+		+gameAudiosSubPathArr[subPathIndex]+"~" 
+		+newaudioName+".ogg";
+	    }
+		 if (subPathIndex == 1)
+	    {
+		document.location = "iflgameAudioPlayCallBackFinal~"
+			+callbackMethod+"~"
+		+gameAudiosMainPathArr[mainPathIndex]+"~" 
+		+gameAudiosSubPathArr[subPathIndex]+"~" 
+		+newaudioName+".ogg";
+	    }
+		 if (subPathIndex == 2)
+	    {
+		document.location = "iflgameAudioPlayCallBackFinal~"
+			+callbackMethod+"~"
+		+gameAudiosMainPathArr[mainPathIndex]+"~" 
+		+gameAudiosSubPathArr[subPathIndex]+"~" 
+		+newaudioName+".ogg";
+	    }
+		 if (subPathIndex == 3)
+	    {
+		document.location = "iflgameAudioPlayCallBackFinal~"
+			+callbackMethod+"~"
+		+gameAudiosMainPathArr[mainPathIndex]+"~" 
+		+gameAudiosSubPathArr[subPathIndex]+"~" 
+		+newaudioName+".ogg";
+	    } 
+		if (subPathIndex == 4)
+	    {
+		document.location = "iflgameAudioPlayCallBackFinal~"
+			+callbackMethod+"~"
+		+gameAudiosMainPathArr[mainPathIndex]+"~" 
+		+gameAudiosSubPathArr[subPathIndex]+"~" 
+		+newaudioName+".ogg";
+	    }
+	}
+	
+	function playGameAudiosFinalCallBackDummy()
+	{
+	}
+	
+	
+	function playGameAudiosFinal(mainPathIndex, subPathIndex, _audioIndex){
+		audioIndex = _audioIndex;
+	    if (subPathIndex == 0)
+	    {
+		document.location = "iflgameAudioPlayCallBackFinal~evalSecCount~"
+		+gameAudiosMainPathArr[mainPathIndex]+"~" 
+		+gameAudiosSubPathArr[subPathIndex]+"~" 
+		+resourceAudiosFileArr[audioIndex]+".ogg";
+	    }
+	}
+	
+	
+	function postGameOverMessageToApp()
+	{
+	   //document.location = 'iflgameover/';
+	   ajax_call();
+	}
+	
+	// lock scroll
+	preventDefaultScroll = function(evt) {
+	evt.preventDefault();
+	window.scroll(0,0);
+	return false;
+	};
+	window.document.addEventListener('touchmove', preventDefaultScroll, false);
+	
+	//////////////////////////////////////////////////////
+	
+			var comeouthom1,comeoutipodHom1;
+			var ipodpostHom2 =["ipod/posthom2a.png","ipod/posthom2b.png","ipod/posthom2c.png"];
+			var gohom3Path=["ipod/posthom3a.png","ipod/posthom3b.png"];
+			var ipodgohom3=new Array();
+			var ipodhouse31go;
+			var comeoutHom3=["ipod/walkouthom3a.png","ipod/walkouthom3b.png","ipod/walkouthom3c.png"];
+			var comeoutHom2=["ipod/walkouthom2a.png","ipod/walkouthom2b.png"];
+			var fpost1,fpost2;
+			var agent = navigator.userAgent;
+			function init(){ 
+					
+					document.getElementById("load").style.visibility="visible";
+		 setTimeout('initial1();',100);
+			}	
+			function initial1(){
+			css = document.getElementById("animated"); 
+			timeInterval=setInterval("timeData()",1000);
+			intera = setTimeout("DemoInstruction();",200);
+			preclr = setTimeout("nexttoinit()",200);
+			}
+			var ipodpost;
+			var postMail;
+			var preclr=0;
+			function nexttoinit(){
+			resetFlag = false;
+			isIntrosnd = "false";
+			clearTimeout(preclr);
+			//loadIceXML(WordsData);
+			//WordsData();
+			loadgamedata("mail")
+			}
+			var splicecnt = 0;
+			var final_animate_letter = "";
+			var correct_answer="";
+			var gameQuestion="";
+			var frames="";
+			var AlphaRandom="";
+			var maxRandom1 = new Array();
+			var maxRandom= new Array();
+			var Letters_image_Array3 = [["Alligator","A",10,10,15,0,60],["Bee","B",4,5,15,4,70],["Nest","N",6,7,15,2,60],["Camel","C",9,10,20,2,60],["Duck","D",11,3,15,4,60],
+		["Elephant","E",8,10,20,2,60],["Fox","F",8,10,20,0,60],["Goose","G",8,5,20,4,60],["Hippo","H",9,10,20,2,60],["Inchworm","I",10,5,10,4,60],["Jaguar","J",8,8,15,2,60],["Lion","L",11,6,17,2,60],
+		["Monkey","M",14,8,15,2,60],["Ostrich","O",15,5,25,4,60],["Pig","P",5,10,25,2,60],["Rabbit","R",14,5,25,4,60],["Snake","S",15,5,25,4,60],["Tiger","T",10,5,25,4,60],["Umbrellabird","U",14,5,25,4,60],
+		["Vulture","V",7,5,25,4,60],["Wolf","W",9,10,25,0,60],["Zebra","Z",8,10,25,0,60]];
+			var changeCase = (Math.round(Math.random())==0)?"upper":"lower";
+			function WordsData(){
+			 
+			 var random_letters_img = randomize(0,(Letters_image_Array.length-1));
+			
+				  var random_letters_custom1 = randomize(0,(w.length-1));
+				
+				  if(gameCount === 0 || gameCount === 3 || gameCount === 6 || gameCount === 9){
+						Alphabet = [w[random_letters_custom1[0]],w[random_letters_custom1[1]],w[random_letters_custom1[2]]];
+						 
+						}
+					 
+						 var random_letters_custom = randomize(0,(Alphabet.length-1));
+						
+			  for(var j=0;j<Letters_image_Array3.length;j++){  
+					// alert(Letters_image_Array3[j][1]);
+				if(Letters_image_Array3[j][1] == Alphabet[random_letters_custom[0]].toUpperCase()){
+				  
+					random_letters_img[0] = j;
+					//break;
+				 }
+			 }
+			 
+		
+			 splicecnt = random_letters_custom[0]; 
+		 
+			 final_animate_letter =  Letters_image_Array[random_letters_img[0]][0];
+			 
+			 correct_answer 	  = Letters_image_Array[random_letters_img[0]][1];
+			 gameQuestion		  = correct_answer; 
+			 frames				  =	Letters_image_Array[random_letters_img[0]][2];
+			 AlphaRandom		  = randomize(0,(Alphabet.length-1));
+			// document.getElementById("letter_anim").style.visibility = "hidden"; 
+			 //document.getElementById("letter_anim").style.left=Letters_image_Array[random_letters_img[0]][5]+"%";
+				/*suffixtext = getSuffix();	 
+				mailtext = getWords();
+				randomSuffixWord = randomize(0,(suffixtext.length-1));
+				randomSuffix0 = suffixtext[randomSuffixWord[0]];
+				randomSuffix1 = suffixtext[randomSuffixWord[1]];
+				randomSuffix2 = suffixtext[randomSuffixWord[2]];*/
+				//if(correct_answer == Alphabet[AlphaRandom[0]]){
+				//Alphabet[AlphaRandom[0]] = Alphabet[AlphaRandom[2]];
+			//}
+			//if(correct_answer == Alphabet[AlphaRandom[1]] ){
+				//Alphabet[AlphaRandom[1]] = Alphabet[AlphaRandom[3]];
+			//}
+			
+				 if(gameCount === 0 || gameCount === 3 || gameCount === 6 || gameCount === 9){
+				 changeCase = (changeCase == "upper")?"lower":"upper";
+					if(changeCase == "upper"){
+						correct_answer = correct_answer.toUpperCase();
+					}
+					else{
+						correct_answer = correct_answer.toLowerCase();
+					}
+				 place_array = [Alphabet[random_letters_custom[0]],Alphabet[random_letters_custom[1]],Alphabet[random_letters_custom[2]]];
+				 place_random = randomize(0,(place_array.length-1)); 
+				randomSuffix0 = place_array[place_random[0]];
+				randomSuffix1 = place_array[place_random[1]];
+				randomSuffix2 = place_array[place_random[2]];
+				 
+			}
+		 
+			//alert(randomSuffix0);
+			starttimeforword = setTimeout(function(){getMatchingWords(place_array[place_random[0]],place_array[place_random[1]],place_array[place_random[2]]);},1000);
+				//getMatchingWords(place_array[place_random[0]],place_array[place_random[1]],place_array[place_random[2]]);
+				scorereload=0;
+				//start();
+			}
+			var allowThreeWords=0;
+			var word_array = new Array();
+			function getMatchingWords(randomSuffix0,randomSuffix1,randomSuffix2){ 
+				 clearTimeout(starttimeforword);
+				suffixWordPlaced(randomSuffix0,randomSuffix1,randomSuffix2);
+			}
+			var suffwordplace0 = "";
+			var suffwordplace1 = "";
+			var suffwordplace2 = "";
+			function suffixWordPlaced(randomSuffix0,randomSuffix1,randomSuffix2){
+				//alert(randomSuffix0+","+randomSuffix1+","+randomSuffix2);
+				//document.getElementById("suffix0").style.visibility = "visible";
+				//document.getElementById("suffix1").style.visibility = "visible";
+				//document.getElementById("suffix2").style.visibility = "visible";
+				suffwordplace0 = document.getElementById("suffix0");
+				suffwordplace1 = document.getElementById("suffix1");
+				suffwordplace2 = document.getElementById("suffix2");
+				if(changeCase == "upper"){
+						correct_answer = correct_answer.toUpperCase();
+						suffwordplace0.innerHTML = randomSuffix0.toUpperCase();
+				suffwordplace1.innerHTML = randomSuffix1.toUpperCase();
+				suffwordplace2.innerHTML = randomSuffix2.toUpperCase();
+					}
+					else{
+						correct_answer = correct_answer.toLowerCase();
+						suffwordplace0.innerHTML = randomSuffix0.toLowerCase();
+				suffwordplace1.innerHTML = randomSuffix1.toLowerCase();
+				suffwordplace2.innerHTML = randomSuffix2.toLowerCase();
+					}
+				gettingWord();
+			}
+			var class1=0;
+			var get_word_random;
+			var final_word;
+			function gettingWord(){  
+				if(gameCount<9) {
+					//clearTimeout(clrTime);
+					click_cnt = 0;
+					//class1 = 0;
+					css.style.visibility = "visible";
+					//get_word_random = randomize(0,(word_array.length-1));
+					final_word = base_img+"images/"+final_animate_letter+".png";
+					//alert(correct_answer);
+					clrTime = setTimeout("start();",25);
+				}
+				else {
+				
+					postGameOverMessageToApp();
+				}
+			}
+			
+			function DemoInstruction(){
+					clearTimeout(intera);
+					agent = navigator.userAgent;
+					document.getElementById("home").style.visibility="visible";
+					document.getElementById("homeaudio").style.visibility="visible";
+					document.getElementById("load").style.visibility="hidden";
+					document.getElementById("mainBg").style.visibility="visible";
+					Audio_Instruct();
+			}
+			
+			 var init_Audios  = new Audio();
+			
+			function Audio_Instruct(){
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+					// alert("hai"+h); 
+					playGameAudiosFinalCustom1(0,2,"mailmanlettersdemo", "startGame");
+				
+				}
+				else {
+				   if (isIntrosnd == "false"){
+						isIntrosnd = "true";
+					if(playIntro){
+					init_Audios.play(); 
+					}
+					if (second == "false"){
+					if(playIntro){
+			init_Audios.addEventListener("ended",function(){nexttoinit();},false);
+					}
+					else{
+						nexttoinit();
+					}
+					
+					}else{
+					if(playIntro){
+					init_Audios.addEventListener('ended',function(){startGame(); },false);
+					}
+					else{
+					startGame();
+					}
+					}
+					}
+				}
+			}
+			init_Audios.src = demoSoundsPath+"mailmanlettersdemo"+audio_compatible; //change 1.1
+			init_Audios.preload = "auto";
+			
+			var second="true";
+			var isIntrosnd="false";
+			function startGame(){
+			isIntrosnd = "false";
+				document.getElementById("mainBg").style.visibility="hidden";
+				document.getElementById("homeaudio").style.visibility = "hidden";
+				document.getElementById("bg").style.visibility="visible";
+				document.getElementById("scoreValue").style.visibility="visible";
+				document.getElementById("Repeat").style.visibility = "visible";
+				DisplayScore();
+				//clrTime = setTimeout("start();",25);
+			}
+			function DisplayScore(){
+				UnixTimeStamp = Math.round((new Date()).getTime() / 1000);
+				document.getElementById("scoreValue").style.visibility="visible";	
+				timeOut=setInterval("haltGame()",180000);
+				//loadXml("../../Config.xml");
+				scoreinterval=setInterval("scrintrvl()",700);
+				
+			}
+			function scrintrvl(){
+				clearInterval(scoreinterval);	
+				score = TotalScore;//getScore();
+				showScore(score);
+				document.getElementById("scoreValue").style.visibility="visible";	
+			}
+			function delay(){
+				clearInterval(delayinter);
+				postGameOverMessageToApp();
+			}
+			var delayinter=0;
+			function haltGame(){
+				clearInterval(timeOut);
+				clearInterval(interval);
+				css.style[setMozOrWebkit+"AnimationName"]="";
+				document.getElementById("scoreValue").style.visibility="hidden";
+				document.getElementById("suffixclick0").style.visibility="hidden";
+				document.getElementById("suffixclick1").style.visibility="hidden";
+				document.getElementById("suffixclick2").style.visibility="hidden";
+				delayinter=setInterval("delay()",500);
+			}
+	
+			
+			function showScore(m){
+					//alert('m'+m);
+					 TotalScore = m;
+			       document.getElementById("scoreValue").innerHTML=m;
+				   gamedata.scoreValue=m;
+				   gamedata.timeOffset=timeOffset;
+				   gamedata.timestamp=gametimestamp;
+				   gamedata.attempts=gameAtt;
+				   gamedata.gameQuestion=gameQuestion;
+				   writeXML(gamedata);
+			}
+			
+			function writeXML(obj){
+			if(obj.timestamp != "")
+			{
+			if(InstanceFlag == true){
+				//alert(obj.attempts);
+				tmpxmlstr+='<Elem><Name>'+gameQuestion+'</Name><Timestamp>'+obj.timestamp+'</Timestamp><Data>'+obj.attempts+'</Data></Elem>';
+			//xmlstr='<student><Usage><Elem><Name>MailMan</Name><Data>'+obj.timeOffset+'</Data></Elem></Usage><Initial_Letter_Sounds>'+tmpxmlstr+'</Initial_Letter_Sounds></student>';
+				xmlstr='<PostGameResultForStudent>'
+				       +'<gameid>2</gameid>'+
+				       '<studentid>'+s_id+'</studentid>' +
+				       '<GameResult><student><Usage><Elem><Name>MailManLetters</Name><Data>'+obj.timeOffset+'</Data></Elem></Usage><Initial_Letter_Sounds>'+tmpxmlstr+'</Initial_Letter_Sounds></student></GameResult>'+
+	 '</PostGameResultForStudent>';
+			 
+				xmlstr2='<GetStudentContentsByIds>' 
+	   +'<studentids>'+s_id+'</studentids><initialscore>'+InitialScore+'</initialscore><finalscore>'+obj.scoreValue+'</finalscore>'
+	+'</GetStudentContentsByIds>';
+				gametimestamp = [];
+				gameAtt = [];
+				InstanceFlag = false;
+				}
+				// alert("offset="+obj.timeOffset);
+				}
+				//xmlstr2='<variable><dispatch><Elem><Name>index</Name><Data>0</Data></Elem><Elem><Name>usageTime</Name><Data>'+obj.timeOffset+'</Data></Elem></dispatch><score><Elem><Name>score</Name><Data>'+obj.scoreValue+'</Data></Elem></score></variable>';
+				 //alert("o/p"+xmlstr);
+			}
+	
+			
+			function start(){
+					 if(!resetFlag){
+			//image,frameWidth, frameHeight, spriteWidth, spriteHeight, frames,duration,endedfunc
+			 
+				css.style.visibility = "visible";
+				css.style.top = "34%";
+				css.style.left = "7%";
+				//alert(postEnd);
+				 Animate(postEnd,470,458,3000,458,8,1,wordplace); // Changing Framewidth
+			}
+				  // Animate(postEnd,410.8,411,5760,411,14,1,wordplace); //ipad
+	
+				 
+			}
+			function fun(){
+			
+			}
+			var agent="";
+			function Animate(image,frameWidth, frameHeight, spriteWidth, spriteHeight, frames,duration,endedfunc){ 
+			//alert("Hi");
+				 if(!resetFlag){
+				class1 ++; 
+				
+				//duration=duration-0.1;
+				css.style.visibility = "visible";
+				css.style.width = "1px";
+				css.style.height = "1px"; 
+				css.style.backgroundImage= "url("+image+")";
+				 //alert(css.style.backgroundImage);
+				 agent = navigator.userAgent;
+				/* if((agent.indexOf("iPod") != -1) || (agent.indexOf("iPhone") != -1)) 
+					frameWidth=frameWidth/2;
+					frameHeight=frameHeight/2;
+					}*/
+					//frameWidth=frameWidth/2;
+					//frameHeight=frameHeight/2;
+				css.style.backgroundSize= frames+"px 1px"; 
+				css.style[setMozOrWebkit+"Transform"]=" scaleX("+(frameWidth*(800/1300))+") scaleY("+(frameHeight*(800/1400))+")";
+				css.style[setMozOrWebkit+"TransformOrigin"]=" top left";
+	 
+				css.style[setMozOrWebkit+"AnimationName"]="sprite"+class1 ;
+				css.style[setMozOrWebkit+"AnimationDuration"]= duration+"s";
+				css.style[setMozOrWebkit+"AnimationTimingFunction"]= "step-start";
+				 css.style[setMozOrWebkit+"AnimationIterationCount"]=  "1";	
+				 var cssAnimation = document.createElement('style');
+					cssAnimation.type = 'text/css'; 
+					//class, frameWidth, frameHeight, spriteWidth, spriteHeight, frames
+				var css1 = setkey+' '+css.style[setMozOrWebkit+"AnimationName"]+' {', step = 100 / (frames-1), horizontalFrames = spriteWidth/frameWidth;
+				for (var i=0; i < frames; i++) { 
+					css1 += '\n\t'+((i) * step)+'% { background-position: '+(-i)+'px '+(-Math.floor( i / horizontalFrames))+'px; }';
+				 };
+				
+				 css1+='\n}';
+				 //alert(css1);
+				
+				 
+					// var o = generateKeyframeAnimation(css.style.MozAnimationName, frameWidth, frameHeight, spriteWidth, spriteHeight, frames);
+					 
+					 var rules = document.createTextNode(css1);
+					 //alert(o);
+					cssAnimation.appendChild(rules);
+					document.getElementsByTagName("head")[0].appendChild(cssAnimation); 
+					 window.addEventListener( animend, function( event ) { clearTimeout(clrTime);
+						// alert(css.style.backgroundImage);
+						 //css.style.backgroundImage="";
+					css.style[setMozOrWebkit+"AnimationName"]="none";
+					 css.style.backgroundPosition =(-frames+1)+"px 0px";
+					 endedfunc(); 
+					 endedfunc="";}, false );
+					 }
+					 else{
+						 css.style[setMozOrWebkit+"AnimationName"]="none";
+					 css.style[setMozOrWebkit+"AnimationDuration"]="none";
+					  endedfunc="";
+					 }
+			}
+			
+			var boardWord = "";
+			var getCorrectSuffix = "";
+			var getCorrectPrefix = "";
+			function wordplace(){
+			 if(!resetFlag){
+			 click_cnt=0;
+				 css.style.backgroundPosition ="-7px 0px";
+				 css.style[setMozOrWebkit+"AnimationName"]="";
+				 
+				 boardWord = document.getElementById("boardword");
+			 
+		      boardWord.src ="";
+				
+				 boardWord.src = final_word;
+				  boardWord.style.visibility = "visible";
+					/*for(var j=0;j<3;j++){
+					 if(boardWord.innerHTML.search(eval("randomSuffix"+j))!=-1){ 
+						getCorrectSuffix = eval("randomSuffix"+j); 
+						getCorrectPrefix = final_word.substr(0,(final_word.length - getCorrectSuffix.length));
+						 //boardWord.innerHTML = final_word +":"+getCorrectSuffix+":"+getCorrectPrefix;
+					}
+				}*/
+				// alert( "Finished animation!");
+				}
+			}
+			function house1(){
+				 if(!resetFlag){
+			 //click_cnt=0;
+				 //css.style.MozAnimationName="";
+				  boardWord.style.visibility = "hidden";
+				// css.style.backgroundPosition ="-39px 0px";
+				 document.getElementById("animated").style.visibility = "hidden";
+				 document.getElementById("boy0").style.visibility = "visible";
+				  document.getElementById("door0").style.visibility = "visible";
+				  Evaluation();
+				  }
+				   //clrTime = setTimeout("Evaluation();",1);
+			}
+			function house2(){
+				 if(!resetFlag){
+			  //click_cnt=0; 
+				 boardWord.style.visibility = "hidden";
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-8px 0px";
+				// css.style.left =  parseInt(css.style.left)+9+"%";
+				 
+				  //clrTime = setTimeout("house2B();",1);
+					Animate(house2go[1],470,458,3660,458,6,1,two);
+					}
+			}
+			function house2B(){
+			
+			}
+			function two(){
+				 if(!resetFlag){
+			//click_cnt=0;
+			css.style.visibility = "visible";
+				 boardWord.style.visibility = "hidden";
+				 css.style.backgroundPosition ="-8px 0px";
+				  //clrTime = setTimeout("house2cB();",1);
+				   Animate(house2go[2],470,458,3660,458,6,1,house2cB);
+				   }
+			}
+			function house2cB(){
+				 if(!resetFlag){
+			// Animate(house2go[2],630.2,330,6935,330,11,2,house2c);
+			 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-8px 0px";
+				Animate(house2go[3],470,458,1220,458,2,1,house2c);
+				}
+			}
+			/*function house2cB1(){
+			// Animate(house2go[2],630.2,330,6935,330,11,2,house2c);
+			 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-8px 0px";
+				Animate(house2go[4],295,200,2065,200,7,1,house2c);
+			}*/
+			 
+			function house2c(){
+				 if(!resetFlag){
+			//click_cnt=0;
+				 css.style[setMozOrWebkit+"AnimationName"]="";
+				 boardWord.style.visibility = "hidden"; 
+				 css.style.backgroundPosition ="-10px 0px";
+				  document.getElementById("animated").style.visibility = "hidden";
+				  document.getElementById("boy1").style.visibility = "visible";
+				  document.getElementById("door1").style.visibility = "visible";
+				   //clrTime = setTimeout("Evaluation();",1);
+				  //Animate('newimg/posthom2c.png',630.2,330,6935,330,11,2);
+				  Evaluation();
+				  }
+			}
+				function house3a(){
+					 if(!resetFlag){
+				 boardWord.style.visibility = "hidden"; 
+				css.style.backgroundPosition ="-8px 0px";
+		
+				Animate(house3go[1],820,458,3280,458,4,0.4,house3b); 
+				 }
+			}
+			function house3b(){
+				 if(!resetFlag){
+			//alert(house3go[2]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-4px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[2],820,458,3280,458,4,0.4,house3c);
+				}
+			}
+			function house3c(){
+				 if(!resetFlag){
+			 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-3px 0px";
+				boardWord.style.visibility = "hidden"; 
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[3],820,458,3280,458,4,0.4,house3d);
+				}
+			}
+			function house3d(){
+				 if(!resetFlag){
+			 //alert(house3go[4]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[4],820,458,3280,458,4,0.4,house3e);
+				}
+			}
+			function house3e(){
+				 if(!resetFlag){
+			 //alert(house3go[5]);
+				boardWord.style.visibility = "hidden"; 
+				//css.style.backgroundPosition ="-9px 0px";
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				Animate(house3go[5],820,458,3280,458,4,0.4,house3f);
+				}
+			}
+			function house3f(){
+				 if(!resetFlag){
+			 //alert(house3go[6]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[6],820,458,3280,458,4,0.4,house3j);
+				}
+				
+			}
+			function house3g(){
+				 if(!resetFlag){
+			  //alert(house3go[7]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[7],820,458,3280,458,4,0.4,house3h);
+				}
+			}
+			function house3h(){
+				 if(!resetFlag){
+			  //alert(house3go[8]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[8],820,458,3280,458,4,0.4,house3i);
+				}
+			}
+			function house3i(){
+				 if(!resetFlag){
+			  //alert(house3go[9]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[9],820,458,3280,458,4,0.4,house3j);
+				}
+			}
+			function house3j(){
+				 if(!resetFlag){
+			 // alert(house3go[10]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[10],820,458,3280,458,4,0.4,house3k);
+				}
+			}
+			function house3k(){
+				 if(!resetFlag){
+			 //alert(house3go[6]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[11],820,458,3280,458,4,0.4,house3l);
+				}
+			}
+			function house3l(){
+				 if(!resetFlag){
+			 //alert(house3go[6]);
+				boardWord.style.visibility = "hidden"; 
+				 css.style.visibility = "visible";
+				  css.style.backgroundPosition ="-6px 0px";
+				//css.style.backgroundPosition ="-9px 0px";
+				Animate(house3go[12],820,458,2460,458,3,0.4,house3);
+				}
+			}
+			
+			function house3(){
+				 if(!resetFlag){
+			//click_cnt=0;
+			//alert(click_no);
+				// css.style.MozAnimationName="";
+				 boardWord.style.visibility = "hidden";
+				// css.style.backgroundPosition ="-8px 0px";
+				  document.getElementById("animated").style.visibility = "hidden";
+				  document.getElementById("boy2").style.visibility = "visible";
+				  document.getElementById("door2").style.visibility = "visible";
+				   //clrTime = setTimeout("Evaluation();",1);
+				   Evaluation();
+				   }
+			}
+			function generateKeyframeAnimation(animationName, frameWidth, frameHeight, spriteWidth, spriteHeight, frames) {
+			
+				var css1 = '@-moz-keyframes \''+animationName+'\' {', step = 100 / (frames-1), horizontalFrames = spriteWidth/frameWidth;
+				for (var i=0; i < frames; i++) { 
+					css1 += '\n\t'+((i) * step)+'% { background-position: '+(-i)+'px '+(-Math.floor(i / horizontalFrames))+'px; }';
+				 };
+				
+				return css1+'\n}';
+			}
+			var click_cnt = 0;
+			var click_no = 0;
+			var gameCount=0;
+			var scorereload=0;
+			
+	function timeData(){
+		
+					if(singleActivity){
+					console.log("timedata>>"+initTimer);
+						if(initTimer > 180) {
+				clearInterval(timeInterval);
+				//resetValues();
+				//alert('ITERATION : ' + '');
+				//alert(base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration);
+							document.location=redirectToArg(document.URL,"redirect");
+						}
+					}
+					initTimer++;
+					timeOffset++;
+				}
+			
+			function getValues(){
+				 if(!resetFlag){
+			    UnixTimeStamp = Math.round((new Date()).getTime() / 1000);
+				var get_len = "images/mailmanletters/images/"; //chang4
+				var tmp = final_word.substr(get_len.length,1);
+				if(selected_answer==tmp){
+					score++;
+					gameCount=gameCount+1;
+					if(scorereload==0) {
+							gametimestamp.push(UnixTimeStamp);
+							gameResult = 1;	
+							gameAtt.push(gameResult);
+							gameQuestion=tmp;
+							InstanceFlag = true;
+							scorereload=1;
+						}
+						showScore(score);
+					
+				}
+				else{
+					if(scorereload==0){
+						gametimestamp.push(UnixTimeStamp);		
+						gameResult = 0;	
+						gameAtt.push(gameResult);
+						gameQuestion=tmp;
+						InstanceFlag = true;
+						scorereload=1;
+						showScore(score);
+					 }
+				}
+				}	
+			
+			}
+			var  keeppost =['ipadimg/keeppost1.png','ipadimg/keeppost2.png'];
+			var foldpost1;
+			var foldpost2;
+			
+			
+			function gotohouse1(icnt){
+			 if(!resetFlag){
+			if(click_cnt == 0){
+			//alert(click_cnt);
+				click_no = icnt;
+				selected_answer="";
+				selected_answer = document.getElementById("suffix0").innerHTML;
+				getValues();
+				click_cnt =1;
+				//  css.style.top = "50%";
+				//  css.style.left = "10%";
+				 boardWord.style.visibility = "hidden";
+				//image,frameWidth, frameHeight, spriteWidth, spriteHeight, frames,duration,endedfunc
+					 css.style.visibility = "visible";
+				 
+					Animate(foldpost1,470,458,2820,458,6,0.5,keeppost2house1);
+				}
+				}
+			}
+			
+			
+		function keeppost2house1(){
+		 if(!resetFlag){
+				Animate(foldpost2,470,458,1410,458,3,0.5,house1bfore);
+				}
+			}
+			
+				
+			
+			function house1bfore(){
+			 if(!resetFlag){
+			 //alert(house1go[0]);
+			 css.style.visibility = "visible";
+			 css.style.left="0%";
+			
+				 // css.style.backgroundPosition ="-10px 0px";
+				 Animate(house1go[0],470,458,4230,458,9,0.4,house1after);
+				 }
+			}
+			function house1after(){
+			 if(!resetFlag){
+				 css.style.visibility = "visible";
+				  css.style.left="0%";
+			
+				  //css.style.backgroundPosition ="-15px 0px";
+				Animate(house1go[1],470,458,4230,458,9,0.4,house1after2);
+				}
+			}
+			function house1after2(){
+			 if(!resetFlag){
+				 css.style.visibility = "visible";
+				  css.style.left="0%";
+				
+				// css.style.backgroundPosition ="-15px 0px";
+				Animate(house1go[2],470,458,4230,458,9,0.4,house1);
+				}
+			
+			}
+			
+			function gotohouse2(icnt){
+			 if(!resetFlag){
+			if(click_cnt == 0){
+			click_no = icnt;
+			selected_answer="";
+			selected_answer = document.getElementById("suffix1").innerHTML;
+			click_cnt =1;
+			boardWord.style.visibility = "hidden"; 
+		        css.style.visibility = "visible";
+			
+					Animate(foldpost1,470,458,2820,458,6,0.4,keeppost2house2);
+					getValues();
+				}
+				}
+			}
+			
+			function keeppost2house2(){
+			 if(!resetFlag){
+				Animate(foldpost2,470,458,1410,458,3,0.4,house2bfore);
+				}
+			}
+	
+	
+			var house2go1 = ['ipadimg/posthom2a.png','ipadimg/posthom2b.png','ipadimg/posthom2c.png','ipadimg/posthom2d.png','ipadimg/comeouthom2a.png','ipadimg/comeouthom2b.png','ipadimg/comeouthom2c.png','ipadimg/comeouthom2d.png','ipadimg/comeouthom2e.png',"ipadimg/showpostipad.png"];
+			
+			
+			function house2bfore(){
+			 if(!resetFlag){
+				 css.style.visibility = "visible";
+				 css.style.left="15%";
+				 //css.style.top="30%";
+				 // css.style.backgroundPosition ="-11px 0px";
+				
+				Animate(house2go[0],470,458,3660,458,6,0.4,house2); 
+				}
+			}
+			var selected_answer = "";
+			function gotohouse3(icnt){
+			 if(!resetFlag){
+			//alert(icnt);
+			if(click_cnt == 0){
+			click_no = icnt;
+			selected_answer="";
+			selected_answer = document.getElementById("suffix2").innerHTML;
+			
+			 //alert(click_cnt);
+			
+				click_cnt =1;
+			// css.style.top = "50%";
+			// css.style.left = "10%";
+				//alert("Hi");
+				 boardWord.style.visibility = "hidden";
+				//image,frameWidth, frameHeight, spriteWidth, spriteHeight, frames,duration,endedfunc
+				 
+				//image,frameWidth, frameHeight, spriteWidth, spriteHeight, frames,duration,endedfunc
+				 
+					 //css.style.left = "0%";
+					//house3go[h3] //iphone
+					
+					Animate(house3go[0],820,458,3280,458,4,0.4,house3a); 	
+					getValues();
+				}
+				}
+			}
+			var dogflag = false;
+			function afterdogbefore(){
+			 if(!resetFlag){
+			dogflag = false;
+				 if(first){
+				 document.getElementById("goodimg").style.visibility = "visible"; 
+				 document.getElementById("goodimgword").style.visibility = "visible";
+				 }
+				 if(sec){
+				  document.getElementById("goodimg1").style.visibility = "visible"; 
+				 document.getElementById("goodimg1word").style.visibility = "visible";
+				 }
+				 if(third){
+				  document.getElementById("goodimg2").style.visibility = "visible"; 
+				 document.getElementById("goodimg2word").style.visibility = "visible";
+				 }
+				 switch(click_no){
+							case 0:
+								clrTime = setTimeout("afterdog1();",1);
+							break;
+							case 1:
+								clrTime = setTimeout("afterdog2();",1);
+							break;
+							case 2:
+								clrTime = setTimeout("afterdog3();",1);
+							break;
+						}
+						}
+			}
+			function afterdog1(){
+				   if(!resetFlag){
+				  //css.style.MozAnimationName="";
+				 //infrontofhome.png
+				 if(first){
+				 document.getElementById("goodimg").style.visibility = "visible"; 
+				 document.getElementById("goodimgword").style.visibility = "visible";
+				 }
+				 document.getElementById("boy0").style.visibility = "hidden";
+				 css.style.top =  35+"%";
+				  //alert(css.style.top);
+				  css.style.left = 1.5+"%";
+				  
+				  Animate(base_img+'ipadimg/infrontofhom.png',470,458,3760,458,8,1,aftershowbefore);
+			}
+			}
+			function afterdog2(){
+			 if(!resetFlag){
+				  css.style[setMozOrWebkit+"AnimationName"]="";
+				  document.getElementById("boy1").style.visibility = "hidden";
+				  if(sec){
+				   document.getElementById("goodimg").style.visibility = "visible"; 
+				   document.getElementById("goodimg1word").style.visibility = "visible";
+				   }
+				 clearTimeout(clrTime);
+				  css.style[setMozOrWebkit+"AnimationName"]="";
+				  document.getElementById("boy1").style.visibility = "hidden";
+				  // document.getElementById("goodimg").style.visibility = "visible"; 
+				   //document.getElementById("goodimg1word").style.visibility = "visible";
+				  css.style.top =  40+"%";
+				  //alert(css.style.top);
+				  css.style.left = 31.5+"%";
+				 
+					 Animate(base_img+'ipadimg/infrontofhom.png',470,458,3760,458,8,1,aftershowbefore);
+			}
+			}
+			function afterdog3(){
+			 if(!resetFlag){
+				// css.style.MozAnimationName="";
+				  document.getElementById("boy2").style.visibility = "hidden";
+				  if(third){
+				   document.getElementById("goodimg").style.visibility = "visible"; 
+				   document.getElementById("goodimg2word").style.visibility = "visible";
+				   }
+				  clearTimeout(clrTime);
+				// css.style.MozAnimationName="";
+				  document.getElementById("boy2").style.visibility = "hidden";
+				 //  document.getElementById("goodimg").style.visibility = "visible"; 
+				  // document.getElementById("goodimg2word").style.visibility = "visible";
+					 css.style.top =  37+"%";
+				  //alert(css.style.top);
+				  css.style.left = 45+"%";
+				 
+					Animate(base_img+'ipadimg/infrontofhom.png',470,458,3760,458,8,1,aftershowbefore);
+			}
+			}
+			function aftershowbefore(){
+			 if(!resetFlag){
+				switch(click_no){
+							case 0:
+								 css.style.visibility = "visible";
+								clrTime = setTimeout("aftershowinfront();",1);
+							break;
+							case 1:
+								 css.style.visibility = "visible";
+								clrTime = setTimeout("aftershowinfront();",1);
+							break;
+							case 2:
+								 css.style.visibility = "visible";
+								clrTime = setTimeout("aftershowinfront();",1);
+							break;
+						}
+						}
+				 
+			}
+			function aftershowinfront(){
+			  if(!resetFlag){
+			
+			 //css.style.backgroundPosition ="";
+			// css.style.backgroundImage="";
+			
+				  css.style[setMozOrWebkit+"AnimationName"]="";
+				
+				 switch(click_no){
+							case 0:
+							 css.style.backgroundPosition ="-7px 0px";
+							css.style.visibility = "visible";
+							 document.getElementById("boy0").style.visibility = "hidden";
+				  if((agent.indexOf("iPod") != -1) ||(agent.indexOf("iPhone") != -1)){
+				  document.getElementById('infrontword0').style.top="61%";
+				   document.getElementById('infrontword0').style.left="27%";
+				  }
+								document.getElementById('infrontword0').src = boardWord.src; 
+							break;
+							case 1:
+							// alert(click_no);
+							 css.style.backgroundPosition ="-7px 0px";
+								 document.getElementById("animated").style.visibility = "visible";
+							 document.getElementById("boy1").style.visibility = "hidden";
+				  if((agent.indexOf("iPod") != -1) ||(agent.indexOf("iPhone") != -1)){
+				  document.getElementById('infrontword1').style.top="62%";
+				  document.getElementById('infrontword1').style.left="57%";
+				  }
+								 document.getElementById('infrontword1').src = boardWord.src;
+							break;
+							case 2:
+							 css.style.backgroundPosition ="-7px 0px";
+							css.style.visibility = "visible";
+							 document.getElementById("boy2").style.visibility = "hidden";
+				  if((agent.indexOf("iPod") != -1) ||(agent.indexOf("iPhone") != -1)){
+				  document.getElementById('infrontword2').style.top="61%";
+				  document.getElementById('infrontword2').style.left="69%";
+				  }
+							 document.getElementById('infrontword2').src = boardWord.src;
+							break;
+								
+						}
+						   clrTime = setTimeout("aftershowfrontword();",2000);
+						 //aftershowfrontword();
+						 
+						 }
+			}
+			var clrTime = "";
+			var audName;
+			function aftershowfrontword(){
+			 if(!resetFlag){
+				clearTimeout(clrTime);
+				// css.style.MozAnimationName="";
+				css.style.visibility = "visible";
+				 switch(click_no){
+							
+							case 0:
+								// playBoardSuffix(index)
+								var tmpvalue =  final_word.lastIndexOf(".");	
+								tmpvalue=tmpvalue-7;
+								audName = final_word.substr(7,tmpvalue);
+								playImgAudios(audName);
+								document.getElementById('infrontword0').style.visibility = "visible";
+								 //document.getElementById('infrontword0').innerHTML = getCorrectPrefix+getCorrectSuffix.fontcolor('red');
+								
+							break;
+							case 1:
+								 var tmpvalue =  final_word.lastIndexOf(".");	
+								tmpvalue=tmpvalue-7;
+								audName = final_word.substr(7,tmpvalue);
+								 playImgAudios(audName);
+								 document.getElementById('infrontword1').style.visibility = "visible";
+								  //document.getElementById('infrontword1').innerHTML =  getCorrectPrefix+getCorrectSuffix.fontcolor('red');
+							break;
+							case 2:
+								var tmpvalue =  final_word.lastIndexOf(".");	
+								tmpvalue=tmpvalue-7;
+								audName = final_word.substr(7,tmpvalue);
+								playImgAudios(audName);
+								 document.getElementById('infrontword2').style.visibility = "visible";
+								 //document.getElementById('infrontword2').innerHTML =  getCorrectPrefix+getCorrectSuffix.fontcolor('red');
+							break;
+						}
+						 // clrTime = setTimeout("afterHighlightFront();",2000);
+						// afterHighlightFront();
+						}
+						
+			}
+				function afterHighlightFront(){
+				 if(!resetFlag){
+				clearTimeout(clrTime);
+				//clrTime=0; 
+				 //css.style.MozAnimationName="";
+				switch(click_no){
+							
+							case 0:
+								letterAudios(randomSuffix0);
+								suffwordplace0.innerHTML = randomSuffix0.fontcolor('red');  
+							break;
+							case 1:
+								letterAudios(randomSuffix1);
+								suffwordplace1.innerHTML = randomSuffix1.fontcolor('red'); 
+							break;
+							case 2:
+								letterAudios(randomSuffix2);
+								suffwordplace2.innerHTML = randomSuffix2.fontcolor('red'); 
+							break;
+						}
+						  clrTime = setTimeout("delayHighlightFront();",1000);
+						// s();
+						}
+			}
+		function delayHighlightFront(){
+			 if(!resetFlag){
+				clearTimeout(clrTime);
+				
+				switch(click_no){
+							
+							case 0:
+								
+								suffwordplace0.innerHTML = randomSuffix0.fontcolor('red');  
+							break;
+							case 1:
+								
+								suffwordplace1.innerHTML = randomSuffix1.fontcolor('red'); 
+							break;
+							case 2:
+								
+								suffwordplace2.innerHTML = randomSuffix2.fontcolor('red'); 
+							break;
+						}
+						  clrTime = setTimeout("s();",2000);
+						  }
+						// s();
+			}
+	
+		
+		
+		
+			function s(){
+			 if(!resetFlag){
+				clearTimeout(clrTime);
+				letterInBag();
+				}
+			}
+			function letterInBag(){
+			 if(!resetFlag){
+				clearTimeout(clrTime);
+				// css.style.MozAnimationName="";
+				 
+	//css = "";
+				switch(click_no){ 
+							case 0:
+								 
+								suffwordplace0.innerHTML = randomSuffix0; 
+								 document.getElementById("boy0").style.visibility = "hidden";
+								//document.getElementById('infrontword0').innerHTML = getCorrectPrefix+getCorrectSuffix.fontcolor('black');
+								//document.getElementById('infrontword0').innerHTML = getCorrectPrefix+getCorrectSuffix;
+								document.getElementById('infrontword0').style.visibility = "hidden";
+								//css.style.MozAnimationName="";  
+								//css.style.backgroundImage = "";
+							afterletterInBag(); 
+								 
+							break;
+							case 1:
+								
+								suffwordplace1.innerHTML = randomSuffix1; 
+								 document.getElementById("boy1").style.visibility = "hidden";
+								//document.getElementById('infrontword1').innerHTML = getCorrectPrefix+getCorrectSuffix.fontcolor('black');
+								//document.getElementById('infrontword1').innerHTML = getCorrectPrefix+getCorrectSuffix;
+								document.getElementById('infrontword1').style.visibility = "hidden";
+								//css.style.MozAnimationName=""; 
+							afterletterInBag(); 
+							break;
+							case 2:
+								suffwordplace2.innerHTML = randomSuffix2; 
+								 document.getElementById("boy2").style.visibility = "hidden";
+								//document.getElementById('infrontword2').innerHTML = getCorrectPrefix+getCorrectSuffix.fontcolor('black');
+								//document.getElementById('infrontword2').innerHTML = getCorrectPrefix+getCorrectSuffix;
+								document.getElementById('infrontword2').style.visibility = "hidden";
+								//css.style.MozAnimationName=""; 
+								afterletterInBag(); 
+							break;
+						}
+						}
+			}
+			function wait(){
+			 if(!resetFlag){
+			clearTimeout(clrTime);
+				 clrTime = setTimeout("afterletterInBag();",2000);
+				 }
+			}
+			
+			
+			
+			function afterletterInBag(){
+			 if(!resetFlag){
+			// alert(document.getElementById('infrontword1').innerHTML);
+			// css.style.backgroundPosition ="-3px 0px";
+			 css.style[setMozOrWebkit+"AnimationName"]="";
+	 //css="";		 
+	 css.style.visibility="visible"; 
+	 clearTimeout(clrTime);
+				 switch(click_no){
+							
+							case 0:
+							// alert("0");
+								// css.style.MozAnimationName="";  
+								document.getElementById("boy0").style.visibility = "hidden";
+							 css.style.top =  37+"%";
+				  //alert(css.style.top);
+				  css.style.left = 3+"%";
+								/*if((agent.indexOf("iPod") != -1) ||(agent.indexOf("iPhone") != -1)){
+									 Animate(comeoutipodHom1,170,190,4590,190,27,1,empty1); 
+								//comeoutipodHom1
+								}
+								else if(agent.indexOf("iPad") != -1){
+									 Animate(house1gooutend,250,330,5750,330,23,1,empty1); 
+								}
+								else {
+									 Animate(house1gooutend,250,330,5750,330,23,1,empty1);  //iphone
+									//	 Animate(house1gooutend,250,330,5750,330,23,1,empty1); //ipad
+									 
+								}*/
+								 
+								    Animate( house1go[3],470,458,3760,458,8,0.5,empty1);
+								    
+								  // Animate('animation/doghom1.png',180,240,1080,240,6,1,empty1);
+							break;
+							case 1:
+							 //alert("1");
+								 //css.style.MozAnimationName=""; 	
+								// Animate('newimg/walkouthom2a.png',661.4,330,7937,330,12,1,empty);
+									document.getElementById("boy1").style.visibility = "hidden"; 
+								//document.getElementById("boy1").style.visibility = "hidden"; 
+									css.style.top = 37+"%";
+				  //alert(css.style.top);
+				  css.style.left =12+"%";
+									Animate(house2go[4],470,458,3660,458,6,0.5,out2a); 
+								
+							break;
+							case 2:
+								document.getElementById("boy2").style.visibility = "hidden";
+						   css.style.top = 38+"%";
+				  //alert(css.style.top);
+				  css.style.left = 3+"%";
+									Animate( house3go[13],820,458,3280,458,4,0.5,out3a); 
+								  
+							break;
+						} 
+						}
+			}
+				function out3a(){
+				 if(!resetFlag){
+				Animate( house3go[14],820,458,3280,458,4,0.3,out3b); 
+				}
+			}
+				function out3b(){
+				 if(!resetFlag){
+				Animate( house3go[15],820,458,3280,458,4,0.3,out3c); 
+				}
+			}
+				function out3c(){
+				 if(!resetFlag){
+				Animate( house3go[16],820,458,3280,458,4,0.3,out3d);
+	}			
+			}
+				function out3d(){
+					 if(!resetFlag){
+				Animate( house3go[17],820,458,3280,458,4,0.3,out3e);  
+					}
+			}
+			function out3e(){
+			 if(!resetFlag){
+				Animate( house3go[18],820,458,3280,458,4,0.3,out3f);  
+				}
+			}
+			function out3f(){
+			 if(!resetFlag){
+				Animate( house3go[19],820,458,3280,458,4,0.3,out3g);  
+				}
+			}
+			function out3g(){
+			 if(!resetFlag){
+				Animate( house3go[20],820,458,3280,458,4,0.3,out3h);
+	}			
+			}
+			function out3h(){
+			 if(!resetFlag){
+				Animate( house3go[21],820,458,3280,458,4,0.3,out3i);  
+				}
+			}
+			function out3i(){
+			 if(!resetFlag){
+				Animate( house3go[22],820,458,3280,458,4,0.3,out3j);  
+				}
+			}
+			function out3j(){
+			 if(!resetFlag){
+				Animate( house3go[23],820,458,3280,458,4,0.3,empty1); 
+	}			
+			}
+			
+			
+			function out2a(){
+			 if(!resetFlag){
+			//alert(house2go[7]);
+				Animate( house2go[5],470,458,3660,458,6,0.5,out2b); 
+				}
+			}
+			function out2b(){
+			 if(!resetFlag){
+			//alert(house2go[8]);
+				Animate( house2go[6],470,458,3660,458,6,0.5,out2c); 
+					}
+				}
+			
+			function out2c(){
+			 if(!resetFlag){
+			//alert(house2go[9]);
+				Animate( house2go[7],470,458,3660,458,6,0.5,out2d); 
+				}
+			}
+			function out2d(){
+			//alert(house2go[8]);
+			 if(!resetFlag){
+				Animate( house2go[8],470,458,3660,458,6,0.5,empty1); 
+				}
+			}
+				
+			function out22(){
+			
+			}
+			 
+			 function afterempty1(){
+			  if(!resetFlag){
+			 css.style.backgroundPosition ="-5px 0px";
+			 setTimeout("WordsData(); ",1000);
+			 }
+			}
+			function empty1(){ 
+				  if(!resetFlag){
+				clearTimeout(clrTime);
+				switch(click_no){
+							
+							case 0:
+							css.style.visibility="visible"; 
+							//css="";
+							//alert("Hi");
+							//alert('hi'+ house1go[4]);
+							
+							Animate( house1go[4],470,458,3760,458,8,0.5,afterempty1);
+								// Animate( house1go[4],470,458,3760,458,8,0.5,afterempty1);
+							break;
+							case 1:  
+									css.style.visibility="visible"; 
+									WordsData(); 
+								// Animate( house2go[10],295,200,1770,200,6,1,afterempty2); 
+								//Animate('animation/walkouthom1.png',250,330,5750,330,23,1,empty1);
+							break;
+							case 2:
+							//alert("3");
+								 //css.style.MozAnimationName="";  
+								 // Animate('animation/putmailinbag.png',180,180,720,180,4,1,empty);
+									document.getElementById("boy2").style.visibility = "hidden";
+									
+									css.style.backgroundPosition ="-11px 0px";
+								css.style.visibility="visible"; 
+								//css.style.left = "0%";
+								//alert(house3go[11]);
+								WordsData(); 
+							break;
+						} 
+				 }
+			}
+			function afterempty2(){
+			 if(!resetFlag){
+				css.style.backgroundPosition ="-5px 0px";
+								css.style.visibility="visible"; 
+								//css="";
+								 WordsData(); 
+								 }
+			}
+			function afterempty3(){
+			 if(!resetFlag){
+				css.style.backgroundPosition ="-6px 0px";
+				css.style.visibility="visible"; 
+				WordsData();
+				}
+			}
+			function finalthird(){
+			 if(!resetFlag){
+				css.style.backgroundPosition ="-6px 0px";
+				css.style.visibility="visible"; 
+				//css="";
+		 WordsData(); 
+		 }
+			}
+			var tmpwordforgoodwork  = "";
+			var tmpwordforgoodwork1 = "";
+			var tmpwordforgoodwork2 = "";
+			var first = false;
+			var sec = false;
+			var positiveflow = true;
+			var third = false;
+				var replayhomes = [base_img+"img/replyhom1.png",base_img+"img/replyhom2.png",base_img+"img/replyhom3.png"];
+			//alert(replayhomes);
+			for(var r=0;r<replayhomes.length;r++){
+				var rply = new Image();
+				rply.src = replayhomes[r];
+				replayhomes[r] = rply.src;
+			}
+			function Evaluation(){ 
+			 if(!resetFlag){
+				//alert(boardWord.innerHTML+":::"+selected_answer);
+				 if(correct_answer == selected_answer){  
+				// alert(click_no);
+				 positiveflow = true;
+								switch(click_no){
+							case 0:
+								first = true;
+								tmpwordforgoodwork = boardWord.src;
+								document.getElementById("goodimg").style.top = "20%";
+								document.getElementById("goodimg").style.left = "15%";
+								document.getElementById("goodimg").style.width = "20%";
+								document.getElementById("goodimg").style.height = "20%";
+								document.getElementById("goodimg").style.visibility = "visible"; 
+								document.getElementById("goodimg").src = replayhomes[0];
+								document.getElementById("goodimgword").style.visibility = "visible";
+								//Letters_image_Array.splice(splicecnt,1);
+								Alphabet.splice(splicecnt,1);
+	
+	//alert(Letters_image_Array.length);
+								document.getElementById("goodimgword").src = tmpwordforgoodwork;
+								 setTimeout("playding();",1000);
+								//css.style.visibility="visible"; 
+								//word_array.splice(get_word_random[0],1);
+								// alert(word_array+":"+get_word_random[0]);
+								document.getElementById("boy0").style.visibility = "visible";
+								//Animate('animation/walkouthom1.png',250,330,5750,330,23,1,afterletterInBag); 
+								//setTimeout("letterInBag();",1000);
+								 setTimeout("afterletterInBag();",2000);
+							break;
+							case 1:
+								sec = true;
+								tmpwordforgoodwork1 = boardWord.src;
+								document.getElementById("goodimg1").style.top = "24%";
+								document.getElementById("goodimg1").style.left = "47%";
+								document.getElementById("goodimg1").style.width = "20%";
+								document.getElementById("goodimg1").style.height = "20%";
+								document.getElementById("goodimg1").style.visibility = "visible"; 
+								document.getElementById("goodimg1").src = replayhomes[1];
+								document.getElementById("goodimg1word").style.visibility = "visible";
+							
+								document.getElementById("goodimg1word").src = tmpwordforgoodwork1;
+								Alphabet.splice(splicecnt,1);
+								//alert(Letters_image_Array.length);
+								 setTimeout("playding();",1000);
+								//word_array.splice(get_word_random[0],1);
+								 //alert(word_array+":"+get_word_random[0]);
+								document.getElementById("boy1").style.visibility = "visible"; 
+								//Animate('newimg/walkouthom2a.png',661.4,330,7937,330,12,1,afterletterInBag); 
+								//setTimeout("letterInBag();",1000);
+								 setTimeout("afterletterInBag();",2000);
+							break;
+							case 2:
+								third = true;
+								tmpwordforgoodwork2 = boardWord.src;
+								document.getElementById("goodimg2").style.top = "16%";
+								document.getElementById("goodimg2").style.left = "79%";
+								document.getElementById("goodimg2").style.width = "20%";
+								document.getElementById("goodimg2").style.height = "20%";
+								document.getElementById("goodimg2").style.visibility = "visible"; 
+								document.getElementById("goodimg2").src = replayhomes[2];
+								document.getElementById("goodimg2word").style.visibility = "visible";
+								
+								document.getElementById("goodimg2word").src = tmpwordforgoodwork2;
+								Alphabet.splice(splicecnt,1);
+								//alert(Letters_image_Array.length);
+								 setTimeout("playding();",1000);
+								
+								//word_array.splice(get_word_random[0],1);
+								// alert(word_array+":"+get_word_random[0]);
+								document.getElementById("boy2").style.visibility = "visible";
+								//Animate('newimg/walkouthom3_1.png',750,330,9000,330,12,1,afterletterInBag); 
+								 setTimeout("afterletterInBag();",2000);
+								//afterletterInBag();
+							break;
+						}
+						
+				}
+				else{
+					positiveflow = false;
+					switch(click_no){
+							case 0:
+								dogflag = true;
+				    document.getElementById("goodimg").style.visibility = "hidden"; 
+								document.getElementById("goodimgword").style.visibility = "hidden";
+								delyAud=setTimeout("delayDogAudio()",50);
+								 
+									  css.style.top = "9%";
+					css.style.left = "17%";
+					css.style.visibility = "visible";
+									Animate(dogbarkimg[0],180,240,600,250,6,1,afterdogbefore);
+									
+							break;
+							case 1:
+								
+								dogflag = true;
+								document.getElementById("goodimg1").style.visibility = "hidden"; 
+								document.getElementById("goodimg1word").style.visibility = "hidden";
+								delyAud=setTimeout("delaySecHom()",50);
+								 
+									  css.style.top = "27%";
+					css.style.left = "47%";
+					css.style.visibility = "visible";
+									Animate(dogbarkimg[1],100,130,500,150,5,1,afterdogbefore);
+								 
+							break;
+							case 2:
+								
+								dogflag = true;
+								document.getElementById("goodimg2").style.visibility = "hidden"; 
+								document.getElementById("goodimg2word").style.visibility = "hidden";
+								delyAud=setTimeout("delayDogAudio()",50);
+								 
+								css.style.top = "19%";
+					css.style.left = "78%";
+									Animate(dogbarkimg[2],150,130,1050,150,7,1,afterdogbefore); //iphone
+									//Animate('animation/doghom3.png',150,130,1050,150,7,1,afterdogbefore); //ipad
+								 
+							break;
+						}
+				}
+				}
+			}
+			
+			   var delyAud=0;
+	    
+		 function playding(){
+		  if(!resetFlag){
+	    playCorrectAudios('ding');
+		}
+	 }
+	
+	    function delayDogAudio(){
+		 if(!resetFlag){
+	    clearTimeout(delyAud);
+	    loadDogBarkAudios("ponga");
+		}
+	    
+	    }
+	     function delaySecHom(){
+		  if(!resetFlag){
+	     clearTimeout(delyAud);
+	     loadDogBarkAudios("prince");
+		 }
+	     }
+		var introAudios = new Audio();
+			introAudios.preload = "auto";
+			
+		 function loadDogBarkAudios(aName){
+		  if(!resetFlag){
+		//alert('aName'+aName);
+			if((agent.indexOf("iPad") != -1)||(agent.indexOf("iPod") != -1)||(agent.indexOf("iPhone") != -1)){
+				playGameAudiosFinalCustom1(0,0,aName,"playGameAudiosFinalCallBackDummy");
+			}
+		
+			else {
+				//introAudios1.addEventListener('canplaythrough',function(e){
+				//alert(introAudios1.src);
+					introAudios1.play();
+				//});
+				
+			}
+			}
+		}
+				var introAudios1 = new Audio();
+				introAudios1.src=soundsDirPath+"ponga"+audio_compatible;			
+				introAudios1.preload="auto";
+				
+		function playImgAudios(index){
+		 if(!resetFlag){
+		//alert('kl '+index);
+			if((agent.indexOf("iPad") != -1) ||(agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)){
+					playGameAudiosFinalCustom1(0,4,index,"playGameAudiosFinalCallBackDummy");
+			}
+			
+			else{
+				var tmpURL = base_url.replace("http://",""); 
+				//alert(tmpURL+":\n"+base_url);
+				index = index.replace(tmpURL+"images/mailmanletters/images/",""); 
+				//alert(index);
+				var boardaudios=new Audio();
+				boardaudios.src=lettersoundsDirPath+correct_answer.toLowerCase()+audio_compatible;
+				 //alert(boardaudios.src);
+				boardaudios.load();
+				boardaudios.play();
+				
+				boardaudios.addEventListener("ended",function(){
+					afterHighlightFront();
+				});
+				boardaudios.addEventListener("error",function(){
+					afterHighlightFront();
+				});
+				
+		}
+		}
+	}
+	
+	function letterAudios(textindex){
+	 if(!resetFlag){
+		if((agent.indexOf("iPad") != -1) ||(agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)){
+				playGameAudiosFinalCustom(0,3,textindex,"playGameAudiosFinalCallBackDummy");
+		}
+		
+		else{
+		//alert(textindex);
+			textboardaudios=new Audio();
+			textboardaudios.src=lettersoundsDirPath+textindex.toLowerCase()+audio_compatible;
+				//alert(textboardaudios.src);
+			textboardaudios.load();
+			textboardaudios.play();
+		}
+	   }
+	}
+	function playCorrectAudios(index){
+	 if(!resetFlag){
+		//alert('kl '+index);
+			if((agent.indexOf("iPad") != -1) ||(agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)){
+					playGameAudiosFinalCustom1(0,4,index,"playGameAudiosFinalCallBackDummy");
+			}
+			
+			else{
+				
+				//boardaudios.load();
+				boardaudios.play();
+			}
+		}
+	}
+				var boardaudios=new Audio();
+				boardaudios.src=ImgsoundsDirPath+'ding'+audio_compatible;
+				boardaudios.preload = "auto";
+	
+	
+	function resize(){
+		var swidth1= window.innerWidth;
+		var swidth2= document.body.clientWidth; 
+		var sheight1= window.innerHeight;
+		var sheight2= document.body.clientHeight;
+		var fon_size = (swidth1/50+sheight1/50);   
+		if (window.innerHeight){  
+			document.body.style.width    = swidth1 + "px";
+			document.body.style.height   = sheight1 + "px";
+			document.body.style.fontSize = swidth1/50+"px"; 
+			document.body.style.fontSize = sheight1/50+"px"; 
+			
+		}
+	}
+	var house21goArr = new Array();
+					   var house31goArr = new Array();
+					   var ipodhouse31goArr= new Array();
+					   var house21gooutArr = new Array();
+					   var dogbarkArr = new Array();
+					   var dogbarkimg =[base_img+'animation/doghom1.png',base_img+'animation/doghom2.png',base_img+'animation/doghom3.png'];
+					window.onload=function(){ 
+						for(var h2=0;h2<dogbarkimg.length;h2++){	
+						dogbarkArr[h2]= new Image();  
+						dogbarkArr[h2].src =dogbarkimg[h2];  
+						dogbarkimg[h2] = dogbarkArr[h2].src;
+						//alert(house2go[h2]);
+					}
+					 //alert("Hi");
+							house11go= new Image();
+							house11go.src =base_img+house1go1[0];  
+							house1go[0] = house11go.src;
+							house12go= new Image();
+							house12go.src =base_img+house1go1[1];  
+							house1go[1] = house12go.src;
+							house13go= new Image();
+							house13go.src =base_img+house1go1[2];  
+							house1go[2] = house13go.src;
+							house14go= new Image();
+							house14go.src =base_img+house1go1[3];  
+							house1go[3] = house14go.src;
+							house15go= new Image();
+							house15go.src =base_img+house1go1[4];  
+							house1go[4] = house15go.src;
+							for(var h2=0;h2<11;h2++){	
+						house21goArr[h2]= new Image(); 
+						 
+							house21goArr[h2].src =base_img+house2go1[h2]; 
+						 
+						house2go[h2] = house21goArr[h2].src;
+						//alert(house2go[h2]);
+					}
+					//for(var h1=0;h1<5;h1++){	
+						
+						 // alert(house1go[h1]);
+					//}
+					for(var h3=0;h3<house3go1.length;h3++){
+						house31goArr[h3] = new Image();
+						house31goArr[h3].src =base_img+house3go1[h3];
+						house3go[h3] = house31goArr[h3].src;
+						 //alert(house3go);
+					}
+					for(var h3=0;h3<2;h3++){
+						ipodhouse31goArr[h3] = new Image();
+						ipodhouse31goArr[h3].src =base_img+gohom3Path[h3];
+						ipodgohom3[h3] = ipodhouse31goArr[h3].src;
+						 //alert(house3go);
+					}
+					
+					for(var h4=0;h4<2;h4++){	
+						house21gooutArr[h4]= new Image(); 
+						 
+							house21gooutArr[h4].src =base_img+comeoutHom2[h4]; 
+						 
+						house2goout[h4] = house21gooutArr[h4].src;
+						//alert(house2go[h2]);
+					}
+					  fpost1= new Image();
+					 fpost1.src=base_img+keeppost[0];
+					 foldpost1=fpost1.src;
+					 
+					  fpost2= new Image();
+					  fpost2.src=base_img+keeppost[1];
+					  foldpost2=fpost2.src; 
+				 
+					
+					post = new Image();
+					post.src = base_img+'ipadimg/showpostipad.png';
+					//ipodpost = new Image();
+					//ipodpost.src='ipod/showpost.png';
+					//postMail=ipodpost.src;
+					postEnd = post.src;
+					
+					comeouthom1 =new Image();
+					comeouthom1.src=base_img+'ipod/walkouthom1.png';
+					comeoutipodHom1= comeouthom1.src;
+						setTimeout(function(){
+						init();
+						resize();
+						},100);
+					}
+		var resetFlag = false;
+	function resetValues(){
+	playIntro = true;
+	resetFlag = true;
+	 css;
+	suffixtext = "";
+	mailtext = "";
+	randomSuffixWord = "";
+	randomSuffix0 = "";
+	randomSuffix1 = "";
+	randomSuffix2 = "";
+	init_Audios  = new Audio();
+			init_Audios.src = demoSoundsPath+"mailmanlettersdemo"+audio_compatible;
+			init_Audios.preload = "auto";
+	//house3go1 = ['ipadimg/walkinghouse3.png','ipadimg/walkinghouse3a.png','ipadimg/walkinghouse3b.png','ipadimg/walkinghouse3c.png','ipadimg/sprite_a.png','ipadimg/sprite_b.png','ipadimg/sprite_c.png','ipadimg/sprite_d.png','ipadimg/sprite_e.png','ipadimg/sprite_f.png','ipadimg/sprite_g.png','ipadimg/sprite_h.png','ipadimg/sprite_i.png','ipadimg/sprite_1.png','ipadimg/sprite_2.png','ipadimg/sprite_3.png','ipadimg/sprite_4.png','ipadimg/sprite_5.png','ipadimg/sprite_6.png','ipadimg/sprite_7.png','ipadimg/sprite_8.png','ipadimg/sprite_9.png','ipadimg/sprite_10.png','ipadimg/sprite_11.png'];
+	//house21go;
+	//house31go;
+	//house11go;
+	//house1go = new Array();
+	//house2go = new Array();
+	//house3go= new Array();
+	
+	//house2go1out = ['newimg/walkouthom2a.png','newimg/walkouthom2b.png'];
+	//house3go1out = ['newimg/walkouthom3_1.png','newimg/walkouthom3_2a.png','newimg/walkouthom3_2b.png'];
+	//house21goout;
+	//house31goout;
+	//house2goout = new Array();
+	//house3goout= new Array();
+	//house1go;
+	//house1goout;
+	//house1goend;
+	//house1gooutend;
+	//post;
+	//postEnd;
+	sample;
+	sampleEnd;
+	//house1go1 = ['ipadimg/posthom1.png','ipadimg/posthom1a.png','ipadimg/posthom1b.png','ipadimg/comeouthom1a.png','ipadimg/comeouthom1b.png'];
+	//Letters_image_Array = [["Alligator","A",10,10,15,0,60],["Bee","B",4,5,15,4,70],["Nest","N",6,7,15,2,60],["Camel","C",9,10,20,2,60],["Duck","D",11,3,15,4,60],
+	//["Elephant","E",8,10,20,2,60],["Fox","F",8,10,20,0,60],["Goose","G",8,5,20,4,60],["Hippo","H",9,10,20,2,60],["Inchworm","I",10,5,10,4,60],["Jaguar","J",8,8,15,2,60],["Lion","L",11,6,17,2,60],
+	//["Monkey","M",14,8,15,2,60],["Ostrich","O",15,5,25,4,60],["Pig","P",5,10,25,2,60],["Rabbit","R",14,5,25,4,60],["Snake","S",15,5,25,4,60],["Tiger","T",10,5,25,4,60],["Umbrellabird","U",14,5,25,4,60],
+	//[Vulture","V",7,5,25,4,60],["Wolf","W",9,10,25,0,60],["Zebra","Z",8,10,25,0,60]];
+	
+	Alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	//gamedata={};
+	//gameAttempt=[];
+	xmlstr="";
+	xmlstr2="";
+	
+	timeInterval;	
+	gameQuestion="";
+	gameResult="";
+	tmpxmlstr="";
+	UnixTimeStamp;
+	//gametimestamp=[];
+	//gameAtt=[];
+	InitSet =0;
+	mainPathIndex = 0;
+	subPathIndex = 0;
+	audioIndex=0;
+	//comeouthom1,comeoutipodHom1;
+	//ipodpostHom2 =["ipod/posthom2a.png","ipod/posthom2b.png","ipod/posthom2c.png"];
+	//gohom3Path=["ipod/posthom3a.png","ipod/posthom3b.png"];
+	//ipodgohom3=new Array();
+	//ipodhouse31go;
+	//comeoutHom3=["ipod/walkouthom3a.png","ipod/walkouthom3b.png","ipod/walkouthom3c.png"];
+	//comeoutHom2=["ipod/walkouthom2a.png","ipod/walkouthom2b.png"];
+	//fpost1,fpost2;
+	agent = navigator.userAgent;
+	//ipodpost;
+	//postMail;
+	preclr=0;
+	splicecnt = 0;
+	final_animate_letter = "";
+	correct_answer="";
+	gameQuestion="";
+	frames="";
+	AlphaRandom="";
+	maxRandom1 = new Array();
+	maxRandom= new Array();
+	allowThreeWords=0;
+	word_array = new Array();
+	suffwordplace0 = "";
+	suffwordplace1 = "";
+	suffwordplace2 = "";
+	class1=0;
+	get_word_random;
+	final_word;
+	//init_Audios  = new Audio();
+	delayinter=0;
+	agent="";
+	boardWord = "";
+	getCorrectSuffix = "";
+	getCorrectPrefix = "";
+	click_cnt = 0;
+	click_no = 0;
+	gameCount=0;
+	scorereload=0;
+	// keeppost =['ipadimg/keeppost1.png','ipadimg/keeppost2.png'];
+	//foldpost1;
+	//foldpost2;
+	//house2go1 = ['ipadimg/posthom2a.png','ipadimg/posthom2b.png','ipadimg/posthom2c.png','ipadimg/posthom2d.png','ipadimg/comeouthom2a.png','ipadimg/comeouthom2b.png','ipadimg/comeouthom2c.png','ipadimg/comeouthom2d.png','ipadimg/comeouthom2e.png',"ipadimg/showpostipad.png"];
+	selected_answer = "";
+	dogflag = false;
+	clrTime = "";
+	audName;
+	tmpwordforgoodwork  = "";
+	tmpwordforgoodwork1 = "";
+	tmpwordforgoodwork2 = "";
+	first = false;
+	sec = false;
+	positiveflow = true;
+	third = false;
+	delyAud=0;
+	//house21goArr = new Array();
+	//house31goArr = new Array();
+	//ipodhouse31goArr= new Array();
+	//house21gooutArr = new Array();
+	//dogbarkArr = new Array();
+	
+	
+	clearInterval(scoreinterval);
+	clearInterval(delayinter);
+	clearInterval(timeOut);
+	//clearInterval(interval);
+	document.getElementById("animated").style.visibility="hidden";
+	document.getElementById("boardword").style.visibility="hidden";
+	document.getElementById("infrontword1").style.visibility="hidden";
+	document.getElementById("infrontword2").style.visibility="hidden";
+	document.getElementById("infrontword0").style.visibility="hidden";
+	if(document.getElementById("goodimg")!=null){
+	document.getElementById("goodimg").style.visibility="hidden";
+	document.getElementById("goodimgword").style.visibility="hidden";
+	document.getElementById("door0").style.visibility="hidden";
+	}
+	if(document.getElementById("goodimg1")!=null){
+	document.getElementById("goodimg1").style.visibility="hidden";
+	document.getElementById("goodimg1word").style.visibility="hidden";
+	document.getElementById("door1").style.visibility="hidden";
+	}
+	if(document.getElementById("goodimg2")!=null){
+	document.getElementById("goodimg2").style.visibility="hidden";
+	document.getElementById("goodimg2word").style.visibility="hidden";
+	document.getElementById("door2").style.visibility="hidden";
+	}
+	score = InitialScore;
+	TotalScore=InitialScore;
+	document.getElementById("scoreValue").innerHTML=score;
+	second="false";
+	audioname=setTimeout("Audio_Instruct()",50);
+	document.getElementById("boy0").style.visibility = "hidden"; 
+	document.getElementById("boy1").style.visibility = "hidden"; 
+	document.getElementById("boy2").style.visibility = "hidden"; 
+	
+	}
+	var audioname = 0;
+				
+	//onLoad="init();resize();"
+		</script> 
+	<style type="text/css">@-moz-keyframes sprite1 {
+		0% { background-position: 0px 0px; }
+		14.285714285714286% { background-position: -1px 0px; }
+		28.571428571428573% { background-position: -2px 0px; }
+		42.85714285714286% { background-position: -3px 0px; }
+		57.142857142857146% { background-position: -4px 0px; }
+		71.42857142857143% { background-position: -5px 0px; }
+		85.71428571428572% { background-position: -6px 0px; }
+		100% { background-position: -7px 0px; }
+	}</style></head> 
+	<body onselectstart="return false;" ondragstrat="return false;" style="overflow: hidden; background-image: url('./MailManLetters_files/back.jpg'); background-attachment: fixed; width: 1780px; height: 609px; font-size: 12.18px;"> 
+		<div style="position:relative; width:700px;height:400px;overflow:hidden;margin:auto;">
+		<a onclick="exit();">
+			<img src="MailManLetters_files/home_alpha01_ipad1.png" id="home" style="position: absolute; z-index: 1100; top: 93%; left: 1%; visibility: visible;">
+			</a>
+			<a onclick="splaudio(init_Audios,startGame);">
+			<img src="MailManLetters_files/skipbtn.png" value="audio" id="homeaudio" style="position: absolute; z-index: 1100; top: 0%; left: 1%; visibility: hidden;">
+			</a>
+			<!-- help function -->
+			<a onclick="resetValues();">
+			<img src="MailManLetters_files/Repeat.png" value="audio" id="Repeat" style="position: absolute; z-index: 1100; top: 0%; left: 1%; visibility: visible;">
+			</a>
+		<img style="position: absolute; visibility: hidden; top: 40%; left: 42%; width: 10%; height: 10%;" src="MailManLetters_files/preloader_white.gif" id="load">
+		<img style="position: absolute; visibility: visible; width: 100%; height: 100%; top: 0%; left: 0%;" src="MailManLetters_files/gamedoor.png" id="bg">
+		<div id="animated" style="visibility: visible; position: absolute; left: 9%; top: 40%; width: 1px; height: 1px; z-index: 30; background-image: url('./images/mailmanletters/ipadimg/showpostipad.png'); background-size: 8px 1px; transform: scaleX(200) scaleY(195); transform-origin: left top 0px; animation-duration: 1s; animation-timing-function: step-start; animation-iteration-count: 1; background-position: -7px 0px;"></div> 
+		<div>
+		<img style="position: absolute; width: 100%; height: 100%; top: 0%; left: 0%; visibility: hidden; z-index: 200;" src="MailManLetters_files/gamebgimg.png" id="mainBg">
+		</div>
+		<img style="position:absolute;visibility:visible;width:0%;height:0%;top:65%;left:18%;z-index:33;text-decoration:none;-moz-tap-highlight-color:rgba(0,0,0,0);border:none;" src="" id="goodimg">
+		<img style="position:absolute;visibility:visible;width:0%;height:0%;top:65%;left:18%;z-index:33;text-decoration:none;-moz-tap-highlight-color:rgba(0,0,0,0);border:none;" src="" id="goodimg1">
+		<img style="position:absolute;visibility:visible;width:0%;height:0%;top:65%;left:18%;z-index:33;text-decoration:none;-moz-tap-highlight-color:rgba(0,0,0,0);border:none;" src="" id="goodimg2">
+		
+		<img style="position:absolute;visibility:hidden; top:23%;left:25%;width:5%;height:5%;z-index:34;text-decoration:none;  " id="goodimgword"> 
+		<img style="position:absolute;visibility:hidden; top:27%;left:57%;width:5%;height:5%;z-index:34;text-decoration:none; " id="goodimg1word"> 
+		<img style="position:absolute;visibility:hidden; top:20%;left:89%;width:5%;height:5%;z-index:34;text-decoration:none; " id="goodimg2word"> 
+		
+		<img id="boardword" src="MailManLetters_files/Rabbit.png" style="position: absolute; top: 45%; left: 24%; width: 18%; height: 15%; visibility: visible; z-index: 32;"> 
+		<div id="suffix0" style="position:absolute;top:62%;left:6%;font-size:250%;text-align:center;visibility:visible;-moz-tap-highlight-color: rgba(0,0,0,0); ">e</div>
+		<div id="suffix1" style="position:absolute;top:67%;left:36%;font-size:240%;text-align:center;visibility:visible;-moz-tap-highlight-color: rgba(0,0,0,0); ">r</div>
+		<div id="suffix2" style="position:absolute;top:78%;left:73%;font-size:240%;text-align:center;visibility:visible;-moz-tap-highlight-color: rgba(0,0,0,0); ">d</div>
+	    
+		<div id="suffixclick0" style="position:absolute;top:67%;left:0%;width:17%;height:13%;z-index:33;-moz-tap-highlight-color:rgba(0,0,0,0);" ontouchstart="gotohouse1(0);" onclick="gotohouse1(0);"></div>
+		<div id="suffixclick1" style="position:absolute;width:17%;height:13%;top:69%;left:29%;z-index:33;-moz-tap-highlight-color:rgba(0,0,0,0);" ontouchstart="gotohouse2(1);" onclick="gotohouse2(1);"></div>
+		<div id="suffixclick2" style="position:absolute;top:83%;left:67%;width:17%;height:13%;z-index:33;-moz-tap-highlight-color:rgba(0,0,0,0);" ontouchstart="gotohouse3(2);" onclick="gotohouse3(2);"></div>
+		<img id="infrontword0" src="" style="visibility:hidden;position:absolute;width:5%;height:5%;top:55%;left:25%;z-index:35;">
+		<img id="infrontword1" src="" style="visibility:hidden;position:absolute;width:5%;height:5%;top:62%;left:54%;z-index:35;">
+		<img id="infrontword2" src="" style="visibility:hidden;position:absolute;border:0;width:5%;height:5%;top:57.5%;left:69%;z-index:35;">
+		<img style="position:absolute;visibility:hidden;width:15%;height:18%;top:24%;left:16%;z-index:29;" src="MailManLetters_files/openwindow1.png" id="door0">
+		<img style="position:absolute;visibility:hidden;width:15%;height:17%;top:29%;left:45%;z-index:29;" src="MailManLetters_files/openwindow2.png" id="door1">
+		<img style="position:absolute;visibility:hidden;width:15%;height:17%;top:21%;left:82%;z-index:29;" src="MailManLetters_files/openwindow3.png" id="door2">
+		
+		<img style="position:absolute;visibility:hidden;width:9%;height:20%;top:65%;left:18%;z-index:33;" src="MailManLetters_files/house1_manstanding.png" id="boy0">
+		<img style="position:absolute;visibility:hidden;width:9%;height:20%;top:65%;left:48%;z-index:33;" src="MailManLetters_files/house2_manstanding.png" id="boy1">
+		<img style="position:absolute;visibility:hidden;width:9%;height:20%;top:60%;left:60%;z-index:33;" src="MailManLetters_files/house3_manstanding.png" id="boy2">
+		<div style="position: absolute; top: 91%; left: 85%; width: 13%; text-align: center; z-index: 50; font-weight: bolder; font-size: 250%; visibility: visible;" id="scoreValue">11</div>
+		
+	</div>
+		<script type="text/javascript" src="MailManLetters_files/ideal_redirect.js"></script>	
+	 
+	 </body></html>
