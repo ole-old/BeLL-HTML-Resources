@@ -5,8 +5,9 @@ var fs = require('fs')
 function puts(error, stdout, stderr) { sys.puts(stdout) }
   
 // Vars
-var couchUrl = 'http://127.0.0.1:5984' 
-var database = 'apps'
+// var couchUrl = 'http://pi:raspberry@raspberrypi.local:5984' 
+var couchUrl = 'http://127.0.0.1127.0.0.1127.0.0.1127.0.0.1127.0.0.1127.0.0.1127.0.0.1127.0.0.1127.0.0.1127.0.0.1127.0.0.1127.0.0.1:5984' 
+var database = 'resources'
 var ignore = ['.git', 'README.md', 'package.json', 'node_modules', 'install.js']
 
 // Go
