@@ -1,0 +1,375 @@
+
+<!-- saved from url=(0071)http://teachermate.treehouse.su/games/games/game/IceCream/1/WordParts/0 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>IceCream</title>
+<style>
+	html, body {
+	-webkit-user-select:none;
+		font-family:Didact;
+	}
+	</style>
+		<link href="./IceCream_files/icecream.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="./IceCream_files/cone_draw.js"></script>
+		<script type="text/javascript" src="./IceCream_files/initialize.js"></script>
+		<script type="text/javascript" src="./IceCream_files/resize.js"></script> 
+		<script type="text/javascript" src="./IceCream_files/ice.js"></script> 
+		<script type="text/javascript" src="./IceCream_files/quesGenParser.js"></script> 
+		<script type="text/javascript" src="./IceCream_files/iphonecall.js"></script> 
+		<script type="text/javascript" src="./IceCream_files/score.js"></script> 
+		<script type="text/javascript" src="./IceCream_files/postdata.js"></script> 
+		<script type="text/javascript" src="./IceCream_files/purl.js"></script>
+		
+	<script type="text/javascript">
+//Code to Check Browsers.
+
+var ad = decodeURIComponent(document.URL);
+var url = purl(ad,true); 
+var redirect = url.fparam('redirect');
+var currentURL = url.attr('file');
+if(!redirect || redirect=="")
+{
+	redirect = currentURL;
+}
+
+var check_compatible = (navigator.userAgent.match(/(Firefox)/i))?true:false;
+var audio_compatible = (check_compatible)?".ogg":".mp4"; 	
+//var base_img = 'http://teachermate.treehouse.su/games/images/ice/';
+var base_img = './';
+//var base_url = 'http://teachermate.treehouse.su/games/';
+var base_url = './'; 
+var category = '1';
+var currentSubCategory = 'WordParts';
+var timeOffset='0';
+var TotalScore = '13';
+var s_id = '8';
+var game_id = '8';
+var timeInterval;
+
+
+//Exit conditon
+var singleActivity = false; 
+var playIntro = true;
+var reload = false;
+var gameFolder = 'IceCream';
+var initTimer = 0; 
+var iteration = '0';
+
+//var soundsPath = base_url+'files/resource/rime/'; 
+//var demoaudiopath = base_url+'files/resource/demo/'
+//var on_set = base_url+'files/resource/onset/'; 
+var soundsPath = base_url+'sound/'; 
+var demoaudiopath = base_url+'sound/'
+var on_set = base_url+'sound/'; 
+//var soundsWordPath=base_url+'files/resource/word/'; 
+var soundsWordPath=base_url+'sound/'; 
+  // var ding = new Audio();
+   	var got = new Audio();
+	
+var InitialScore = '13';
+var resetflag = false;
+function timeData(){
+	
+				if(singleActivity){
+				console.log("timedata>>"+initTimer);
+					if(initTimer == 181) {
+                        clearInterval(timeInterval);
+                        //resetValues();
+                        //alert('ITERATION : ' + '');
+                        //alert(base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration);
+						document.location = base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration;
+					}
+				}
+				initTimer++;
+				timeOffset++;
+			}
+ 
+ function resetValues(){
+ playIntro = true;
+	resetflag=true;
+	//timeInterval = 0;
+	got = new Audio();
+	scoop_array = ['brown_scoop','green_scoop','maroon_scoop','orange_scoop','rose_scoop','violet_scoop','white_scoop','yellow_scoop','brown_scoop'];
+	studentPath="";
+	studentPathloaded = true;
+	//backToFunc = {};
+	words = new Array();
+	type = new Array();
+	w0 = new Array();
+	w1 = new Array();
+	w2 = new Array();
+	a = new Array();
+	w0Arr = new Array();
+	w1Arr = new Array();
+	w2Arr = new Array();
+	str;
+	arrCnt=0;
+	//drawcone={};
+	//fall={};
+	//cream_run={};
+	coneArray=new Array();
+	//conesuf_Obj={};
+	j=0;
+	k=0;
+	left_pos=0;
+	top_pos=0;
+	first_cone_cnt = 0;
+	second_cone_cnt = 0;
+	third_cone_cnt = 0;
+	top_down_bottom_up_approach = 0;
+	call_cnt = 0;
+	i=-20;
+	/*fall_word_suf="";
+	fall_word_pre="";
+	last_word_suf_1="";
+	last_word_pre_1="";
+	last_word_suf_2="";
+	last_word_pre_2="";
+	last_word_suf_3="";
+	last_word_pre_3="";
+	full_word_cone1="";
+	full_word_cone2="";
+	full_word_cone3="";*/
+	calling_loop;
+	no_of_cnt = 0
+	whole_word="";
+	last_wordSuff="";
+	last_wordPre="";
+	delaynegtime;
+	runflag = false;
+	allowThreeWords=0;
+	word_array = new Array();
+	//coneInterval;
+	fall_pos_interval;
+	start_pos_left = 15;
+	cream_random;
+	audio_from_xml;
+	randam_audio_no;
+	randam_audio_array_for_cone1;
+	randam_audio_array_for_cone2;
+	randam_audio_array_for_cone3;
+	falling_cream_word;
+	random_word;
+	word_from_xml;
+	click_count = 0;
+	score = InitialScore;
+	TotalScore=InitialScore;
+	 document.getElementById("score").innerHTML=score;
+	//timeInterval;
+	//scoreinterval;
+	agent;
+	tmp = 0;
+	left_picker_array = [15,41,67];
+	left_random;
+	final_left;
+	ActivityChange = ["Empty","Non-Empty"];
+	random_activity;
+	finalActivity;
+	//For score updates
+
+	//gamedata={};
+	//gameAttempt=[];
+	xmlstr="";
+	xmlstr2="";
+	timeOffset=0;
+	//timeInterval=0;
+	//scoreinterval=0;
+	mainPathIndex = 0;
+	subPathIndex = 0;
+	audioIndex=0;
+	tmpxmlstr="";
+	gameQuestion="";
+	gameResult="";
+	timestamp="";
+	UnixTimeStamp;
+	//gametimestamp=[];
+	minus_suffix;
+	cone_manage_id=0;
+	cone_Count=0;
+	CONE1LIMIT = 0;
+	CONE2LIMIT = 0;
+	CONE3LIMIT = 0;
+	id=0;
+	//backToFunc = {};
+	words = new Array();
+	w0 = new Array();
+	w1 = new Array();
+	w2 = new Array();
+	a = new Array();
+	w0Arr = new Array();
+	w1Arr = new Array();
+	w2Arr = new Array();
+	str;
+	//scores = 0;
+	parsedFiles=0;
+	document.getElementById("scoop").style.visibility="hidden";
+	document.getElementById("containword").style.visibility="hidden";
+	document.getElementById("cream_container").style.visibility="hidden";
+	document.getElementById("third_cone_0").style.visibility="hidden";
+	document.getElementById("third_cone_1").style.visibility="hidden";
+	document.getElementById("third_cone_2").style.visibility="hidden";
+	document.getElementById("third_cone_3").style.visibility="hidden";
+	document.getElementById("sec_cone_0").style.visibility="hidden";
+	document.getElementById("sec_cone_1").style.visibility="hidden";
+	document.getElementById("sec_cone_2").style.visibility="hidden";
+	document.getElementById("sec_cone_3").style.visibility="hidden";
+	document.getElementById("first_cone_0").style.visibility="hidden";
+	document.getElementById("first_cone_1").style.visibility="hidden";
+	document.getElementById("first_cone_2").style.visibility="hidden";
+	document.getElementById("first_cone_3").style.visibility="hidden";
+		document.getElementById("cone1blur").style.visibility="hidden";
+	document.getElementById("cone2blur").style.visibility="hidden";
+	document.getElementById("cone3blur").style.visibility="hidden";
+	
+	
+		document.getElementById("cone1_suffix").style.color="black";
+	document.getElementById("cone2_suffix").style.color="black";
+	document.getElementById("cone3_suffix").style.color="black";
+		 
+		
+	 
+	clearInterval(coneInterval);
+	clearInterval(fall_pos_interval);
+	clearTimeout(clrtime);
+	clearInterval(scoreinterval);
+	clearTimeout(delaynegtime);
+	Audio_Instruct();
+ 
+ }
+ function initial(){
+document.getElementById("load").style.visibility="visible";
+//setTimeout('initial1();',1000);
+initial1();
+}
+function initial1(){
+agent = navigator.userAgent;
+//document.getElementById("homeaudio").style.visibility="hidden";
+document.getElementById("mainBg").style.visibility="visible";
+document.getElementById("scoreboard").style.visibility="visible";
+document.getElementById("score").style.visibility="visible";
+document.getElementById("cream_container").style.visibility="visible";
+
+timeInterval = setInterval("timeData()",1000);
+
+Audio_Instruct();
+document.getElementById('home').style.visibility ="visible";
+	document.getElementById('homeaudio').style.visibility ="visible";
+}
+		function ajax_call(){
+		//alert("Hi");
+	 post_score_details(xmlstr2);
+}
+		window.onload = resize;
+		window.onresize = resize;
+		function lockwebviewscreen(){
+		 
+		document.documentElement.addEventListener('touchmove',
+		function(e) {
+				e.preventDefault();
+					}
+					);
+}
+
+	</script></head>
+<!--<script type='text/javascript'
+ 	src='http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'>
+</script>-->
+	
+<body onload="initial();resize();lockwebviewscreen();" onselectstart="return false;" ondragstart="return false;" style="overflow: hidden; background-image: url(http://teachermate.treehouse.su/games//images/back.jpg); background-attachment: fixed; width: 1684px; height: 851px; font-size: 21.275px; ">
+	
+	<div id="container" style="position:relative; width:800px;height:600px;overflow:hidden;margin:auto;">
+	
+	<a onclick="exit();">
+		<img src="./IceCream_files/home_alpha01_ipad1.png" id="home" style="visibility: visible; position: absolute; z-index: 101; top: 93%; left: 1%; width: 40px; height: 40px; ">
+		</a>
+		<a onclick="splaudio(init_Audios,scoreInit);">
+		<img src="./IceCream_files/skipbtn.png" value="audio" id="homeaudio" style="visibility: visible; position: absolute; z-index: 101; top: 0%; left: 1%; width: 40px; height: 40px; ">
+		</a>
+		
+		<a onclick="resetValues();">
+		<img src="./IceCream_files/Repeat.png" value="audio" id="Repeat" style="visibility:hidden;position:absolute;z-index:1100;top:0%;left:1%;visibility:hidden;width:40px; height:40px;">
+		</a>
+		
+		<img style="position: absolute; visibility: visible; top: 30%; left: 42%; width: 10%; height: 10%; " src="./IceCream_files/preloader_white.gif" id="load">
+
+<img src="./IceCream_files/icecream.png" style="position: absolute; top: 0%; left: 0%; width: 800px; height: 600px; z-index: 100; visibility: visible; " id="mainBg">
+	<!--	<img src ="http://teachermate.treehouse.su/games/images/ice/images/icecream.png"  style="position:absolute;top:0%;left:0%; width:800px;height:600px;  visibility:visible;">  -->
+		
+		<img src="./IceCream_files/DressUp_score box.png" style="position: absolute; z-index: 100; top: 81%; left: 83%; width: 15%; height: 15%; visibility: visible; " id="scoreboard">
+		<div id="score" style="position: absolute; z-index: 100; top: 84%; left: 85%; font-size: 300%; font-weight: bold; visibility: visible; "></div>
+		
+		<div id="cone1_suffix" style="position:absolute;z-index:100;top:78%;left:20.5%;font-size:230%;font-weight:bold;-webkit-tap-highlight-color: rgba(0,0,0,0);" onclick="before_render(0,event)"></div>
+		<div id="cone2_suffix" style="position:absolute;z-index:100;top:78%;left:46.5%;font-size:230%	;font-weight:bold;-webkit-tap-highlight-color: rgba(0,0,0,0);" onclick="before_render(1,event)"></div>
+		<div id="cone3_suffix" style="position:absolute;z-index:100;top:78%;left:72%;font-size:230%;font-weight:bold;-webkit-tap-highlight-color: rgba(0,0,0,0);" onclick="before_render(2,event)"></div>
+		
+		<div id="cone1" style="position:absolute;z-index:200;top:50%;left:15%;width:19%;height:50%;-webkit-tap-highlight-color: rgba(0,0,0,0);" onclick="before_render(0,event)"></div>
+		<div id="cone2" style="position:absolute;z-index:200;top:50%;left:41%;width:19%;height:50%;-webkit-tap-highlight-color: rgba(0,0,0,0);" onclick="before_render(1,event)"></div>
+		<div id="cone3" style="position:absolute;z-index:200;top:50%;left:67%;width:19%;height:50%;-webkit-tap-highlight-color: rgba(0,0,0,0);" onclick="before_render(2,event)"></div> 
+		
+		<img id="cone1blur" src="./IceCream_files/cone_mouseon.png" style="visibility:hidden;position:absolute;z-index:100;top:49%;left:14%;width:22%;height:54%;"> 
+		<img id="cone2blur" src="./IceCream_files/cone_mouseon.png" style="visibility:hidden;position:absolute;z-index:100;top:49%;left:39%;width:22%;height:54%;"> 
+		<img id="cone3blur" src="./IceCream_files/cone_mouseon.png" style="visibility:hidden;position:absolute;z-index:100;top:49%;left:65%;width:22%;height:54%; "> 
+		
+		<div id="cream_container" style="position: absolute; z-index: 102; top: -15%; left: 15%; width: 22%; height: 28%; visibility: visible; ">
+			<img src="./IceCream_files/brown_scoop.png" id="scoop" width="100%" height="100%">
+			<div style="position:absolute;z-index:102;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;" id="containword">?</div>
+		</div>
+		<!-- 3rd cone -->
+		<div id="third_cone_0" style="position:absolute;z-index:100;top:35%;left:66%;width:19%;height:28%;visibility:hidden;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone3_0" width="110%" height="100%">
+			<div id="cone3_ans_0" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="third_cone_1" style="visibility:hidden;position:absolute;z-index:100;:1px solid red;top:21%;left:66%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone3_1" width="110%" height="100%">
+			<div id="cone3_ans_1" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="third_cone_2" style="visibility:hidden;position:absolute;z-index:100;top:7%;left:66%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone3_2" width="110%" height="100%">
+			<div id="cone3_ans_2" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="third_cone_3" style="visibility:hidden;position:absolute;z-index:100;top:-6%;left:66%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone3_3" width="110%" height="100%">
+			<div id="cone3_ans_3" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<!---->
+		<!-- 2nd cone -->
+		<div id="sec_cone_0" style="visibility:hidden;z-index:100;position:absolute;top:35%;left:40.5%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone2_0" width="110%" height="100%">
+			<div id="cone2_ans_0" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="sec_cone_1" style="visibility:hidden;position:absolute;z-index:100;top:21%;left:40.5%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone2_1" width="110%" height="100%">
+			<div id="cone2_ans_1" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="sec_cone_2" style="visibility:hidden;position:absolute;z-index:100;top:7%;left:40.5%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone2_2" width="110%" height="100%">
+			<div id="cone2_ans_2" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="sec_cone_3" style="visibility:hidden;position:absolute;z-index:100;top:-6%;left:40.5%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone2_3" width="110%" height="100%">
+			<div id="cone2_ans_3" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<!---->
+		<!-- 1st cone -->
+		<div id="first_cone_0" style="visibility:hidden;z-index:100;position:absolute;top:35%;left:15%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone1_0" width="110%" height="100%">
+			<div id="cone1_ans_0" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="first_cone_1" style="visibility:hidden;position:absolute;z-index:100;top:21%;left:15%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone1_1" width="110%" height="100%">
+			<div id="cone1_ans_1" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="first_cone_2" style="visibility:hidden;position:absolute;z-index:100;top:7%;left:15%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone1_2" width="110%" height="100%">
+			<div id="cone1_ans_2" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<div id="first_cone_3" style="visibility:hidden;position:absolute;z-index:100;top:-6%;left:15%;width:19%;height:28%;">
+			<img src="./IceCream_files/brown_scoop.png" id="cone1_3" width="110%" height="100%">
+			<div id="cone1_ans_3" style="position:absolute;z-index:100;top:51%;left:26%;font-size:270%;font-weight:bold;text-align:left;">?</div>
+		</div>
+		<!---->
+
+
+		</div>
+		<script type="text/javascript" src="./IceCream_files/ideal_redirect.js"></script>	
+
+</body></html>
