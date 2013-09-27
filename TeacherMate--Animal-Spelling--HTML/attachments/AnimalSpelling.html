@@ -1,0 +1,2328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0077)http://teachermate.treehouse.su/games/games/game/AnimalSpelling/1/WordParts/0 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<meta name="viewport" content="user-scalable=no, width=320, height=320, initial-scale=1.0, maximum-scale=1.0">
+<title>Animal Spelling</title>
+
+<link rel="stylesheet" type="text/css" href="./AnimalSpelling_files/animalipad.css">
+<script type="text/javascript" src="./AnimalSpelling_files/sightTagParser.js"></script>
+<script type="text/javascript" src="./AnimalSpelling_files/animal.js"></script>
+<script type="text/javascript" src="./AnimalSpelling_files/score.js"></script>
+<script type="text/javascript" src="./AnimalSpelling_files/postdata.js"></script> 
+<script type="text/javascript" src="./AnimalSpelling_files/purl.js"></script>
+
+<script type="text/javascript">
+ // var bgImage =["images/animalspel_bg.png"];
+
+ var ad = decodeURIComponent(document.URL);
+var url = purl(ad,true); 
+
+var redirect = url.fparam('redirect');
+var currentURL = url.attr('file');
+if(!redirect || redirect=="")
+{
+	redirect = currentURL;
+}
+//alert(redirect);
+ var check_compatible = (navigator.userAgent.match(/(Firefox)/i))?true:false;
+			var audio_compatible = (check_compatible)?".ogg":".mp4"; 
+			var setMozOrWebkit = (check_compatible)?"Moz":"Webkit"; 
+			var transend = (check_compatible)?"transitionend":"webkitTransitionEnd";
+			var animend = (check_compatible)?"animationend":"webkitAnimationEnd";
+			var setkey = (check_compatible)?'@-moz-keyframes':'@-webkit-keyframes';
+ var focus_array = ["btn1","btn2","btn3","btn4","btn5","btn6","btn7","btn8","btn9","btn10","btn11","btn12","btn13","btn14","btn15","btn16","btn17","btn18","btn19","delbtn","btn21","btn22","btn23","btn24","btn25","btn26","btn27","earbtn"];
+ 
+ var earimg=["earbtn",base_img+"speak_db.png",base_img+"speak_db.png"];
+// var audios=["win","so","other","lead","over","her","after","more","what","our","was","buy"];
+ //var audios=["again","alley","bleed","books","call","feed","even","win","so","other","lead","over","her","after","more","what","our","was","buy","pool","door","drill","egg","eek"];
+ var characterSet=["q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","del","z","x","c","v","b","n","m"];
+ var dupImg = ["ipadimg/q_still.png","ipadimg/w_still.png","ipadimg/e_still.png","ipadimg/r_still.png","ipadimg/t_still.png","ipadimg/y_still.png","ipadimg/u_still.png","ipadimg/i_still.png","ipadimg/o_still.png","ipadimg/p_still.png","ipadimg/a_still.png","ipadimg/s_still.png","ipadimg/d_still.png","ipadimg/f_still.png","ipadimg/g_still.png","ipadimg/h_still.png","ipadimg/j_still.png","ipadimg/k_still.png","ipadimg/l_still.png","ipadimg/z_still.png","ipadimg/x_still.png","ipadimg/c_still.png","ipadimg/v_still.png","ipadimg/b_still.png","ipadimg/n_still.png","ipadimg/m_still.png"];
+ var  blinkArray=[1,2,3,4,5];
+ var audios= new Array();
+ var captureTxt="";
+ /*var Playwords = randomize(0,audios.length);
+ var rand=Playwords[1];
+
+ var quesAudio=audios[rand];*/
+  var Playwords = new Array();
+  var rand="";
+  var quesAudio="";
+ var giveChance=0;
+ var charIndex=0;	
+ var Index = 0;
+ var currentId;
+ var errorCount=0;
+ var scr=0;
+ var charsetPos = 90;
+ var randChar = new Array();
+ var interval=true;
+ var isBlink=true;
+ var blinker=true;
+ var prevBlink;
+ var blinkerID=1;
+ var x;
+ var erroronFirst = true;
+ var lock_keyboard;
+ var catchTmp=0;
+ var putfocus;
+ var setPos;
+ var Count=true;
+ var showBlnk=true;
+ var posFlag=true;
+ var pressenter=0;
+ var n=0;
+ var waitInterval=0;
+ var evalInterval=0;
+ var ans;
+ var tmp;
+ var removImg=true;
+ var eraseCount=0;
+ var interval2=0;
+ var setPos=0;
+ var blinkIndex=0;
+ var Positioned=false;
+ var typeofSearch = "shuffled";  
+ var reCaptureTxt="";
+ var AintersectB = new Array();	
+ var AunionB= new Array();
+ var shuflinterval=0;
+ var keyPadid= new Array();
+ var countflg=true;
+ var chr1;
+ var num;
+ var hintCount;
+ var hintCollection = new Array();	
+ var atemptFlag=true;
+ var flag=true;
+
+// var str="little";
+ //var s="e";
+ //For score updates
+var gamedata={};
+var gameAttempt=[];
+var xmlstr="";
+var xmlstr2="";
+var timeOffset=0;
+var timeInterval=0;
+var scrValue=true;
+var scr_interval2=0;
+var gameCount=0;
+//var base_img = 'http://teachermate.treehouse.su/games/images/animal/';
+var base_img = './';
+//var base_url = 'http://teachermate.treehouse.su/games/';
+var base_url = './';
+var category = '1';
+var currentSubCategory = 'WordParts';
+var timeOffset='0';
+var TotalScore = '4';
+var InitialScore = '4';
+var s_id = '8';
+//var s_id=783;
+var game_id = '10';
+
+var singleActivity = false; 
+var playIntro = true;
+var reload = false;
+var gameFolder = 'AnimalSpelling';
+var initTimer = 0; 
+var iteration = '0';
+
+//var soundsDirPath = base_url+'files/resource/word/'; 
+//var demoaudiopath = base_url+'files/resource/demo/';
+
+var soundsDirPath = base_url+'sound/'; 
+var demoaudiopath = base_url+'demo/';
+var agent = "";
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// For AnimalSpelling Game - Support audio play back
+
+var mainPathIndex = 0;
+var subPathIndex = 0;
+var audioIndex=0;
+// HR
+var UnixTimeStamp;
+var gametimestamp=[];
+var qns="";
+var q_series ="";
+var timeoutword;
+// HR
+// main path - Either resource OR Current game folder
+var gameAudiosMainPathArr =["resource", "game"];
+
+// sub path - under main path the audio file is located
+var gameAudiosSubPathArr =["word/","word/"];
+var isIntrosnd="false";
+
+function resetValues(){
+playIntro = true;
+clearInterval(scr_interval2);
+clearInterval(setPos);
+clearInterval(waitInterval);
+clearInterval(interval2);
+clearInterval(blinker);
+clearInterval(shuflinterval);
+clearInterval(evalInterval);
+clearInterval(interval);
+ focus_array = ["btn1","btn2","btn3","btn4","btn5","btn6","btn7","btn8","btn9","btn10","btn11","btn12","btn13","btn14","btn15","btn16","btn17","btn18","btn19","delbtn","btn21","btn22","btn23","btn24","btn25","btn26","btn27","earbtn"]; 
+  earimg=["earbtn",base_img+"ipadimg/ear_vol1.png",base_img+"ipadimg/ear_vol2.png"];
+ characterSet=["q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","del","z","x","c","v","b","n","m"];
+ dupImg = ["ipadimg/q_still.png","ipadimg/w_still.png","ipadimg/e_still.png","ipadimg/r_still.png","ipadimg/t_still.png","ipadimg/y_still.png","ipadimg/u_still.png","ipadimg/i_still.png","ipadimg/o_still.png","ipadimg/p_still.png","ipadimg/a_still.png","ipadimg/s_still.png","ipadimg/d_still.png","ipadimg/f_still.png","ipadimg/g_still.png","ipadimg/h_still.png","ipadimg/j_still.png","ipadimg/k_still.png","ipadimg/l_still.png","ipadimg/z_still.png","ipadimg/x_still.png","ipadimg/c_still.png","ipadimg/v_still.png","ipadimg/b_still.png","ipadimg/n_still.png","ipadimg/m_still.png"];
+  blinkArray=[1,2,3,4,5];
+  audios= new Array();
+  captureTxt="";
+  Playwords = new Array();
+ rand="";
+ //quesAudio="";
+ quesAudio=audios[rand];
+ giveChance=0;
+ charIndex=0;	
+ Index = 0;
+ currentId;
+ errorCount=0;
+ scr=InitialScore;
+ TotalScore = scr;
+ document.getElementById('exp1').innerHTML=scr;
+ document.getElementById('mainStage').innerHTML = "";
+ charsetPos = 90;
+ randChar = new Array();
+ interval=true;
+ isBlink=true;
+ blinker=true;
+ prevBlink;
+ blinkerID=1;
+ x;
+ hintCount=0;
+ erroronFirst = true;
+ lock_keyboard;
+ catchTmp=0;
+ putfocus;
+ setPos;
+ Count=true;
+ showBlnk=true;
+ posFlag=true;
+ pressenter=0;
+ n=0;
+ waitInterval=0;
+ evalInterval=0;
+ ans;
+ tmp;
+ removImg=true;
+ eraseCount=0;
+ interval2=0;
+ setPos=0;
+ blinkIndex=0;
+ Positioned=false;
+ typeofSearch = "shuffled";  
+ reCaptureTxt="";
+ AintersectB = new Array();	
+ AunionB= new Array();
+ shuflinterval=0;
+ keyPadid= new Array();
+ countflg=true;
+ chr1;
+ num;
+ 
+ hintCollection = new Array();	
+ atemptFlag=true;
+ flag=true;
+ gamedata={};
+ gameAttempt=[];
+ xmlstr="";
+ xmlstr2="";
+ timeOffset=0;
+ timeInterval=0;
+ scrValue=true;
+ scr_interval2=0;
+ gameCount=0;
+ //soundsDirPath = base_url+'files/resource/word/'; 
+ agent = "";
+ mainPathIndex = 0;
+ subPathIndex = 0;
+ audioIndex=0;
+ UnixTimeStamp;
+ gametimestamp=[];
+ qns="";
+ q_series ="";
+ timeoutword;
+ //gameAudiosMainPathArr =["resource", "game"];
+// gameAudiosSubPathArr =["word/","word/"];
+ init_Audios  = new Audio();
+ intras=0;
+ atendCount=0;
+ CommonFlag=true; 
+ hintFlag = true;
+ delayscr =0;
+ //soundsDirPath1 =soundsDirPath;
+
+for(var i=1;i<=5;i++) {
+				  document.getElementById("blinker"+i).style.backgroundImage="url("+base_img+"ipadimg/blinker1.PNG)";
+				  document.getElementById("blinker"+i).style.visibility="hidden";
+		   }
+		   
+		   document.getElementById("wordsdiv").style.visibility="hidden";
+		    document.getElementById("words").style.visibility="hidden"; 
+
+ Audio_Instruct(); 
+ //gamedataloaded();
+// alert("Hi");
+//reset_ajax();
+}
+function reset_ajax(){
+	alert("Hi");
+		var xmlhttp;
+			if (window.XMLHttpRequest)
+			  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+			  }
+			else
+			  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			xmlhttp.onreadystatechange=function()
+			  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				{
+				alert("Success");
+				}
+			  }
+			xmlhttp.open("GET","AnimalSpelling/index.php",true);
+			xmlhttp.send();
+	}
+
+function playGameAudiosFinalCustom1(newaudioName, callbackMethod)
+{
+	 playGameAudiosFinalCustom(0,subPathIndex, newaudioName, callbackMethod);
+}
+
+function playGameAudiosFinalCustom(mainPathIndex, subPathIndex, newaudioName, callbackMethod){
+   //alert("sdh "+newaudioName);
+	audioIndex = -1;
+    if (subPathIndex == 0)
+    {
+        document.location = "iflgameAudioPlayCallBackFinal~"
+		+callbackMethod+"~"
+        +gameAudiosMainPathArr[mainPathIndex]+"~" 
+        +gameAudiosSubPathArr[subPathIndex]+"~" 
+        +audios[newaudioName]+".ogg";
+    }
+    if (subPathIndex == 1)
+    {
+        document.location = "iflgameAudioPlayCallBackFinal~"
+		+callbackMethod+"~"
+        +gameAudiosMainPathArr[mainPathIndex]+"~" 
+        +gameAudiosSubPathArr[subPathIndex]+"~" 
+        +newaudioName+".ogg";
+    }
+}
+
+
+
+function playGameAudiosFinalCallBackDummy()
+{
+}
+
+function postGameOverMessageToApp()
+	{
+		//document.location = 'iflgameover/';
+		ajax_call();
+	}
+
+		function ajax_call(){
+		//  alert("Hi"+xmlstr2);
+		window.location = redirect;
+	 post_score_details(xmlstr2);
+}
+///////////////////////////////////////////////////
+
+	function wordxml(){	
+		document.getElementById("load").style.visibility ="visible";
+		loadgamedata(gamedataloaded);
+		timeInterval=setInterval("timeData()",1000);
+	} 
+	//var audios = new Array();
+	function gamedataloaded(){
+		audios = getAudio();//timeoutword=setTimeout("init()",1000);
+        //alert("audios1"+audios); 		
+		timeoutword = setTimeout("intro()",2000);
+	}
+	
+ 
+ //////////////////////////////////////////////////////////////////
+     
+ 	 function intro(){
+			clearTimeout(timeoutword);
+			document.getElementById('mainBg').style.visibility="visible";
+			document.getElementById("icons").style.visibility = "visible";
+			agent = navigator.userAgent;
+		//init();
+         Audio_Instruct();
+	 	  // Audio_Instruct('animalspellingdemo');
+	 }
+	 
+	 var init_Audios  = new Audio();
+   
+   function Audio_Instruct(){
+  // alert("Audio_"); 
+  if(playIntro){
+		  if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1) || (agent.indexOf("iPod") != -1)) {
+                 //  alert("hai"); 
+                playGameAudiosFinalCustom(0,1, "animalspellingdemo", "init");
+		   }
+		   else {
+		       if (isIntrosnd == "false"){
+					isIntrosnd = "true";
+				init_Audios.src = demoaudiopath+"animalspellingdemo"+audio_compatible;
+				//alert(init_Audios.src);
+				init_Audios.load();
+				init_Audios.play(); 
+				init_Audios.addEventListener('error',function(){init();});
+				init_Audios.addEventListener('ended',init,false);
+				}
+		  }
+		  }
+		  else{
+			init();
+		  }
+	}
+	
+	 function fun(){
+	 //alert('hi');
+	 }
+	 var suffPart = "";
+     function initVar() {
+			//alert("initVar");
+			clearTimeout(intras);
+			clearTimeout(timeoutword);
+			captureTxt="";
+		//	quesAudio=audios[rand];
+		    audios = getAudio(); 
+			//alert("audios.length"+audios.length);
+			Playwords = randomize(0,audios.length);
+			//alert("Playwords="+Playwords);
+			rand=Playwords[1];
+			//alert("rand="+rand);
+			//audios[rand] = "shrug";
+			quesAudio=audios[rand];
+			suffPart = w1[Math.floor(rand/3)];
+			// alert(quesAudio+":"+suffPart);
+			giveChance=0;
+			charIndex=0;	
+			Index = 0;
+			errorCount=0;
+			charsetPos = 90;
+			randChar = new Array();
+			interval=true;
+			isBlink=true;
+			blinker=true;
+			blinkerID=1;
+			prevBlink="";
+			erroronFirst = true;
+			catchTmp=0;
+			Count=true;
+			showBlnk=true;
+			pressenter=0;
+			n=0;
+			removImg=true;
+			eraseCount=0;
+			interval2=0;
+			setPos=0;
+			blinkIndex=0;
+			Positioned=false;
+			typeofSearch = "shuffled"; 
+			reCaptureTxt="";
+			AintersectB = new Array();	
+			AunionB= new Array();
+			shuflinterval=0;
+			keyPadid= new Array();
+			countflg=true;
+			hintCollection = new Array();
+			flag=true;
+			CommonFlag=true;
+			atemptFlag=true;
+			blinkArray=[1,2,3,4,5];
+      }
+	
+		//lock scrolling 
+		preventDefaultScroll = function(evt) {
+		evt.preventDefault();
+		window.scroll(0,0);
+		return false;
+		};
+		window.document.addEventListener('touchmove', preventDefaultScroll, false);
+	 
+     var intras=0;
+     
+      function init() {	
+	  // alert('ji');
+	  isIntrosnd = "false";
+      clearTimeout(intras);
+	  // HR
+			UnixTimeStamp = Math.round((new Date()).getTime() / 1000);
+			// HR
+	       
+			    if(scrValue){
+					//loadXml("../../Config.xml");
+					agent = navigator.userAgent;
+					
+					scr_interval2=setInterval("Incr_score()",2000);
+					scrValue=false;
+			    }
+				document.getElementById("homeaudio").style.visibility = "hidden";
+				document.getElementById('mainBg').style.visibility="hidden";
+				 document.getElementById('bg').style.visibility="visible";
+				 document.getElementById('Repeat').style.visibility="visible";
+				 
+				/*x=document.getElementById("btn1");
+				var x_pos=Number(x.style.top.split('px')[0]);
+				var n=x_pos+1.5;
+				var y_pos=Number(x.style.left.split('px')[0]);
+				var m=y_pos+2;
+				transimage.style.top =n+"px";
+				transimage.style.left = m+"px";
+				showTransBox();
+				document.getElementById('btn1').focus();*/
+				
+				initVar();
+				intras = setTimeout("delayloadaudios()",50);
+				//alert("quesAudio"+quesAudio);
+				//tmp
+				//evalplayAudio();
+				
+				
+				//enableKeyboard();
+		        //alert(quesAudio);
+				document.getElementById("sn").innerHTML=quesAudio;
+				
+					
+
+
+				document.getElementById('mainStage').style.visibility="visible";
+				document.getElementById('score').style.visibility="visible";
+				//earimg.gotoAndStop(1);
+				//alert(focus_array.length);
+                for(var i=0;i<focus_array.length;i++){
+				    document.getElementById(focus_array[i]).style.visibility="visible";					
+                }
+			    hideallCursors();
+				hideallAnimals();
+				//alert('hi');
+     }
+	function delayloadaudios(){
+	  clearTimeout(intras);
+	 // alert("before");
+	  loadplay_Audios(rand); 
+	}
+	   function Incr_score() {
+	 
+	      clearInterval(scr_interval2);
+	      scr = TotalScore;//getScore();
+		  showScore(scr);
+	  }
+	function timeData(){
+	
+				if(singleActivity){
+				console.log("timedata>>"+initTimer);
+					if(initTimer > 180) {
+                        clearInterval(timeInterval);
+                        //resetValues();
+                        //alert('ITERATION : ' + '');
+                        //alert(base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration);
+						document.location = base_url+'games/reloadGame/'+gameFolder+'/'+category+'/'+currentSubCategory+'/'+timeOffset+'/singleActivity'+'/'+iteration;					
+					}
+				}
+				initTimer++;
+				timeOffset++;
+			}
+	  function showScore(n) {
+	  //alert(n);
+	  TotalScore = n;
+	  		gamedata.timestamp=gametimestamp;
+	  		document.getElementById('exp1').innerHTML=n;
+			gamedata.exp1=n;
+			gamedata.timeOffset=timeOffset;
+			gamedata.attempts=gameAttempt;
+			writeXML(gamedata);
+	  }  
+  	  function writeXML(obj){
+	  //alert('Timeoff'+obj.timestamp);
+	  	  if(obj.timestamp!=""){
+		 
+			q_series += '<Elem><Name>'+suffPart+'</Name> <Timestamp>'+obj.timestamp+'</Timestamp><Data>'+obj.attempts+'</Data></Elem>';
+			//xmlstr='<student><Usage><Elem><Name>AnimalSpelling</Name><Data>'+obj.timeOffset+'</Data></Elem></Usage><Sight_Words>'+q_series+'</Sight_Words></student>';
+			xmlstr='<PostGameResultForStudent>'
+                               +'<gameid>'+game_id+'</gameid>'+
+                               '<studentid>'+s_id+'</studentid>' +
+                               '<GameResult><student><Usage><Elem><Name>AnimalSpelling</Name><Data>'+obj.timeOffset+'</Data></Elem></Usage><Word_And_Word_Parts>'+q_series+'</Word_And_Word_Parts></student></GameResult>'+
+ '</PostGameResultForStudent>';
+		 //alert("XMLSTR "+xmlstr);
+		 
+		 //alert('s_id  :  ' + s_id +  'InitialScore : ' + InitialScore + 'obj.exp1  : ' + obj.exp1);
+		 
+		 //alert("XMLSTR2 ---->  : " + '<GetStudentContentsByIds><studentids>'+s_id+'</studentids><initialscore>'+InitialScore+'</initialscore><finalscore>'+obj.exp1+'</finalscore></GetStudentContentsByIds>');
+			xmlstr2= '<GetStudentContentsByIds><studentids>'+s_id+'</studentids><initialscore>'+InitialScore+'</initialscore><finalscore>'+obj.exp1+'</finalscore></GetStudentContentsByIds>';
+			// alert('XML INIT : ' + xmlstr2);
+			gameAttempt = [];
+			gametimestamp = [];
+			
+			}
+			//xmlstr2='<variable><dispatch><Elem><Name>index</Name><Data>0</Data></Elem><Elem><Name>usageTime</Name><Data>'+obj.timeOffset+'</Data></Elem></dispatch><score><Elem><Name>score</Name><Data>'+obj.exp1+'</Data></Elem></score></variable>';
+	 	//alert(">>  "+xmlstr);  //timestamp undefined
+		}
+	   function showCursors(s) {
+	       //alert("cursor"+s);
+		   for(var i=1;i<=s.length;i++) {
+				  document.getElementById("blinker"+i).style.backgroundImage="url("+base_img+"ipadimg/blinker1.PNG)";
+				  document.getElementById("blinker"+i).style.visibility="visible";
+		   }
+	   }
+	   
+	   function hideallCursors() {
+	      for(var j=1;j<=5;j++) {
+	          document.getElementById("blinker"+j).style.visibility="hidden";
+	      }
+	   }
+		   
+	   function onKeyPressed(keyCode){
+	     putfocus = currentId;
+	    // currentId = event.target.id;
+		  switch(keyCode)
+			{
+				//left 
+				case 37:
+					//alert("left");	
+					pressenter=1;
+					setFocus2Alphabets(focus_array, keyCode);			
+				    break;
+					
+				//right 
+				case 39:
+					//alert("right");
+					pressenter=1;
+					setFocus2Alphabets(focus_array, keyCode);			
+				    break;
+					
+				 //up
+				case  38:
+				   // alert("up");
+				   	pressenter=1;
+					setFocus2Alphabets(focus_array, keyCode);		
+					break;
+					
+				//down	
+			    case 40:
+				    // alert("down");
+					pressenter=1;
+					setFocus2Alphabets(focus_array, keyCode);		
+					break;
+				//enter 
+				case 13:
+				
+				   score();
+				   break;
+					   
+			}
+		}
+		
+	   function waitToErase(tmp) {
+	            hideanimalImages(tmp);
+	   }
+		 //evaluate all possibles of ans
+	  function toEvaluateallCase(){
+			var tmpArray = new Array();
+			if(quesAudio!=captureTxt) {
+				for(var i=0;i<quesAudio.length;i++) {
+				for(var j=0;j<captureTxt.length;j++){
+					if(quesAudio.substr(i,1)==captureTxt.substr(j,1)){
+					tmpArray.push(captureTxt.substr(j,1));
+					break;
+					}
+				}
+				} 
+				if(tmpArray.join('')==quesAudio){ 
+					atemptFlag = false;
+					if(atemptFlag==false) {					
+						UnixTimeStamp = Math.round((new Date()).getTime() / 1000);                  
+                        gameCount++;
+						gameAttempt.push(0);
+						gametimestamp.push(UnixTimeStamp);
+						delayscr = setTimeout("dec_Score()",100);						
+						lock_keyboard=false;
+						disableKeyboard();
+						//alert("before1");
+						loadplay_Audios(rand);
+					}
+				}
+			}
+	  }
+	  
+	  function dec_Score(){
+	    clearTimeout(delayscr);
+		showScore(scr);	  
+	  }
+	  
+	    function EvaluateAfterHints(){
+			var tmpArray = new Array();
+			if(Positioned==true){
+				captureTxt=reCaptureTxt;
+			}
+			for(var i=0;i<quesAudio.length;i++) {
+			for(var j=0;j<captureTxt.length;j++){
+				if(quesAudio.substr(i,1)==captureTxt.substr(j,1)){
+				tmpArray.push(captureTxt.substr(j,1));
+				break;
+				}
+			}
+			} 
+		//	alert('all case');
+			if(tmpArray.join('')==quesAudio){ 
+				lock_keyboard=false;
+				disableKeyboard();
+				//alert("before2");
+				loadplay_Audios(rand);
+			}
+			
+	  }
+	  var atendCount=0;
+		//set pos and hide images  
+	  function  toCollectRightAns(){
+	 
+			AintersectB = new Array();
+			AunionB= new Array();
+			clearInterval(setPos);
+			typeofSearch = "shuffled";    
+			for(var i=0;i<captureTxt.length;i++){
+				for(var j=i;j<=i;j++){
+					if(quesAudio.substr(j,1)==captureTxt.substr(i,1)){
+					typeofSearch= "hasCommon";
+					AintersectB.push(j);
+					reCaptureTxt+=quesAudio.substr(j,1);
+					}
+				}
+			}
+			//alert("typeofSearch "+AintersectB);
+			clearInterval(waitInterval);
+			waitInterval=setInterval("hideallAnimals()",500);
+			interval2= setInterval("todisplayCursor()",1000);
+			if(typeofSearch =="shuffled"){
+				shuflinterval= setInterval("ShuffledCase()",1000);
+			}
+			else{
+				//
+				for(var h=0;h<quesAudio.length;h++) {
+					AunionB.push(h);
+				}
+				shuflinterval=setInterval("hasSimilarPos()",1000);
+			}
+	  }
+	  
+	  //hide all anim imgs
+	  function  hideallAnimals(n) {
+				for(var i=1;i<=27;i++){
+					if(i==20) {
+						i=i+1;
+					}
+					document.getElementById("anim"+i).style.visibility = "hidden";
+				}
+			toHideallDupImages(n);
+	  }
+	 
+	 //hide duplicate imgs 
+	function toHideallDupImages(q){
+			clearInterval(waitInterval);
+			for(q=1;q<=28;q++){
+					if(q==20) {
+						q=q+1;
+					}
+					q=q--;
+					var d = document.getElementById('mainStage');
+					document.getElementById('mainStage').innerHTML = "";
+					var olddiv = document.getElementById('dup'+q);
+                    //d.removeChild(olddiv);
+			}
+	 }
+	
+	  //to show cursor once all img hide
+	  function todisplayCursor(){
+				clearInterval(interval2);
+				showCursors(audios[rand]);
+				blinkerID=1;
+				charsetPos = 90;
+				clearInterval(blinker);
+				blinker=setInterval("blinkImage()",500);
+				Positioned=true;
+			
+	  }
+	  var CommonFlag=true; 
+	  
+	  //if img pos matches
+	 function hasSimilarPos(){
+	 		Positioned=false;
+	 		clearInterval(shuflinterval);
+	 		reCaptureTxt="";
+			//get correctly pressed images and wrongly positnied images
+			for(var i=0;i<AintersectB.length;i++){
+				for(var j=0;j<AunionB.length;j++){
+					if(AunionB[j]==AintersectB[i]){
+					AunionB.splice(j,1);
+					break;
+					}
+				} 
+			}
+			var q1="";
+			var c1="";
+			for(var i=0;i<AunionB.length;i++) {
+				q1+=quesAudio.substr(AunionB[i],1);//expected ans
+				c1+=captureTxt.substr(AunionB[i],1);//wrongly pressed
+			}
+			
+			//use wrong positioned images
+			/*var wrongPosArr = new Array();
+			var cVal="";
+			for(var i=0;i<c1.length;i++) {
+				for(var j=0;j<quesAudio.length;j++){
+					if(quesAudio.substr(j,1)==c1.substr(i,1) && cVal.indexOf(c1.substr(i,1)+','+j)==-1){
+					wrongPosArr.push({char:c1.substr(i,1),idx:j});
+					cVal+=c1.substr(i,1)+','+j+"$";
+					break;
+					}
+				}
+			}*/
+			
+			var tempraryCommonArray=new Array();
+			var checkDupval = "";
+			blinkArray = new Array();
+			for(var i=0;i<captureTxt.length;i++) {
+				for(var j=0;j<quesAudio.length;j++){
+					if(quesAudio.substr(j,1)==captureTxt.substr(i,1) && checkDupval.indexOf(captureTxt.substr(i,1)+','+j)==-1){
+					tempraryCommonArray.push({char:captureTxt.substr(i,1),idx:j});
+					checkDupval+=captureTxt.substr(i,1)+','+j+"$";
+					break;
+					}
+				}
+			 }
+			
+		/*	if(c1>0) {
+				alert('temp  arr ='+tempraryCommonArray);
+				tempraryCommonArray.push(wrongPosArr);
+			}*/
+			var captrArray2= new Array();
+			captrArray2 = tempraryCommonArray;
+			var CharValue;
+			var BFlag;
+			for(var i = 0; i< quesAudio.length; i++)
+			{  
+				BFlag = 0;
+				for(var j = 0; j< captrArray2.length; j++)
+				{
+					CharValue= captrArray2[j].char
+					if(quesAudio[i] == CharValue)
+					{
+						BFlag=1;
+						CharValue = 1;	
+					}
+				}	
+				if(BFlag == 0)
+				{
+					count=i;
+					count++;
+					blinkArray.push(count);
+				//alert(i);
+				}
+			}
+			//alert("blinkArray  ="+blinkArray.length +"blinkArray arr ="+blinkArray);
+			//alert("blinkArray[0] ="+blinkArray[0]);
+			blinkIndex = 0;
+			blinkerID = blinkArray[blinkIndex];
+			PositionImages(tempraryCommonArray);
+			
+	 }
+	
+	
+	//	var correct_chars	= 0;
+
+
+	//if no img pos matches
+	function ShuffledCase(){  				 //singleinpt pblm
+		clearInterval(shuflinterval);
+		Positioned=false;
+		var checkDup = "";
+		var tempraryArray=new Array();
+		blinkArray = new Array();
+		
+		/*for(var i=0;i<captureTxt.length;i++) 
+		{
+			for(var j=0;j<quesAudio.length;j++)
+			{
+				 if(quesAudio.substr(j,1)==captureTxt.substr(i,1) && checkDup.indexOf(captureTxt.substr(i,1)+','+j)==-1)
+				 {
+					tempraryArray.push({char:captureTxt.substr(i,1),idx:j});
+					checkDup+=captureTxt.substr(i,1)+','+j+"$";
+					break;
+				 }
+			}
+			
+		}*/
+		
+		var captrArray = new Array();
+		captrArray = tempraryArray;
+		var CharVal;
+		var BFlag;
+		for(var i = 0; i< quesAudio.length; i++)
+		{  
+			
+		    BFlag = 0;
+			for(var j = 0; j< captrArray.length; j++)
+			{
+				CharVal= captrArray[j].char
+				if(quesAudio[i] == CharVal)
+				{
+					BFlag=1;
+					CharVal = 1;	
+				}
+				
+			}	
+			if(BFlag == 0)
+			{
+			count=i;
+			count++;
+			blinkArray.push(count);
+			//alert(i);
+			}
+		}
+		//alert("blinkArray  ="+blinkArray.length +"blinkArray arr ="+blinkArray);
+		//alert("blinkArray[0] ="+blinkArray[0]);
+		blinkIndex = 0;
+		blinkerID = blinkArray[blinkIndex];
+		PositionImages(tempraryArray);
+	}
+	
+	 //auto positioning imgs
+	function PositionImages(arr){
+		   for(var i=0;i<arr.length;i++){
+				var img = base_img+"ipadimg/"+arr[i].char+"_still.png"; 	
+				reCaptureTxt+=arr[i].char;
+				//alert("idx "+arr[i].idx+" charsetPos "+charsetPos);
+				//alert("enter");
+				var imgPos =  document.getElementById('blinker'+(arr[i].idx+1));
+				var tmpimgPos= Number(imgPos.style.left.split('px')[0]);
+				tmpimgPos=tmpimgPos-20;
+				document.getElementById('blinker'+(arr[i].idx+1)).style.visibility="hidden";
+				document.getElementById('mainStage').innerHTML += "<div id=dup"+i+" style='position:absolute;'></div>";
+				document.getElementById('dup'+i).style.width = "300px";
+				document.getElementById('dup'+i).style.height ="300px";
+				document.getElementById('dup'+i).style.backgroundSize ="50% 80%";
+				document.getElementById('dup'+i).style.backgroundRepeat = "no-repeat";
+				document.getElementById('dup'+i).style.left = tmpimgPos+"px";
+				document.getElementById('dup'+i).style.top = "3px";
+				document.getElementById('dup'+i).style.backgroundImage = "url("+img+")";
+				charsetPos+=160;
+		   }
+			lock_keyboard=true;
+			enableKeyboard();
+			clearInterval(blinker);
+			blinker=setInterval("blinkImage()",500);
+			Positioned=true;
+	}
+	
+	function duplicateClips(k)  {
+		  	 if(pressenter==0){
+				  currentId="btn1";
+			 }
+			var staticDiv=k+1;
+			/*if(staticDiv>=20){
+			   staticDiv=staticDiv+1;
+			}*/
+			if(k>=20) {
+				k=k-1;
+			}
+			document.getElementById("anim"+ staticDiv).style.visibility="hidden";
+			document.getElementById("anim"+staticDiv).style.left = charsetPos+"px";
+			document.getElementById('mainStage').innerHTML += "<div id=dup"+n+" style='position:absolute;'></div>";
+			document.getElementById('dup'+n).style.width = "300px";
+			document.getElementById('dup'+n).style.height ="300px";
+			document.getElementById('dup'+n).style.backgroundSize ="50% 80%";
+			document.getElementById('dup'+n).style.backgroundRepeat = "no-repeat";
+			document.getElementById('dup'+n).style.left = charsetPos+"px";
+			document.getElementById('dup'+n).style.top = "3px";
+			if(n!=quesAudio.length){
+					document.getElementById('dup'+n).style.backgroundImage = "url("+base_img+dupImg[k]+")";
+					n++;
+			}
+	}
+	
+	
+ 
+	//remove dup imges
+	function removeElement() {
+			if(n>=1){
+			n--;
+			blinkerID--;
+			blinkIndex--;
+			}
+			charIndex--;
+			charsetPos=charsetPos-160;
+			var d = document.getElementById('mainStage');
+			var olddiv = document.getElementById('dup'+n); 
+			d.removeChild(olddiv);
+			//alert( "n val "+n);
+			todisplayBlink(n);
+    }
+	
+     function todisplayBlink(x){
+			for(var x;x<quesAudio.length;x++) {
+				document.getElementById("blinker"+blinkArray[x]).style.backgroundImage="url("+base_img+"ipadimg/blinker1.PNG)";
+				document.getElementById("blinker"+blinkArray[x]).style.visibility = "visible";	
+			}
+			//alert("blink = "+blinkerID);
+	 }
+	 
+	 
+	//to evaluate
+   function score(currentId){
+  // alert("currentId  ="+currentId);
+   clearInterval(blinker);
+	   if(currentId=='delbtn' && blinkIndex>=1){
+	  // alert(blinkIndex);
+			if(removImg) {
+				if(eraseCount==0) {	
+					removeElement();
+					clearInterval(evalInterval);
+					if(blinkerID==1) { 
+					captureTxt="";
+					}
+				}      
+			}
+	   }
+	   else if(currentId!='earbtn') {
+				/*if(pressenter==0){
+				  currentId="btn1";
+				 }*/
+				tmp=currentId.substr(3,currentId.length);
+				catchTmp=tmp;
+				//alert(tmp);
+				var tmpTxt=captureTxt;
+				document.getElementById("anim"+tmp).style.left = charsetPos+"px";
+				captureTxt = characterSet[tmp-1];
+				//alert("characterSet "+characterSet[tmp-1]);
+				if(Positioned == false){
+					captureTxt = tmpTxt+captureTxt;
+				}
+				else if(Positioned==true){    //after positioning evaluation
+				   //alert("bid  "+blinkerID);
+					lock_keyboard=true;
+					enableKeyboard();
+
+					var letter=quesAudio.substr(blinkArray[blinkIndex]-1,1);
+					//to show img >20
+					var m=tmp;
+					if(m<=20){
+						m=m-1;
+					}
+					else {
+						m=m-2;
+					}
+					//alert("reCaptureTxt bCond   "+reCaptureTxt );
+					if(captureTxt==letter){ 					
+						giveChance=0;
+						document.getElementById("words").style.visibility="hidden";
+						document.getElementById("wordsdiv").style.visibility="hidden";
+						reCaptureTxt+=captureTxt;
+						document.getElementById('mainStage').innerHTML += "<div id=dup"+n+" style='position:absolute;'></div>";
+						document.getElementById('dup'+n).style.width = "300px";
+						document.getElementById('dup'+n).style.height ="300px";
+						document.getElementById('dup'+n).style.backgroundSize ="50% 80%";
+						document.getElementById('dup'+n).style.backgroundRepeat = "no-repeat";
+						/// to show img pos exactly
+						var xpos=document.getElementById('blinker'+blinkerID); 
+						var tmpBlink=Number(xpos.style.left.split('px')[0]);
+						tmpBlink=tmpBlink-20;
+						//document.getElementById('dup'+n).style.left =document.getElementById('blinker'+blinkerID).style.left;
+						document.getElementById('dup'+n).style.left =tmpBlink+"px";
+						document.getElementById('dup'+n).style.top = "3px";
+						document.getElementById('dup'+n).style.backgroundImage = "url("+base_img+dupImg[m]+")"; 
+						document.getElementById('blinker'+blinkerID).style.visibility="hidden";
+						
+						blinkIndex++;
+						//blinkerID = blinkArray[blinkIndex];
+						clearInterval(blinker);
+						blinker=setInterval("blinkImage()",500);
+						n++;
+						
+						if(reCaptureTxt.length==quesAudio.length){
+					//	alert('ans');
+							EvaluateAfterHints();
+							
+						}
+					}else{						  
+						errorCount++;
+						showHint(blinkArray[blinkIndex]-1,tmp);
+						document.getElementById("blinker"+blinkerID).style.visibility = "visible";
+						if(errorCount>1){						   
+							showHint(blinkArray[blinkIndex]-1,tmp);
+							document.getElementById("words").style.visibility="visible";
+							document.getElementById("wordsdiv").style.visibility="visible";
+						}
+					}
+				}
+				if(Positioned == false && captureTxt.length<quesAudio.length){
+						document.getElementById("anim"+tmp).style.visibility="visible"; 
+						keyPadid.push(tmp);	
+						if(currentId!='delbtn'){
+							document.getElementById("blinker"+blinkerID).style.visibility = "hidden";
+							prevBlink=blinkerID;
+							blinkIndex++;
+							//document.getElementById("blinkdiv").innerHTML=blinkerID;  
+							clearInterval(blinker);
+							blinker=setInterval("blinkImage()",500);
+						}
+						//alert("notdelblink  "+blinkIndex)
+				}
+				if(Positioned == false && captureTxt.length==quesAudio.length) {
+						if(captureTxt.length==quesAudio.length){
+						document.getElementById("blinker"+blinkerID).style.visibility = "hidden";
+						}
+						eraseCount=1;	
+						removImg=false;
+						lock_keyboard=false;
+						disableKeyboard();
+						delayscr = setTimeout("del_toEvaluateallCase()",100);
+						document.getElementById("wordsdiv").style.visibility="hidden";
+						document.getElementById("words").style.visibility="hidden";
+						
+				}
+				blinkerID = blinkArray[blinkIndex];
+				if(blinkerID<1){
+					document.getElementById("blinker"+prevBlink).style.visibility = "hidden";
+				}
+				if(Positioned == false){
+					duplicateClips(tmp-1);//img duplication
+				}
+				charIndex++;
+				//alert('pos '+charsetPos);	
+				charsetPos+=160; 
+				if(Positioned == false){
+					clearInterval(evalInterval);
+					evalInterval=setInterval("evaluateTask()",3000);
+			    }
+		}
+		else  if(currentId=='earbtn'){
+				repeat_Audios(rand);
+		}
+	}
+	
+
+    function del_toEvaluateallCase(){
+	//alert('hi');
+	clearTimeout(delayscr);
+	toEvaluateallCase();
+   }	
+	
+   
+	
+		 //to show hints
+var hintFlag = true;
+     function showHint(m,m2) {	
+	 
+		   document.getElementById("blinker"+blinkerID).style.visibility = "visible";
+		   countflg=true;
+		   num=0;
+		   hintCount=0;
+		   chr1=quesAudio.substr(m,1);
+		   // alert("chr1"+chr1);
+		   var chr2=characterSet[m2-1];
+		   if(giveChance==0) {
+				document.getElementById("words").style.visibility="visible";
+				document.getElementById("wordsdiv").style.visibility="visible";
+				randChar= randomize(0,26);
+				hintCollection = new Array();
+				/* for(var num=0;num<=1;num++) {      //previous  code
+				hintCollection.push(characterSet[randChar[num]]);
+				}	hintCollection.push(chr1);
+				*/
+				toevalHints();
+				if(countflg){
+					hintCollection.push(chr1);
+				}
+		   } 
+		   //alert(hintCollection);
+		  hintCollection = new searchAndsplice(chr2, hintCollection);	
+		    
+		   for(var t=0;t<hintCollection.length;t++){
+			for(var u=t+1;u<hintCollection.length;u++){
+				if(hintCollection[t]==hintCollection[u]){
+			
+				hintCollection.splice(u,1);
+				break;
+				}
+				}
+		   }
+		   document.getElementById("blinker"+blinkerID).style.visibility="visible";		
+		   document.getElementById('words').innerHTML = hintCollection.join('').substring(0,3);		   
+	  }
+	  
+	 
+	  function toevalHints(){
+		 document.getElementById("blinker"+blinkerID).style.visibility = "visible";
+		 if(hintCount<2){
+				if(characterSet[randChar[num]]!=chr1 && characterSet[randChar[num]]!='del') {
+					hintCollection.push(characterSet[randChar[num]]);
+					hintCollection.push(characterSet[randChar[num+1]]);
+					//hintCollection.push(characterSet[randChar[num+2]]);
+					//alert(hintCollection);
+					//num++;
+					hintCount=2;
+					//setTimeout("toevalHints();",10);
+				}
+				else{
+					// alert('else prt');
+					 document.getElementById("blinker"+blinkerID).style.visibility="visible";
+					// alert(blinkArray[blinkIndex]+":"+blinkArray[blinkIndex]-1+":"+tmp);
+					 showHint(blinkArray[blinkIndex]-1,tmp);
+					 countflg=false;
+				}
+			} 
+	  }
+	  
+	  // to avoid shown words
+	  function searchAndsplice(ch, arr){
+	  
+	  		for(var n=0;n<arr.length;n++){
+				if(arr[n]==ch){
+					 
+					arr.splice(n,1);
+					break;
+				}
+			}
+			giveChance++;
+			 
+			return arr;
+	  }
+	var delayscr =0;
+    //to eval correct ans
+	function verifyAnswer(quesAudio,captureTxt){
+	 		if(captureTxt==quesAudio){
+			//alert('correct');
+				UnixTimeStamp = Math.round((new Date()).getTime() / 1000);
+				gameAttempt.push(1);
+				gametimestamp.push(UnixTimeStamp);
+				ans=true;
+				delayscr = setTimeout("delayscore()",500);
+			}
+	        else {
+				ans=false;
+				delayscr = setTimeout("delay_wrongAns()",1000);
+				/**/
+			}
+			return ans;
+	 }
+	 
+	 function delayscore(){
+	           //  alert('delscr');
+	            clearTimeout(delayscr);
+				scr++;
+				gameCount++;
+				showScore(scr);
+	 }
+	 
+	 function delay_wrongAns(){
+	  clearTimeout(delayscr);
+		if(Positioned == false){	
+				if(atemptFlag) {
+					UnixTimeStamp = Math.round((new Date()).getTime() / 1000); //o/p
+                    gameCount++;
+					gameAttempt.push(0);
+					gametimestamp.push(UnixTimeStamp);
+					showScore(scr);
+				}
+				removImg=false;
+				charsetPos = 90; 
+				}
+	 
+	 }
+	function evaluateTask(){
+	 
+		lock_keyboard=false;
+		disableKeyboard();
+		clearInterval(evalInterval);
+		ans=verifyAnswer(quesAudio,captureTxt,charIndex); 
+		if(ans){	
+            // alert('correct');	
+		    /*scr++;
+            gameCount++;
+			showScore(scr);*/
+			//alert("before3");
+			loadplay_Audios(rand);
+		}else{
+			//img hide & show blink
+			if(Positioned == false){	
+                
+			/*	if(atemptFlag) {
+					UnixTimeStamp = Math.round((new Date()).getTime() / 1000); //o/p
+                    gameCount++;
+					gameAttempt.push(0);
+					gametimestamp.push(UnixTimeStamp);
+					showScore(scr);
+				}	*/	
+			
+				
+					
+				setPos=setInterval("toCollectRightAns()",1000);
+			}
+	   }
+  }
+  
+	
+	function blinkImage() {
+		document.getElementById("blinkdiv").innerHTML=blinkerID;  
+		if(isBlink) {
+		document.getElementById("blinker"+ blinkerID).style.backgroundImage="";
+		}
+		else {
+		document.getElementById("blinker"+ blinkerID).style.backgroundImage="url("+base_img+"ipadimg/blinker1.PNG)";
+		}
+		isBlink=!isBlink;
+	}
+	
+	
+	 function blinkImagenew() {
+	  // alert("blinkfunt  "+ blinkArray[blinkIndex]);
+			 if(isBlink) {
+	              document.getElementById("blinker"+ blinkArray[blinkIndex]).style.backgroundImage="";
+			  }
+			 else {
+			      document.getElementById("blinker"+blinkArray[blinkIndex]).style.backgroundImage="url("+base_img+"ipadimg/blinker1.PNG)";
+	          }
+			  isBlink=!isBlink;
+	  }
+	  
+      
+      function menuCallback(){
+        clearTimeout(intras);
+        postGameOverMessageToApp();
+      }
+      
+	  
+	  function replay() {
+		        hideallCursors();
+				clearInterval(waitInterval);
+				clearInterval(setPos);
+				clearInterval(interval);
+				clearInterval(blinker);
+				clearInterval(evalInterval);
+				//removekeyListener();
+				document.getElementById("wordsdiv").style.visibility="hidden";
+				document.getElementById("words").style.visibility="hidden";
+				document.getElementById('mainStage').innerHTML = "";
+		        if(gameCount<4) {
+                        intras=setTimeout("init()",1000);
+				}
+				else {
+					//intras=setTimeout("menuCallback()",1000);
+                     postGameOverMessageToApp();
+
+				}
+	   }
+	   
+	  function removekeyListener() {
+	      for(i=1;i<=focus_array.length;i++) {
+		      document.getElementById(focus_array[i]).removeEventListener('click', validate, false);
+			   
+		   }
+	   } 
+	   
+	   function evalplayAudio(){
+			if(showBlnk) { 
+				hideallCursors();
+				//showCursors(audios[rand]);
+			//	alert('hi '+audios[rand]);
+			   //alert("hai"+audios[rand]);
+				showCursors(audios[rand]);
+				lock_keyboard=true;
+				enableKeyboard();
+				blinker=setInterval("blinkImage()",500);
+				showBlnk=false;
+			}
+			if(charIndex!=0){
+				replay();
+			}
+	   }
+	  var soundsDirPath1 =soundsDirPath; 
+	  
+	   function loadplay_Audios(val){
+	   //alert("val="+val);
+	   //alert("get "+audios);
+				var play_Audios = new Audio();
+	            //play_Audios.src = "audio/"+n+".ogg";
+				if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1)){
+					playGameAudiosFinalCustom1(val,"evalplayAudio");
+				}
+				else{
+					/*if (navigator.userAgent.indexOf("Firefox")!=-1){		
+					   play_Audios.src = soundsDirPath+audios[val]+".ogg";
+						//play_Audios.src = soundsDirPath+audios[val]+".ogg";
+					}
+					else {
+						play_Audios.src = soundsDirPath+audios[val]+".ogg";
+					}*/
+					play_Audios.src = soundsDirPath+audios[val]+audio_compatible;
+					play_Audios.addEventListener('error',function(){evalplayAudio();});
+					play_Audios.addEventListener('ended',evalplayAudio, false);
+					play_Audios.load();
+					play_Audios.play();
+				}
+      }
+	 
+	    function  repeat_Audios(h){
+				var playagain_Audios = new Audio();
+	            if((agent.indexOf("iPad") != -1) || (agent.indexOf("iPhone") != -1)){
+					playGameAudiosFinalCustom1(h,"playGameAudiosFinalCallBackDummy");
+				}
+				else{	
+					if (navigator.userAgent.indexOf("Firefox")!=-1){	
+						
+						playagain_Audios.src = soundsDirPath+audios[h]+audio_compatible;
+					}
+					else {
+						playagain_Audios.src = soundsDirPath+audios[h]+audio_compatible;
+						}
+					playagain_Audios.load();
+					playagain_Audios.play();
+				}
+      }
+	 
+	
+	
+	    function enableKeyboard(){
+		//alert('enable');
+		     lock_keyboard=true;	 
+			// document.getElementById(focus_array[0]).addEventListener("click",validate,false);
+             for(var i=0;i<focus_array.length;i++) {
+                document.getElementById(focus_array[i]).addEventListener("click",validate,false);
+             }
+		}
+		
+		function disableKeyboard(){
+	//	alert('disable');
+		    lock_keyboard=false;
+			 for(var i=0;i<focus_array.length;i++) {
+                document.getElementById(focus_array[i]).removeEventListener("click",validate,false);
+             }
+		}
+		
+	    function validate(event){
+		clearInterval(blinker);
+		    for (var i=0;i<focus_array.length;i++){
+			  if(focus_array[i]==event.target.id) {
+			 	  score(event.target.id);
+			  }
+			}
+	    }
+		
+	    /*function keypress(e) { 
+		    onKeyPressed(e.keyCode);	
+	    }
+		
+		/* function onFocus(keyCode){
+			currentId = event.target.id;
+			eventHolder = event;
+			// alert(currentId.id);
+		  //  alert(eventHolder+" >> "+eventHolder.target.id);
+			 switch(currentId)
+		     {
+			   case 'btn1':
+				  // alert("q");
+					   x=document.getElementById("btn1");
+					  // alert("tg "+x.style.top);  
+					  // alert("tg "+x.style.left);  
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					  // alert("n"+transimage.style.left);
+					   showTransBox();
+					   break;
+		       case 'btn2':
+						//alert("w");
+					   x=document.getElementById("btn2");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+					   break;
+			   case 'btn3':
+			        //alert("e");
+					   x=document.getElementById("btn3");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+					   break;
+			   case 'btn4':
+			        //alert("r");
+					   x=document.getElementById("btn4");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+		       case 'btn5':
+			        //alert("t");
+					   x=document.getElementById("btn5");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn6':
+			       // alert("y");
+					   x=document.getElementById("btn6");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn7':
+			       // alert("u");
+					   x=document.getElementById("btn7");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+		       case 'btn8':
+			       // alert("i");
+						x=document.getElementById("btn8");
+						var x_pos=Number(x.style.top.split('px')[0]);
+						var n=x_pos+1.5;
+						var y_pos=Number(x.style.left.split('px')[0]);
+						var m=y_pos+2;
+						transimage.style.top =n+"px";
+						transimage.style.left = m+"px";
+						showTransBox();
+				        break;
+			   case 'btn9':
+			        //alert("o");
+					   x=document.getElementById("btn9");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn10':
+			       // alert("p");
+					   x=document.getElementById("btn10");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+		       case 'btn11':
+			        //alert("a");
+					   x=document.getElementById("btn11");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn12':
+			       // alert("s");
+					   x=document.getElementById("btn12");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn13':
+			      //alert("d");
+					   x=document.getElementById("btn13");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+		       case 'btn14':
+			     // alert("f");
+					   x=document.getElementById("btn14");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn15':
+			       // alert("g");
+					   x=document.getElementById("btn15");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn16':
+			        //alert("h");
+					   x=document.getElementById("btn16");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+		       case 'btn17':
+			       //alert("j");
+					   x=document.getElementById("btn17");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+					   break;
+			   case 'btn18':
+			        //alert("k");
+					   x=document.getElementById("btn18");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn19':
+			        //alert("l");
+					   x=document.getElementById("btn19");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+				case 'delbtn':
+			      //alert("delbtn");
+					   x=document.getElementById("delbtn");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos-2;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+1;
+					   var z_pos=Number(x.style.width.split('px')[0]);
+					   //var q=z_pos+200;
+					   deltrans.style.top =n+"px";
+					   deltrans.style.left = m+"px";
+					  // transimage.style.width =q+"px";
+					   showTransDelBtn();
+					  // showTransBox();
+				       break;
+		       case 'btn21':
+			       //alert("z"); 
+					   x=document.getElementById("btn21");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+					   break;
+			   case 'btn22':
+			       // alert("x");
+					   x=document.getElementById("btn22");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+					   break;
+				case 'btn23':
+			       // alert("c");
+					   x=document.getElementById("btn23");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+					   break;
+				case 'btn24':
+			        //alert("v");
+					   x=document.getElementById("btn24");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn25':
+			        //alert("b");
+					   x=document.getElementById("btn25");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn26':
+			       // alert("n");
+					   x=document.getElementById("btn26");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+			   case 'btn27':
+			        //alert("m");
+					   x=document.getElementById("btn27");
+					   var x_pos=Number(x.style.top.split('px')[0]);
+					   var n=x_pos+1.5;
+					   var y_pos=Number(x.style.left.split('px')[0]);
+					   var m=y_pos+2;
+					   transimage.style.top =n+"px";
+					   transimage.style.left = m+"px";
+					   showTransBox();
+				       break;
+		       case 'earbtn':
+			       // alert("earbtn");
+				      earimg.gotoAndStop(2);
+				      break;
+					
+		     }
+	    }
+	  function onBlur(keyCode)
+		{
+		   	currentId = event.target.id;
+			//alert("blur");
+			 switch(currentId)
+		     {
+			   case 'btn1':
+				    transimage.style.visibility="hidden";
+				    break;
+		       case 'btn2':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'btn3':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'btn4':
+			        transimage.style.visibility="hidden";
+				    break;
+		       case 'btn5':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'btn6':
+			        transimage.style.visibility="hidden";
+				    break;
+		       case 'btn7':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'btn8':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn9':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn10':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn11':
+			        transimage.style.visibility="hidden";
+				    break;
+				case 'btn12':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn13':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn14':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn15':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn16':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn17':
+			        transimage.style.visibility="hidden";
+				    break;
+				case 'btn18':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn19':
+			        transimage.style.visibility="hidden";
+				    break;
+				case 'delbtn':
+			       deltrans.style.visibility="hidden";
+				    break;
+				case 'btn21':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn22':
+			        transimage.style.visibility="hidden";
+				    break;
+			    case 'btn23':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'btn24':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'btn25':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'btn26':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'btn27':
+			        transimage.style.visibility="hidden";
+				    break;
+			   case 'earbtn':
+			        transimage.style.visibility="hidden";
+					earimg.gotoAndStop(1);
+				    break;
+		 }
+	 }
+	 
+	 function setFocus2Alphabets(f_array, keyCode){
+	   // alert("sampl");
+   		 if(keyCode==37){
+		    //1row
+			  if(Index==1) {
+					  Index=0;
+			   }
+			   else if(Index==2) {
+					 Index=1;
+			   }	  
+			   else if(Index==3) {
+					 Index=2;
+			   }	
+			   else if(Index==4) {
+					 Index=3;
+			   }	
+			   else if(Index==5) {
+					 Index=4;
+			   }
+			   else if(Index==6) {
+					 Index=5;
+			   }
+			   else if(Index==7) {
+					 Index=6;
+			   }	  
+			   else if(Index==8) {
+					 Index=7;
+			   }	  
+			   else if(Index==9) {
+					 Index=8;
+			   }
+			   //2row
+			    else if(Index==10) {
+					 Index=9;
+			   }	  
+			   else if(Index==11) {
+					 Index=10;
+			   }	
+			   else if(Index==12) {
+					 Index=11;
+			   }	
+			   else if(Index==13) {
+					 Index=12;
+			   }
+			   else if(Index==14) {
+					 Index=13;
+			   }
+			   else if(Index==15) {
+					 Index=14;
+			   }	  
+			   else if(Index==16) {
+					 Index=15;
+			   }	  
+			   else if(Index==17) {
+					 Index=16;
+			   }
+			   else if(Index==18) {
+					 Index=17;
+			   }
+			   //3row
+			   else if(Index==19) {  
+					   Index=18;
+			   }
+			   else if(Index==20) {  
+					   Index=19;
+			   }
+			   else if(Index==21) {  
+					   Index=20;
+			   }
+			   else if(Index==22) {  
+					   Index=21;
+			   }
+			   else if(Index==23) {  
+					   Index=22;
+			   }
+			   else if(Index==24) {  
+					   Index=23;
+			   }
+			   else if(Index==25) {  
+					   Index=24;
+			   }
+			   else if(Index==26) {  
+					   Index=25;
+			   }
+			   else if(Index==27) { 
+					   Index=26;
+			   }
+			//Index--;
+		    document.getElementById(f_array[Index]).focus();				
+		 }
+		 if(keyCode==39){
+			 //1row
+			  if(Index==0) {
+					  Index=1;
+			   }
+			   else if(Index==1) {
+					 Index=2;
+			   }	  
+			   else if(Index==2) {
+					 Index=3;
+			   }	
+			   else if(Index==3) {
+					 Index=4;
+			   }	
+			   else if(Index==4) {
+					 Index=5;
+			   }
+			   else if(Index==5) {
+					 Index=6;
+			   }
+			   else if(Index==6) {
+					 Index=7;
+			   }	  
+			   else if(Index==7) {
+					 Index=8;
+			   }	  
+			   else if(Index==8) {
+					 Index=9;
+			   }
+			 //2row 
+			   else if(Index==9) {
+			         Index=10;
+			   }
+			   else if(Index==10) {
+					 Index=11;
+			   }	  
+			   else if(Index==11) {
+					 Index=12;
+			   }	
+			   else if(Index==12) {
+					 Index=13;
+			   }	
+			   else if(Index==13) {
+					 Index=14;
+			   }
+			   else if(Index==14) {
+					 Index=15;
+			   }
+			   else if(Index==15) {
+					 Index=16;
+			   }	  
+			   else if(Index==16) {
+					 Index=17;
+			   }	  
+			   else if(Index==17) {
+					 Index=18;
+			   }
+			   //3row
+			   else if(Index==18) {
+					 Index=19;
+			   }
+			   else if(Index==19) {  
+					   Index=20;
+			   }
+			   else if(Index==20) {  
+					   Index=21;
+			   }
+			   else if(Index==21) {  
+					   Index=22;
+			   }
+			   else if(Index==22) {  
+					   Index=23;
+			   }
+			   else if(Index==23) {  
+					   Index=24;
+			   }
+			   else if(Index==24) {  
+					   Index=25;
+			   }
+			   else if(Index==25) {  
+					   Index=26;
+			   }
+			   else if(Index==26) {  
+					   Index=27;
+			   }
+		     document.getElementById(f_array[Index]).focus();							
+		 }
+		 //up
+	 if(keyCode==38) {
+		     //2row up
+			   if(Index==10) {
+					  Index=0;
+			   }
+			   else if(Index==11) {
+					 Index=1;
+			   }	  
+			   else if(Index==12) {
+					 Index=2;
+			   }	
+			   else if(Index==13) {
+					 Index=3;
+			   }	
+			   else if(Index==14) {
+					 Index=4;
+			   }
+			   else if(Index==15) {
+					 Index=5;
+			   }
+			   else if(Index==16) {
+					 Index=6;
+			   }	  
+			   else if(Index==17) {
+					 Index=7;
+			   }	  
+			   else if(Index==18) {
+					 Index=8;
+			   }	
+			     
+			   //3row up
+			   else if(Index==19) {  //a&delbtn
+					   Index=10;
+				}
+			   else if(Index==20) {  
+					   Index=11;
+			   }
+			   else if(Index==21) {  
+					   Index=12;
+			   }
+			   else if(Index==22) {  
+					   Index=13;
+			   }
+			   else if(Index==23) {  
+					   Index=14;
+			   }
+			   else if(Index==24) {  
+					   Index=15;
+			   }
+			   else if(Index==25) {  
+					   Index=16;
+			   }
+			   else if(Index==26) {  
+					   Index=17;
+			   }
+			   else if(Index==27) { //l & ear
+					   Index=18;
+			   }
+		    document.getElementById(f_array[Index]).focus();	
+		  }
+		 //down
+	   if(keyCode==40) {
+		      //1row down
+			  if(Index==0) {
+			       Index=10;
+			  }
+			  else if(Index==1) {
+			       Index=11;
+			  }
+			  else if(Index==2) {
+			       Index=12;
+			  }
+			  else if(Index==3) {
+			       Index=13;
+			  }
+			  else if(Index==4) {
+			       Index=14;
+			  }
+			  else if(Index==5) {
+			       Index=15;
+			  }
+			  else if(Index==6) {
+			       Index=16;
+			  }
+			  else if(Index==7) {
+			       Index=17;
+			  }
+			  else if(Index==8) {
+			       Index=18;
+			  }
+			  else if(Index==9){  //l&p
+					Index=18;
+			  }
+			  //2row down
+			  
+			  else if(Index==10) {  
+					Index=19;
+			  }
+			  else if(Index==11){
+			       Index=20;
+			  }
+			  else if(Index==12){
+			       Index=21;
+			  }
+			  else if(Index==13){
+			       Index=22;
+			  }
+			  else if(Index==14){
+			       Index=23;
+			  }
+			  else if(Index==15){
+			       Index=24;
+			  }
+			  else if(Index==16){
+			       Index=25;
+			  }
+			  else if(Index==17){
+			       Index=26;
+			  }
+			  else if(Index==18) { //l&ear
+					Index=27;
+			  }
+			 
+		   document.getElementById(f_array[Index]).focus();	
+		 }
+     }	
+	 
+	   function showTransBox() {
+				var transCanvas = document.getElementById("transimage");
+				transCanvas.style.visibility="visible"; 
+				var canvas2D = transCanvas.getContext('2d');
+				canvas2D.clearRect(0,0,70,70);
+				canvas2D.fillStyle = "rgba(0,255,240,0.3)";
+				canvas2D.fillRect(0,0,70,70);
+	  } 
+	  
+	   function showTransDelBtn() {
+				var transCanvas = document.getElementById("deltrans");
+				transCanvas.style.visibility="visible"; 
+				var canvas2D = transCanvas.getContext('2d');
+				canvas2D.clearRect(0,0,70,70);
+				canvas2D.fillStyle = "rgba(0,255,240,0.3)";
+				canvas2D.fillRect(0,0,70,70);
+	  } 
+	  
+		//Iphone Key Mapping
+        function ActionLeft(event) { 
+			 if(lock_keyboard==true) {
+				onKeyPressed(37);
+			 }
+          }	
+        function ActionRight(event)  { 
+		     if(lock_keyboard==true) {
+	             onKeyPressed(39);
+			 }
+          }	
+         function ActionUp(event) {
+		     if(lock_keyboard==true) {
+	            onKeyPressed(38);
+			 }
+          }	
+	     function ActionDown(event)  {
+		    if(lock_keyboard==true) {
+	           onKeyPressed(40);
+		    }
+          }	
+       // Game Specific actions - enter key action
+
+        function ActionEnter(event)  {
+		   if(lock_keyboard==true) {
+	         onKeyPressed(13);
+		   }
+         }	
+		 
+		*/
+	 //"wordxml()"
+</script>
+</head>
+<body onload="wordxml()" ondragstart="return false;" onselectstart="return false;" style="position:absolute;background-image:url(http://teachermate.treehouse.su/games//images/back.jpg );background-attachment:fixed;">
+<div style="position:fixed;left:0px;top:0px;width:700px; height:500px; z-index:1;"> 
+<div style="position: absolute; left: 16%; top: 3%; width: 700px; height: 500px; visibility: visible; " id="icons"> 
+<a onclick="exit();">
+		<img src="./AnimalSpelling_files/home_alpha01_ipad1.png" id="home" style="position:absolute;z-index:1100;top:107%;">
+		</a>
+		<a onclick="splaudio(init_Audios,init);">
+		<img src="./AnimalSpelling_files/skipbtn.png" value="audio" id="homeaudio" style="position:absolute;z-index:1100;top:5%;left:1%;">
+		</a>
+		<a onclick="resetValues();">
+		<img src="./AnimalSpelling_files/Repeat.png" value="audio" id="Repeat" style="visibility:hidden;position:absolute;z-index:1100;top:5%;left:1%;visibility:hidden;">
+		</a>
+		</div>
+		<img style="position: absolute; visibility: visible; top: 50%; left: 67%; width: 10%; height: 10%; " src="./AnimalSpelling_files/preloader_white0001.gif" id="load">
+  <div> <img src="./AnimalSpelling_files/animalspel_bg.png" width="800" height="600" style="position:absolute; left:104px;top:20px;-webkit-tap-highlight-color: rgba(0,0,0,0); visibility:hidden;border:6px solid black;" id="bg"> </div>
+    <img src="./AnimalSpelling_files/animalbg.png" style="position: absolute; top: 20px; left: 104px; width: 800px; height: 600px; visibility: visible; border: 6px solid black; " id="mainBg">
+
+  <!--button ipadimg-->
+  <div style="top:0px;left:0px;">
+     <!--1row-->
+	 
+    	
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_q.png); outline:none;top:420px;left:110px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn1" tabindex="21"></div>
+	
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_w.png); outline:none;top:420px;left:181px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn2" tabindex="22"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_e.png); outline:none;top:420px;left:255px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn3" tabindex="23"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_r.png); outline:none;top:420px;left:330px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn4" tabindex="24"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_t.png); outline:none;top:420px;left:406px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn5" tabindex="25"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_y.png); outline:none;top:420px;left:483px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn6" tabindex="26"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_u.png);outline:none;top:420px;left:559px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn7" tabindex="27"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_i.png);outline:none;top:420px; left:634px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn8" tabindex="28"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_o.png);outline:none;top:420px;left:708px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn9" tabindex="29"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_p.png);outline:none;top:420px; left: 779px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn10" tabindex="30"></div>
+	
+  <!--2ndrow-->
+  
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_a.png);outline:none;top:490px;left: 132px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn11" tabindex="31"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_s.png);outline:none;top:490px; left: 207px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn12" tabindex="32"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_d.png);outline:none;top:490px;left: 282px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn13" tabindex="33"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_f.png);outline:none;top:490px;left: 358px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn14" tabindex="34"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_g.png);outline:none;top:490px;left: 436px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn15" tabindex="35"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_h.png);outline:none;top:490px;left: 515px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn16" tabindex="36"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_j.png);outline:none;top:490px;left: 592px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn17" tabindex="37"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_k.png);outline:none;top:490px;left:669px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn18" tabindex="38"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_l.png);outline:none;top:490px;left: 744px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn19" tabindex="39"></div>
+	
+   		<!--3rd row--->
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/del_btn.png);outline:none;top:488px;left: 822px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="delbtn" tabindex="39"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_z.png);outline:none;top:558px;left: 200px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn21" tabindex="39"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_x.png);outline:none;top:558px;left: 280px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn22" tabindex="39"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_c.png);outline:none;top:558px;left: 360px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn23" tabindex="39"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_v.png);outline:none;top:558px;left:440px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn24" tabindex="39"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_b.png);outline:none;top:558px;left: 520px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn25" tabindex="39"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_n.png);outline:none;top:558px;left: 600px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn26" tabindex="39"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_m.png);outline:none;top:558px;left:680px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn27" tabindex="39"></div>
+    <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/btn_m.png);outline:none;top:558px;left:745px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:95% 95%;z-index:1000;width: 9%;height:12%;background-repeat:no-repeat;" id="btn27" tabindex="39"></div>
+	<!--ear btn--->
+
+    <div>
+      <canvas style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/speak_db.png); outline:none;top:340px;left:831px;width: 162px;height:117px;visibility:hidden;z-index:1000;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:34% 59%;background-repeat:no-repeat; " id="earbtn" tabindex="39"></canvas>
+    </div>
+
+		<!--score board-->
+   <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/score_board.png); background-size: 50% 50%; top:558px; left:805px;visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);width: 27%;height:20%;background-repeat:no-repeat;" id="score"></div>
+  </div>
+   <!--score value-->
+  <div style="position:absolute; z-index:5;left:20px;top:5px;-webkit-tap-highlight-color: rgba(0,0,0,0);">
+    <section id="exp1" style="position:absolute;top:560px; left:806px;z-index:11;font-size:28px;font-family:Didact;width:5%;height:5%;text-align:center;"> </section>
+  </div>
+  <!--transparent focus-->
+  <div style="position:absolute;z-index:4;-webkit-tap-highlight-color: rgba(0,0,0,0);">
+    <canvas style="position:absolute;width:100px;height:53.5px;" id="transimage"></canvas>
+  </div>
+  <!--deltransparency-->
+  <div style="position:absolute;z-index:4;-webkit-tap-highlight-color: rgba(0,0,0,0);">
+    <canvas style="position:absolute;width:200px;height:50px;" id="deltrans"></canvas>
+  </div>
+  <!--animal ipadimg-->
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/q_still.png); background-size: 14% 11%; visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim1"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/w_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim2"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/e_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim3"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/r_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim4"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/t_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim5"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/y_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim6"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/u_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim7"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/i_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim8"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/o_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim9"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/p_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim10"></div>
+  
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/a_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim11"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/s_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim12"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/d_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim13"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/f_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim14"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/g_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim15"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/h_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim16"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/j_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim17"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/k_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim18"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/l_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim19"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/z_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim21"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/x_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim22"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/c_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim23"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/v_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim24"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/b_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim25"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/n_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim26"></div>
+  <div style="background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/m_still.png); visibility:hidden;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="anim27"></div>
+  
+  
+    <!--show words-->
+ <!-- <div style="background-image:url(ipadimg/textbox.png); position:absolute; z-index:5; top:174px;left:185px;font-family:Didact; border:#000000; width:110px; height:35px; visibility: visible;"  id="words" ></div>-->
+ <div style="background-color:#FFFFFF;position:absolute; z-index:4; top:340px;left: 389px;font-family:Didact;width: 145px; height:57px; visibility:hidden;border:1px solid black;font-weight:100;-webkit-tap-highlight-color: rgba(0,0,0,0);" id="wordsdiv"></div>
+
+ <div style="position:absolute; z-index:5; top: 349px;left: 393px;font-family:Didact; visibility:visible;padding-left:10.5px;font-weight:100;-webkit-tap-highlight-color: rgba(0,0,0,0);width:18%;height:7%;text-align:center;font-size:50px;" id="words"></div>
+ <!--blinker ipadimg-->
+ 
+ <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/blinker1.PNG); visibility:hidden; top:280px;left:140px;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:92% 87%;z-index:1000;width:16%;height:2%;background-repeat:no-repeat;" id="blinker1"></div>
+ 
+ 
+ 
+  <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/blinker1.PNG); visibility:hidden; top:280px;left:288px;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:92% 87%;z-index:1000;width:16%;height:2%;background-repeat:no-repeat;" id="blinker2"></div>
+  <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/blinker1.PNG); visibility:hidden; top:280px;left:440px;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:92% 87%;z-index:1000;width:16%;height:2%;background-repeat:no-repeat;" id="blinker3"></div>
+  
+  <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/blinker1.PNG); visibility:hidden; top:280px;left:596px;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:92% 87%;z-index:1000;width:16%;height:2%;background-repeat:no-repeat;" id="blinker4"></div>
+  
+  <div style="position:absolute;background-image:url(http://teachermate.treehouse.su/games/images/animal/ipadimg/blinker1.PNG); visibility:hidden; top:280px;left:742px;-webkit-tap-highlight-color: rgba(0,0,0,0);background-size:92% 87%;z-index:1000;width:16%;height:2%;background-repeat:no-repeat;" id="blinker5"></div>
+  
+  
+  <div id="mainStage" style="position:absolute;z-index:20;top:40px;left:0px;"> </div>
+  <div id="sn" style="position:absolute;top:10px;left:20px;font-size:36px;visibility:hidden;"></div>
+   <div id="blinkdiv" style="position:absolute;top:370px;left:20px;font-size:28px; visibility:hidden;"></div>
+</div>
+<script type="text/javascript" src="./AnimalSpelling_files/ideal_redirect.js"></script>
+
+
+</body></html>
