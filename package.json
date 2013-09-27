@@ -1,0 +1,16 @@
+{
+  "name": "bell-resources",
+  "description": "A collection of Resources for the BeLL",
+  "version": "0.0.1",
+  "author": "R.J. Steinert <rj@rjsteinert.com>",
+  "repository": {
+      "type": "git",
+      "url": "http://github.com/open-learning-exchange/bell-resourcers.git" 
+  },
+  "dependencies": {
+    "couchapp": ">= 0.10.0",
+    "underscore": ">= 1.5.2"
+    
+  },
+  "engines": { "node": ">= 0.3.0" }
+}
