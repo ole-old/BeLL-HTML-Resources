@@ -7,7 +7,7 @@ function puts(error, stdout, stderr) { sys.puts(stdout) }
 // Vars
 var couchUrl = 'http://127.0.0.1:5984' 
 var database = 'apps'
-var ignore = ['.git', 'package.json', 'node_modules', 'install.js']
+var ignore = ['.git', 'README.md', 'package.json', 'node_modules', 'install.js']
 
 // Go
 fs.readdir('./', function(err, files) {
